@@ -21,6 +21,7 @@ AOS.init({
 
 $(function () {
   headerScroll();
+  quickMenu();
   visualDonut();
   btnBite();
   storyDonutRoll();
@@ -37,6 +38,81 @@ function visualDonut() {
 
   gsap.fromTo(section.querySelector('.donut01'), { x: 240, y: -240, autoAlpha: 0 }, $.extend({ delay: 0.2 }, to));
   gsap.fromTo(section.querySelector('.donut02'), { x: -240, y: 240, autoAlpha: 0 }, $.extend({ delay: 0.35 }, to));
+}
+
+function quickMenu() {
+  var menu = document.querySelector('.quick-menu');
+  var headerBtn = document.querySelector('.header .btn-round');
+  if (!menu || !headerBtn) return;
+
+  var join = menu.querySelector('.quick-join');
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var state = false;
+  var ghost = null;
+  var tl = null;
+
+  function rectOf(el) {
+    var r = el.getBoundingClientRect();
+    return { left: r.left, top: r.top, width: r.width, height: r.height };
+  }
+
+  function morph(show) {
+    var from = ghost ? rectOf(ghost) : rectOf(show ? headerBtn : join);
+    var to = rectOf(show ? join : headerBtn);
+
+    if (tl) tl.kill();
+    if (!ghost) {
+      ghost = document.createElement('div');
+      ghost.className = 'quick-ghost';
+      ghost.setAttribute('aria-hidden', 'true');
+      ghost.innerHTML = '<span>' + headerBtn.textContent.trim() + '</span>';
+      ghost.style.fontSize = getComputedStyle(headerBtn).fontSize;
+      document.body.appendChild(ghost);
+    }
+
+    var label = ghost.firstChild;
+    root.classList.add('is-quick');
+    gsap.set(join, { autoAlpha: 0 });
+    gsap.set(ghost, from);
+    if (!show) gsap.set(label, { autoAlpha: 0 });
+
+    tl = gsap.timeline({
+      onComplete: function () {
+        ghost.remove();
+        ghost = null;
+        tl = null;
+        if (show) gsap.set(join, { autoAlpha: 1 });
+        else root.classList.remove('is-quick');
+      }
+    })
+      .to(ghost, $.extend({ duration: 0.8, ease: 'power3.inOut' }, to), 0)
+      .to(label, { autoAlpha: show ? 0 : 1, duration: 0.25 }, show ? 0 : 0.55);
+  }
+
+  function toggle(y) {
+    var show = y > window.innerHeight * 0.6;
+    if (show === state) return;
+    state = show;
+    menu.classList.toggle('is-show', show);
+
+    if (reduceMotion) {
+      root.classList.toggle('is-quick', show);
+      gsap.set(join, { autoAlpha: show ? 1 : 0 });
+      return;
+    }
+    morph(show);
+  }
+
+  toggle(window.scrollY);
+  lenis.on('scroll', function (e) {
+    toggle(e.scroll);
+  });
+
+  menu.querySelector('.quick-top').addEventListener('click', function () {
+    lenis.scrollTo(0, { duration: 1.4 });
+    document.querySelector('.header .logo a').focus({ preventScroll: true });
+  });
 }
 
 function headerScroll() {
