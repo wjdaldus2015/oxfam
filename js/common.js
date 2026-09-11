@@ -35,9 +35,7 @@ function btnBite() {
   $('.btn-round').each(function () {
     for (var i = 0; i < 6; i++) $(this).append('<span class="btn-crumb" aria-hidden="true"></span>');
   }).on('mouseenter focusin', function () {
-    this.style.setProperty('--x1', rand(58, 82));
-    this.style.setProperty('--y2', rand(38, 62));
-    this.style.setProperty('--x3', rand(16, 40));
+    this.style.setProperty('--y2', rand(40, 60));
   });
 }
 
