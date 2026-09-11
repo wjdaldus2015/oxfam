@@ -21,12 +21,23 @@ AOS.init({
 
 $(function () {
   headerScroll();
+  visualDonut();
   btnBite();
   storyDonutRoll();
   doStepScroll();
   rollSlide();
   crewFlow();
 });
+
+function visualDonut() {
+  var section = document.querySelector('.sc-visual');
+  if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var to = { autoAlpha: 1, x: 0, y: 0, duration: 1.6, ease: 'power3.out' };
+
+  gsap.fromTo(section.querySelector('.donut01'), { x: 240, y: -240, autoAlpha: 0 }, $.extend({ delay: 0.2 }, to));
+  gsap.fromTo(section.querySelector('.donut02'), { x: -240, y: 240, autoAlpha: 0 }, $.extend({ delay: 0.35 }, to));
+}
 
 function headerScroll() {
   var header = document.querySelector('.header');
