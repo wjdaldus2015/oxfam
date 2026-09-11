@@ -46,16 +46,180 @@
 }
 
 /* Button */
+@property --bite1 {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --bite2 {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --bite3 {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
 .btn-round {
+  --x1: 78%;
+  --y2: 50%;
+  --x3: 22%;
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: var(--color-green);
   font-weight: 800;
   line-height: 1.25;
   letter-spacing: -0.02em;
   color: #fff;
+  transition: transform 0.2s;
+}
+
+.btn-round::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--color-green);
+  -webkit-mask-image:
+    radial-gradient(circle at var(--x1) 0, transparent calc(var(--bite1) - 0.5px), #000 var(--bite1)),
+    radial-gradient(circle at calc(var(--x1) + 0.6em) 0.35em, transparent calc(var(--bite1) * 0.6 - 0.5px), #000 calc(var(--bite1) * 0.6)),
+    radial-gradient(circle at 100% var(--y2), transparent calc(var(--bite2) - 0.5px), #000 var(--bite2)),
+    radial-gradient(circle at calc(100% - 0.3em) calc(var(--y2) - 0.7em), transparent calc(var(--bite2) * 0.6 - 0.5px), #000 calc(var(--bite2) * 0.6)),
+    radial-gradient(circle at var(--x3) 100%, transparent calc(var(--bite3) - 0.5px), #000 var(--bite3)),
+    radial-gradient(circle at calc(var(--x3) - 0.6em) calc(100% - 0.35em), transparent calc(var(--bite3) * 0.6 - 0.5px), #000 calc(var(--bite3) * 0.6));
+  mask-image:
+    radial-gradient(circle at var(--x1) 0, transparent calc(var(--bite1) - 0.5px), #000 var(--bite1)),
+    radial-gradient(circle at calc(var(--x1) + 0.6em) 0.35em, transparent calc(var(--bite1) * 0.6 - 0.5px), #000 calc(var(--bite1) * 0.6)),
+    radial-gradient(circle at 100% var(--y2), transparent calc(var(--bite2) - 0.5px), #000 var(--bite2)),
+    radial-gradient(circle at calc(100% - 0.3em) calc(var(--y2) - 0.7em), transparent calc(var(--bite2) * 0.6 - 0.5px), #000 calc(var(--bite2) * 0.6)),
+    radial-gradient(circle at var(--x3) 100%, transparent calc(var(--bite3) - 0.5px), #000 var(--bite3)),
+    radial-gradient(circle at calc(var(--x3) - 0.6em) calc(100% - 0.35em), transparent calc(var(--bite3) * 0.6 - 0.5px), #000 calc(var(--bite3) * 0.6));
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  transition:
+    --bite1 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    --bite2 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) 0.09s,
+    --bite3 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s;
+}
+
+.btn-round:hover::before,
+.btn-round:focus-visible::before {
+  --bite1: 0.5em;
+  --bite2: 0.55em;
+  --bite3: 0.45em;
+}
+
+.btn-round:active {
+  transform: scale(0.97);
+}
+
+.btn-crumb {
+  position: absolute;
+  width: 0.22em;
+  height: 0.22em;
+  margin: -0.11em 0 0 -0.11em;
+  border-radius: 50%;
+  background: var(--color-green);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-crumb:nth-of-type(1) {
+  left: var(--x1);
+  top: 0;
+  --dx: 0.3em;
+  --dy: -0.7em;
+  animation-delay: 0s;
+}
+
+.btn-crumb:nth-of-type(2) {
+  left: calc(var(--x1) + 0.5em);
+  top: 0;
+  --dx: 0.7em;
+  --dy: -0.45em;
+  width: 0.16em;
+  height: 0.16em;
+  animation-delay: 0.03s;
+}
+
+.btn-crumb:nth-of-type(3) {
+  left: 100%;
+  top: var(--y2);
+  --dx: 0.8em;
+  --dy: -0.3em;
+  animation-delay: 0.09s;
+}
+
+.btn-crumb:nth-of-type(4) {
+  left: 100%;
+  top: calc(var(--y2) + 0.3em);
+  --dx: 0.6em;
+  --dy: 0.5em;
+  width: 0.16em;
+  height: 0.16em;
+  animation-delay: 0.12s;
+}
+
+.btn-crumb:nth-of-type(5) {
+  left: var(--x3);
+  top: 100%;
+  --dx: -0.5em;
+  --dy: 0.7em;
+  animation-delay: 0.18s;
+}
+
+.btn-crumb:nth-of-type(6) {
+  left: calc(var(--x3) + 0.4em);
+  top: 100%;
+  --dx: 0.25em;
+  --dy: 0.8em;
+  width: 0.16em;
+  height: 0.16em;
+  animation-delay: 0.21s;
+}
+
+.btn-round:hover .btn-crumb,
+.btn-round:focus-visible .btn-crumb {
+  animation-name: crumbFly;
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes crumbFly {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.3);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-round::before {
+    transition: none;
+  }
+
+  .btn-crumb {
+    display: none;
+  }
 }
 
 .btn-round-l {
