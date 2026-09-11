@@ -1,0 +1,192 @@
+#wrap {
+  width: 100%;
+  min-width: 320px;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+#header {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+#container {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.inner {
+  max-width: 1200px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#footer {
+  width: 100%;
+  clear: both;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  position: relative;
+  z-index: 10;
+  background: #fff;
+}
+
+.header .inner {
+  max-width: 1222px;
+  height: 171px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .logo {
+  width: 170px;
+}
+
+.header .logo a,
+.header .logo img {
+  display: block;
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  padding: 40px 0 60px;
+  border-top: 1px solid #e0e0e0;
+  background: #fff;
+}
+
+.footer .inner {
+  max-width: 1222px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.ft-info {
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #424242;
+}
+
+.ft-company .name,
+.ft-detail strong {
+  font-weight: 600;
+}
+
+.ft-company address {
+  margin-top: 4px;
+}
+
+.ft-detail {
+  margin-top: 16px;
+}
+
+.ft-detail li + li {
+  margin-top: 4px;
+}
+
+.ft-detail .bar {
+  color: #e0e0e0;
+}
+
+.ft-copy {
+  margin-top: 24px;
+  color: #757575;
+}
+
+.ft-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-height: 160px;
+}
+
+.ft-menu {
+  display: flex;
+  align-items: center;
+}
+
+.ft-menu li + li::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  margin: 0 16px;
+  background: #e0e0e0;
+  vertical-align: middle;
+}
+
+.ft-menu a {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #000;
+  white-space: nowrap;
+}
+
+.ft-sns {
+  display: flex;
+  gap: 12px;
+}
+
+.ft-sns a,
+.ft-sns img {
+  display: block;
+  height: 32px;
+}
+
+@media all and (max-width: 1200px) {
+  .inner {
+    width: auto;
+    margin-left: 3.90625%;
+    margin-right: 3.90625%;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .header .inner {
+    height: 80px;
+  }
+
+  .header .logo {
+    width: 100px;
+  }
+
+  .footer .inner {
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
+
+  .ft-info,
+  .ft-menu a {
+    font-size: 0.875rem;
+    line-height: 1.57;
+  }
+
+  .ft-side {
+    align-items: flex-start;
+    min-height: 0;
+    gap: 24px;
+  }
+
+  .ft-menu {
+    flex-wrap: wrap;
+  }
+
+  .ft-menu li + li::before {
+    margin: 0 10px;
+  }
+}

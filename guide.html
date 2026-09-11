@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>guide</title>
+  <!-- fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.css"
+    integrity="sha512-NzqTHTrO48HsIamogmIaVhTXoSgRF24Cn+ynrNYrFuKrY0AdDbmcNieiOHsQARS/r0Gax9VwV3/rVMHs3ipUlg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- //fonts -->
+  <link type="text/css" rel="stylesheet" href="css/base.css" />
+  <link type="text/css" rel="stylesheet" href="css/common.css" />
+  <link type="text/css" rel="stylesheet" href="css/layout.css" />
+  <link type="text/css" rel="stylesheet" href="css/main.css" />
+  <!-- 스와이퍼 -->
+  <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- SplitType  -->
+  <script src="https://unpkg.com/split-type"></script>
+  <!-- gsap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- aos -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- lenis -->
+  <script src="https://unpkg.com/lenis@1.1.5/dist/lenis.min.js"></script>
+  <!-- script -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script defer type="text/javascript" src="js/masonry.js"></script>
+  <script defer type="text/javascript" src="js/scrollOverflow.js"></script>
+  <script defer type="text/javascript" src="js/common.js?t=<?php echo time(); ?>"></script>
+  <script defer type="text/javascript" src="js/main.js?t=<?php echo time(); ?>"></script>
+  <script defer type="text/javascript" src="js/sub.js?t=<?php echo time(); ?>"></script>
+  <script defer type="text/javascript" src="js/script.js"></script>
+</head>
+
+<body>
+  <!--Header-->
+  <header class="header">
+    <div class="inner">
+      <h1 class="logo"><a href="./"><img src="image/common/img-logo.png" alt="옥스팜 도넛" /></a></h1>
+      <a href="#" class="btn-round btn-round-l">옥스팜 도넛 함께하기 &gt;</a>
+    </div>
+  </header>
+  <!--END Header-->
+
+  <!--Container-->
+  <div id="container" class="main">
+
+    <!-- 비주얼 -->
+    <section class="sc-visual">
+      <div class="visual-bg" aria-hidden="true">
+        <img src="image/main/img-visual-bg01.png" alt="" class="bg01" />
+        <img src="image/main/img-visual-donut01.svg" alt="" class="donut01" />
+        <img src="image/main/img-visual-bg02.png" alt="" class="bg02" />
+        <img src="image/main/img-visual-donut02.svg" alt="" class="donut02" />
+      </div>
+      <div class="inner">
+        <h2 class="tit tit-xxl txt-white">세상을 굴리는 힘,<br />옥스팜 도넛</h2>
+      </div>
+      <div class="scroll-hint">
+        <span class="ico" aria-hidden="true"></span>
+        <p>스크롤해서 확인해 보세요</p>
+      </div>
+    </section>
+
+    <!-- 인트로 -->
+    <section class="sc-intro">
+      <div class="intro-bg" aria-hidden="true">
+        <img src="image/main/img-intro-bg.jpg" alt="" class="bg" />
+        <img src="image/main/img-intro-edge.png" alt="" class="edge" />
+      </div>
+      <h2 class="tit tit-xl txt-white">우리에게도, 지구에게도<br />지금의 세상은 지속가능하지 않습니다</h2>
+    </section>
+
+    <!-- Donut Story -->
+    <section class="sc-story">
+      <div class="story-deco" aria-hidden="true">
+        <svg class="story-track" viewBox="0 0 4714.84 1174.41" focusable="false">
+          <defs>
+            <path id="storyTrackPath" d="M2907.27 6.79752C3160.38 -23.5269 3410.38 50.0387 3636.6 179.015C3737.09 234.798 3830.57 298.869 3888.97 335.631C3956.1 377.89 3993.94 395.945 4025.24 403.932C4063.16 413.609 4155.31 427.139 4424.06 251.491L4714.84 695.751C4403.85 899.008 4149.78 983.589 3893.8 918.274C3778.15 888.764 3682.12 832.815 3605.81 784.783C3521.02 731.403 3462.02 689.269 3377.76 642.579L3376.2 641.714L3374.65 640.831C3214.83 549.445 3079.03 520.866 2970.51 533.868C2868.14 546.134 2759.14 598.818 2651.35 733.843C2488.54 937.839 2275.58 1117.82 2011.93 1163.43C1730.13 1212.18 1465.73 1096.16 1239.12 864.355L1239.11 864.338C1072.63 694.02 943.258 631.304 838.504 626.219C740.47 621.462 592.091 664.371 378.213 881.047L0 508.266C269.259 235.485 555.686 81.0193 864.274 95.9956C1166.13 110.646 1415.19 284.761 1619.13 493.407C1762.93 640.506 1860.89 650.815 1921.31 640.363C1999.86 626.773 2108.98 562.033 2236.04 402.836L2236.05 402.819C2418.14 174.713 2647.31 37.9438 2907.27 6.79752Z" />
+            <clipPath id="storyTrackClip">
+              <rect class="track-mask" x="0" y="0" width="0" height="1174.41" />
+            </clipPath>
+          </defs>
+          <use href="#storyTrackPath" class="track-fill" clip-path="url(#storyTrackClip)" />
+          <path class="track-guide" d="M189.1 694.7L242.9 642.8L296.1 595.0L348.5 552.0L400.1 513.6L451.1 479.7L518.0 441.5L583.7 410.9L648.3 387.9L711.8 372.0L774.4 363.2L836.0 361.2L896.8 365.7L956.8 376.6L1016.1 393.6L1074.6 416.6L1132.6 445.1L1190.0 479.2L1246.9 518.4L1303.3 562.6L1359.4 611.6L1415.2 665.0L1470.7 718.7L1525.9 766.2L1580.8 806.6L1635.4 839.9L1689.6 866.3L1757.5 890.3L1818.2 903.1L1886.2 908.3L1947.2 904.5L2017.6 889.8L2080.5 867.7L2142.3 837.7L2202.9 800.1L2262.4 755.3L2309.0 714.5L2354.8 669.5L2399.6 620.7L2440.5 572.2L2488.1 516.9L2533.6 470.2L2580.5 428.5L2628.6 391.7L2690.3 352.6L2753.7 321.0L2818.7 296.7L2884.9 279.5L2946.8 269.6L3007.3 266.0L3076.6 267.9L3146.8 276.3L3217.7 291.1L3289.2 312.0L3346.7 333.1L3404.4 357.9L3462.1 386.4L3520.0 418.0L3573.5 449.4L3629.1 484.0L3683.6 519.2L3737.2 553.7L3789.9 586.2L3847.6 617.9L3905.5 643.7L3968.6 663.1L4030.2 672.5L4093.7 672.8L4153.9 665.3L4226.1 647.4L4288.3 625.4L4355.4 595.9L4409.4 568.7L4431.0 532.5" />
+          <g class="track-donut" transform="translate(4431 532.5) rotate(-96.86)">
+            <circle class="donut-hole-bg" r="200" />
+            <circle class="donut-hole" r="200" />
+            <image href="image/main/img-story-donut.svg" x="-340.989" y="-332.965" width="681.978" height="665.93" />
+          </g>
+        </svg>
+      </div>
+      <div class="inner">
+        <div class="tit-group">
+          <p class="tit tit-m txt-green">Donut Story</p>
+          <h2 class="tit tit-xl">그래서<br /><span class="txt-green">옥스팜 도넛</span>이 있습니다</h2>
+        </div>
+        <div class="story-txt">
+          <p>물 부족으로 하루를 시작하는 사람들,<br />교육받을 기회조차 없는 아이들,<br />기후변화로 삶의 터전을 잃어가는 공동체들.</p>
+          <p>이 문제들은 하나의 도넛 위에서 연결되어 있습니다.</p>
+          <p>세상을 바꾸는 힘은 같은 뜻을 가진 사람들이 함께 움직일 때 생겨요.<br />누구나 어디서든 지금 당장 시작할 수 있죠.<br />관심 있는 문제 하나를 골라 참여하고, 기부하고, 주변에 알리면<br />그 행동들이 모여 세상을 굴리는 힘이 된답니다.</p>
+        </div>
+        <div class="story-point">
+          <p>당신의 행동이 더해질수록 도넛은 더 크게 굴러가요.</p>
+          <p>세상을 굴리는 힘. 옥스팜 도넛</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who We Are -->
+    <section class="sc-who">
+      <div class="who-head">
+        <div class="inner">
+          <div class="tit-group">
+            <p class="tit tit-m txt-green">Who We Are</p>
+            <h2 class="tit tit-xl txt-white">도넛은<br />저절로 만들어지지 않으니까</h2>
+          </div>
+        </div>
+      </div>
+      <div class="who-film">
+        <p class="film-txt">브랜드필름 15초 버전 재생</p>
+      </div>
+    </section>
+
+    <!-- What We Do -->
+    <section class="sc-do">
+      <img src="image/main/img-do-donut.svg" alt="" class="do-donut" aria-hidden="true" />
+      <div class="inner">
+        <div class="tit-group">
+          <p class="tit tit-m txt-white">What We Do</p>
+          <h2 class="tit tit-xl txt-white">우리가 움직일 때,<br />세상도 움직이니까</h2>
+        </div>
+      </div>
+      <ul class="do-list">
+        <li>
+          <h3 class="tit tit-l txt-white">알아가요</h3>
+          <p class="do-sub">세상을 이해하는 콘텐츠</p>
+          <p class="do-desc">불평등, 기후위기 등 국제·사회 이슈를<br />쉽고 친근한 옥스팜 콘텐츠로 알아갑니다.</p>
+        </li>
+        <li>
+          <h3 class="tit tit-l txt-white">실천해요</h3>
+          <p class="do-sub">일상에서 실천하는 챌린지</p>
+          <p class="do-desc">어렵고 거창한 행동이 아닌<br />일상에서 쉽게 시작할 수 있는 작은 실천을 시작합니다.</p>
+        </li>
+        <li>
+          <h3 class="tit tit-l txt-white">연결돼요</h3>
+          <p class="do-sub">함께 연결되는 커뮤니티</p>
+          <p class="do-desc">같은 문제의식을 가진 사람들과<br />생각과 행동을 나누며 함께 변화를 만듭니다.</p>
+        </li>
+        <li>
+          <h3 class="tit tit-l txt-white">함께 움직여요</h3>
+          <p class="do-sub">옥스팜의 캠페인과 행동</p>
+          <p class="do-desc">옥스팜의 캠페인, 서명, 후원 등 다양한 활동에 참여합니다.</p>
+        </li>
+      </ul>
+      <div class="inner">
+        <div class="do-deco" aria-hidden="true">
+          <svg class="char01" viewBox="0 0 106.446 131.142" focusable="false">
+            <defs>
+              <path id="doCharPath" d="M100.734 47.7028C97.7796 48.1248 96.8083 52.6861 96.6081 56.1825C91.2409 59.6286 79.5152 56.936 79.5152 56.936C84.4919 54.4142 92.3924 53.3291 92.3924 41.0819C92.3924 33.6673 87.9965 27.2372 83.1801 21.6913C85.5733 20.2446 87.2355 17.6424 87.3957 14.9699C87.556 12.0362 86.5045 9.1829 83.871 7.42469C82.4892 9.96656 80.5165 11.7951 77.903 12.2974C79.3049 9.80581 79.6554 7.11323 78.3737 4.37042C77.4624 2.41126 75.4497 0.321502 72.6961 0C72.626 2.1199 71.8549 3.96854 70.6133 5.38516C69.3516 6.77163 67.5992 7.72609 65.5765 8.00741C64.1747 8.20835 62.6726 8.09783 61.2207 8.0476C51.5477 7.60553 42.4055 12.5285 40.1825 22.3243C37.9796 23.5902 35.9669 25.1977 34.595 27.4482C29.5583 35.6867 32.6625 45.7035 40.0323 51.5408C41.8748 52.9875 43.7573 54.1027 45.9603 55.1275C37.1485 54.8161 28.5169 56.082 21.0369 61.0954C15.5495 64.7726 11.3639 69.997 9.50144 76.3467C9.01079 78.0144 9.23108 79.6621 10.4527 80.8477C12.1149 82.4753 14.0275 83.902 16.1103 84.9267C18.4134 86.0821 20.9868 85.2382 22.2385 83.0781C23.33 81.1692 23.37 79.0895 22.619 76.9796C24.8119 73.8349 28.0162 71.5945 31.7412 70.6601C27.2853 78.8283 27.085 87.2074 28.8574 91.2764C28.9475 91.4974 29.0576 91.6984 29.1678 91.9194C27.2552 93.8585 21.3173 98.691 16.631 99.2235C14.2979 99.4747 11.9748 99.2738 9.60158 99.0427C5.96671 98.681 2.76242 100.6 1.34052 103.936C-0.992609 109.371 -0.0413351 118.162 2.36188 123.748C3.36322 126.069 5.11557 127.777 7.08821 128.36C9.6216 129.093 12.2752 128.942 14.0976 127.244C15.2291 126.179 15.9601 124.863 16.4307 123.437C16.9014 122.01 17.0916 120.453 17.1216 118.936C29.2178 119.579 40.2726 115.218 48.2834 106.025C48.3034 106.045 48.3334 106.045 48.3535 106.065C55.0825 109.09 61.1806 112.787 65.2861 118.715C66.6379 120.674 70.413 126.772 70.413 126.772C72.6961 130.319 76.5813 131.916 80.6167 130.781C88.0466 128.691 98.01 121.277 96.7683 113.128C96.3277 110.295 94.1948 107.944 91.3811 107.472C88.9178 107.03 86.4345 107.713 84.3016 108.658C81.3476 102.117 71.7147 92.6528 71.7147 92.6528C75.5499 90.4425 79.6554 81.2094 79.7755 71.9863C79.7755 71.9863 100.854 72.8101 104.899 64.6219C108.644 57.0565 104.939 47.1 100.704 47.7028H100.734ZM75.4998 38.5903C74.0779 36.8923 73.7475 34.3806 74.7688 32.3612C75.5899 30.6934 77.5225 29.96 78.9644 31.0752C80.7368 32.4616 81.4277 35.1442 80.5165 37.4449C80.0759 38.5601 79.1347 39.4041 78.3636 39.5648C77.2822 39.806 76.2308 39.4342 75.4998 38.5802V38.5903Z" />
+              <clipPath id="doCharBody"><polygon points="0,0 107,0 107,89 73,89 48,104 30,91 0,91" /></clipPath>
+              <clipPath id="doCharLegBack"><polygon points="0,95 30,89 38,82 49,106 49,132 0,132" /></clipPath>
+              <clipPath id="doCharLegFront"><polygon points="49,106 60,85 71,89 107,105 107,132 49,132" /></clipPath>
+            </defs>
+            <g class="char-leg-back"><use href="#doCharPath" clip-path="url(#doCharLegBack)" /></g>
+            <g class="char-leg-front"><use href="#doCharPath" clip-path="url(#doCharLegFront)" /></g>
+            <g class="char-body"><use href="#doCharPath" clip-path="url(#doCharBody)" /></g>
+          </svg>
+          <img src="image/main/img-do-char02.svg" alt="" class="char02" />
+        </div>
+      </div>
+    </section>
+
+    <!-- We Roll the World -->
+    <section class="sc-roll">
+      <div class="inner">
+        <div class="roll-head">
+          <div class="tit-group">
+            <p class="tit tit-m txt-green">We Roll the World</p>
+            <h2 class="tit tit-xl">우리의 행동은<br />사람들의 일상을 바꾸는 중입니다</h2>
+          </div>
+          <a href="#" class="btn-round btn-round-m">더 알아보기 →</a>
+        </div>
+      </div>
+      <div class="roll-slide">
+        <ul class="roll-list">
+          <li class="roll-frame">
+            <div class="swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="#" class="roll-card">
+                    <span class="img"><img src="image/main/img-roll01.png" alt="" /></span>
+                    <h3 class="tit tit-s txt-white">도넛X트레일워커 이벤트<br />현장 스케치!</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="roll-frame">
+            <div class="swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="#" class="roll-card">
+                    <span class="img"><img src="image/main/img-roll02.png" alt="" /></span>
+                    <h3 class="tit tit-s txt-white">아프리카 → 도넛으로 날아온<br />편지 한 통</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="roll-frame">
+            <div class="swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="#" class="roll-card">
+                    <span class="img"><img src="image/main/img-roll03.png" alt="" /></span>
+                    <h3 class="tit tit-s txt-white">우리의 일상이 바꾼<br />지구 반대편의 일상</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="roll-frame">
+            <div class="swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="#" class="roll-card">
+                    <span class="img"><img src="image/main/img-roll04.png" alt="" /></span>
+                    <h3 class="tit tit-s txt-white">세컨핸드로 오래가는 지구,<br />9월에 찾아온 행복</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <button type="button" class="btn-next"><img src="image/main/icon-next-arrow.svg" alt="다음 이야기 보기" /></button>
+      </div>
+    </section>
+
+    <!-- 목표 -->
+    <section class="sc-goal">
+      <div class="goal-box">
+        <div class="goal-bg" aria-hidden="true">
+          <img src="image/main/img-goal-bg.png" alt="" class="bg" />
+          <img src="image/main/img-goal-edge.png" alt="" class="edge" />
+        </div>
+        <h2 class="tit tit-xl txt-white">우리는 다 달라도, 목표는 하나입니다.<br />세상이 더 잘 굴러가게 하는 것</h2>
+      </div>
+    </section>
+
+    <!-- Let’s Roll the World! -->
+    <section class="sc-crew">
+      <div class="inner">
+        <div class="tit-group">
+          <p class="tit tit-m txt-green">Let’s Roll the World!</p>
+          <h2 class="tit tit-xl">이제 도넛 크루가 되어,<br />세상을 굴리는 힘을 보태주세요!</h2>
+        </div>
+      </div>
+      <div class="crew-rows" aria-hidden="true">
+        <ul class="crew-row row01">
+          <li><img src="image/main/img-crew09.svg" alt="" /></li>
+          <li><img src="image/main/img-crew01.svg" alt="" /></li>
+          <li class="char"><img src="image/main/img-crew02.svg" alt="" /></li>
+          <li><img src="image/main/img-crew03.svg" alt="" /></li>
+          <li><img src="image/main/img-crew04.svg" alt="" /></li>
+          <li><img src="image/main/img-crew05.svg" alt="" /></li>
+          <li><img src="image/main/img-crew06.svg" alt="" /></li>
+          <li><img src="image/main/img-crew07.svg" alt="" /></li>
+          <li class="char"><img src="image/main/img-crew02.svg" alt="" /></li>
+        </ul>
+        <ul class="crew-row row02">
+          <li><img src="image/main/img-crew08.svg" alt="" /></li>
+          <li><img src="image/main/img-crew09.svg" alt="" /></li>
+          <li><img src="image/main/img-crew07.svg" alt="" /></li>
+          <li><img src="image/main/img-crew10.svg" alt="" /></li>
+          <li><img src="image/main/img-crew11.svg" alt="" /></li>
+          <li class="char flip"><img src="image/main/img-crew12.svg" alt="" /></li>
+          <li><img src="image/main/img-crew13.svg" alt="" /></li>
+          <li><img src="image/main/img-crew14.svg" alt="" /></li>
+        </ul>
+      </div>
+      <div class="crew-btn">
+        <a href="#" class="btn-round btn-round-l">도넛 크루 등록하기</a>
+      </div>
+    </section>
+
+  </div>
+  <!--END Container-->
+
+  <!--Footer-->
+  <footer class="footer">
+    <div class="inner">
+      <div class="ft-info">
+        <div class="ft-company">
+          <p class="name">재단법인 옥스팜코리아</p>
+          <address>(우)04519 서울 중구 세종대로 19길 16, 301호</address>
+        </div>
+        <ul class="ft-detail">
+          <li><strong>대표자</strong> 빈디야 바차니 <span class="bar" aria-hidden="true">|</span> <strong>고유번호</strong> 114-82-11141</li>
+          <li><strong>문의전화(옥스팜 트레일워커)</strong> 02-739-8091 (평일 10:00-17:00 / 점심시간 12:30-13:30)</li>
+          <li><strong>이메일</strong> <a href="mailto:trailwalker@oxfam.or.kr">trailwalker@oxfam.or.kr</a></li>
+        </ul>
+        <p class="ft-copy">©2025. OXFAM KOREA All rights reserved.</p>
+      </div>
+      <div class="ft-side">
+        <ul class="ft-menu">
+          <li><a href="#">소개</a></li>
+          <li><a href="#">자주 묻는 질문</a></li>
+          <li><a href="https://www.oxfam.or.kr/terms-and-conditions" target="_blank" title="새 창 열림">이용약관</a></li>
+          <li><a href="https://www.oxfam.or.kr/privacy-policy" target="_blank" title="새 창 열림">개인정보처리방침</a></li>
+        </ul>
+        <ul class="ft-sns">
+          <li><a href="https://www.oxfam.or.kr/" target="_blank" title="새 창 열림"><img src="image/common/icon-oxfam.svg" alt="옥스팜코리아" /></a></li>
+          <li><a href="https://www.instagram.com/oxfamtrailwalkerkorea/" target="_blank" title="새 창 열림"><img src="image/common/icon-instagram.svg" alt="인스타그램" /></a></li>
+          <li><a href="https://www.youtube.com/@OxfamKorea" target="_blank" title="새 창 열림"><img src="image/common/icon-youtube.svg" alt="유튜브" /></a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <!--END Footer-->
+</body>
+
+</html>
