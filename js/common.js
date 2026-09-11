@@ -109,7 +109,7 @@ function rollSlide() {
 
     swipers.push(new Swiper($(this).find('.swiper')[0], {
       loop: true,
-      speed: 700,
+      speed: 1200,
       allowTouchMove: false,
       a11y: { enabled: false },
       on: {
@@ -119,7 +119,10 @@ function rollSlide() {
     }));
   });
 
-  $('.sc-roll .btn-next').on('click', function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var timer = null;
+
+  function next() {
     var moving = swipers.some(function (swiper) {
       return swiper.animating;
     });
@@ -127,7 +130,27 @@ function rollSlide() {
     swipers.forEach(function (swiper) {
       swiper.slideNext();
     });
+  }
+
+  function stop() {
+    clearInterval(timer);
+  }
+
+  function play() {
+    stop();
+    if (!reduceMotion) timer = setInterval(next, 5000);
+  }
+
+  $('.sc-roll .btn-next').on('click', function () {
+    next();
+    play();
   });
+
+  $('.sc-roll .roll-slide')
+    .on('mouseenter focusin', stop)
+    .on('mouseleave focusout', play);
+
+  play();
 }
 
 function storyDonutRoll() {
