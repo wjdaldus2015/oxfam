@@ -83,6 +83,7 @@ function doStepScroll() {
   var donut = deco.querySelector('.char02');
   var donutRadius = 98;
   var stride = 45;
+  var decoGap = 20;
   var mm = gsap.matchMedia();
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -134,7 +135,7 @@ function doStepScroll() {
     tl.fromTo(items, { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 1, stagger: 1 }, 0)
       .fromTo(deco, { x: 0 }, {
         x: function () {
-          return deco.parentNode.clientWidth - deco.offsetWidth;
+          return section.clientWidth - deco.offsetWidth - decoGap * 2;
         },
         duration: items.length,
         ease: 'none',
