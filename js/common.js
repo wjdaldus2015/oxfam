@@ -58,6 +58,9 @@ function btnBite() {
     var r = h / 2;
     var em = parseFloat(getComputedStyle(btn).fontSize);
     var crumbs = btn.querySelectorAll('.btn-crumb');
+    var sizes = [rand(0.5, 0.7), rand(0.8, 1), rand(1.15, 1.35)].sort(function () {
+      return Math.random() - 0.5;
+    });
 
     pickBites().forEach(function (bite, k) {
       var rad = (bite.deg * Math.PI) / 180;
@@ -68,12 +71,12 @@ function btnBite() {
       btn.style.setProperty('--b' + n + 'x', cx.toFixed(1) + 'px');
       btn.style.setProperty('--b' + n + 'y', cy.toFixed(1) + 'px');
       btn.style.setProperty('--b' + n + 'a', (bite.deg + 180).toFixed(1) + 'deg');
-      btn.style.setProperty('--b' + n + 's', rand(0.85, 1.1).toFixed(2));
+      btn.style.setProperty('--b' + n + 's', sizes[k].toFixed(2));
 
       for (var j = 0; j < 2; j++) {
         var crumb = crumbs[k * 2 + j];
         var spread = rad + ((j ? 1 : -1) * rand(10, 35) * Math.PI) / 180;
-        var dist = em * rand(0.7, 1.1);
+        var dist = em * rand(0.7, 1.1) * sizes[k];
 
         crumb.style.left = cx.toFixed(1) + 'px';
         crumb.style.top = cy.toFixed(1) + 'px';
