@@ -349,7 +349,6 @@
 
 .roll-frame .swiper-slide {
   opacity: 1 !important;
-  transition-duration: 0s !important;
 }
 
 .roll-frame .swiper-slide-prev {

@@ -263,7 +263,7 @@ function rollSlide() {
 
     swipers.push(new Swiper($(this).find('.swiper')[0], {
       loop: true,
-      speed: 1200,
+      speed: 0,
       effect: 'fade',
       fadeEffect: { crossFade: false },
       allowTouchMove: false,
@@ -277,12 +277,14 @@ function rollSlide() {
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var timer = null;
+  var locked = false;
 
   function next() {
-    var moving = swipers.some(function (swiper) {
-      return swiper.animating;
-    });
-    if (moving) return;
+    if (locked) return;
+    locked = true;
+    setTimeout(function () {
+      locked = false;
+    }, 1200);
     swipers.forEach(function (swiper) {
       swiper.slideNext();
     });
