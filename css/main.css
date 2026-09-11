@@ -496,11 +496,11 @@
 }
 
 .crew-row[data-aos="fade-right"] {
-  transform: translate3d(-400px, 0, 0);
+  transform: translate3d(-800px, 0, 0);
 }
 
 .crew-row[data-aos="fade-left"] {
-  transform: translate3d(400px, 0, 0);
+  transform: translate3d(800px, 0, 0);
 }
 
 .crew-track {
