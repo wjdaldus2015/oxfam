@@ -28,14 +28,60 @@ $(function () {
 });
 
 function btnBite() {
+  var delays = [0, 0.12, 0.24];
+
   function rand(min, max) {
-    return (min + Math.random() * (max - min)).toFixed(1) + '%';
+    return min + Math.random() * (max - min);
+  }
+
+  function pickBites() {
+    var right = rand(-55, 55);
+    var left = rand(125, 235);
+    var extraOnRight = Math.random() < 0.5;
+    var extra = extraOnRight
+      ? (right > 0 ? rand(-75, -45) : rand(45, 75))
+      : (left > 180 ? rand(105, 135) : rand(225, 255));
+
+    return [
+      { side: 'right', deg: right },
+      { side: 'left', deg: left },
+      { side: extraOnRight ? 'right' : 'left', deg: extra }
+    ];
   }
 
   $('.btn-round').each(function () {
     for (var i = 0; i < 6; i++) $(this).append('<span class="btn-crumb" aria-hidden="true"></span>');
   }).on('mouseenter focusin', function () {
-    this.style.setProperty('--y2', rand(40, 60));
+    var btn = this;
+    var w = btn.offsetWidth;
+    var h = btn.offsetHeight;
+    var r = h / 2;
+    var em = parseFloat(getComputedStyle(btn).fontSize);
+    var crumbs = btn.querySelectorAll('.btn-crumb');
+
+    pickBites().forEach(function (bite, k) {
+      var rad = (bite.deg * Math.PI) / 180;
+      var cx = (bite.side === 'right' ? w - r : r) + r * Math.cos(rad);
+      var cy = r + r * Math.sin(rad);
+      var n = k + 1;
+
+      btn.style.setProperty('--b' + n + 'x', cx.toFixed(1) + 'px');
+      btn.style.setProperty('--b' + n + 'y', cy.toFixed(1) + 'px');
+      btn.style.setProperty('--b' + n + 'a', (bite.deg + 180).toFixed(1) + 'deg');
+      btn.style.setProperty('--b' + n + 's', rand(0.85, 1.1).toFixed(2));
+
+      for (var j = 0; j < 2; j++) {
+        var crumb = crumbs[k * 2 + j];
+        var spread = rad + ((j ? 1 : -1) * rand(10, 35) * Math.PI) / 180;
+        var dist = em * rand(0.7, 1.1);
+
+        crumb.style.left = cx.toFixed(1) + 'px';
+        crumb.style.top = cy.toFixed(1) + 'px';
+        crumb.style.setProperty('--dx', (Math.cos(spread) * dist).toFixed(1) + 'px');
+        crumb.style.setProperty('--dy', (Math.sin(spread) * dist - em * 0.3).toFixed(1) + 'px');
+        crumb.style.animationDelay = (delays[k] + 0.08 + j * 0.03).toFixed(2) + 's';
+      }
+    });
   });
 }
 
