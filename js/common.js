@@ -23,7 +23,15 @@ $(function () {
   storyDonutRoll();
   doStepScroll();
   rollSlide();
+  crewFlow();
 });
+
+function crewFlow() {
+  $('.sc-crew .crew-track').each(function () {
+    var $items = $(this).children();
+    $(this).append($items.clone(), $items.clone()).addClass('is-flow');
+  });
+}
 
 function doStepScroll() {
   var section = document.querySelector('.sc-do');
