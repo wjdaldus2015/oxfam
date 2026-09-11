@@ -341,11 +341,70 @@
 }
 
 .roll-frame .swiper {
-  --swiper-wrapper-transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
   width: 100%;
   height: 100%;
   border-radius: 50%;
   clip-path: circle(50%);
+}
+
+.roll-frame .swiper-slide {
+  opacity: 1 !important;
+  transition-duration: 0s !important;
+}
+
+.roll-frame .swiper-slide-prev {
+  z-index: 1;
+}
+
+.roll-frame .swiper-slide-active {
+  z-index: 2;
+  animation: rollReveal 1.2s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+.roll-frame .swiper-slide-active .img img {
+  animation: rollZoomIn 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.roll-frame .swiper-slide-prev .img img {
+  animation: rollZoomOut 1.2s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+@keyframes rollReveal {
+  from {
+    clip-path: circle(0% at 50% 50%);
+  }
+
+  to {
+    clip-path: circle(71% at 50% 50%);
+  }
+}
+
+@keyframes rollZoomIn {
+  from {
+    transform: scale(1.25);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes rollZoomOut {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roll-frame .swiper-slide-active,
+  .roll-frame .swiper-slide-active .img img,
+  .roll-frame .swiper-slide-prev .img img {
+    animation: none;
+  }
 }
 
 .roll-card {

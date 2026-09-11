@@ -264,6 +264,8 @@ function rollSlide() {
     swipers.push(new Swiper($(this).find('.swiper')[0], {
       loop: true,
       speed: 1200,
+      effect: 'fade',
+      fadeEffect: { crossFade: false },
       allowTouchMove: false,
       a11y: { enabled: false },
       on: {
