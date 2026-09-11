@@ -27,10 +27,48 @@ $(function () {
 });
 
 function crewFlow() {
-  $('.sc-crew .crew-track').each(function () {
+  var $tracks = $('.sc-crew .crew-track');
+  if (!$tracks.length) return;
+
+  var edge = 60;
+
+  $tracks.each(function () {
     var $items = $(this).children();
-    $(this).append($items.clone(), $items.clone()).addClass('is-flow');
+    $(this).append($items.clone(), $items.clone());
   });
+
+  function place() {
+    var row01 = document.querySelector('.sc-crew .row01');
+    var row02 = document.querySelector('.sc-crew .row02');
+    var setWidth = row01.querySelector('.crew-track').scrollWidth / 3;
+
+    row01.style.marginLeft = (window.innerWidth - setWidth * 2 + edge) + 'px';
+    row02.style.marginLeft = -edge + 'px';
+  }
+
+  function flow() {
+    place();
+    $tracks.addClass('is-flow');
+  }
+
+  place();
+  $(window).on('load resize', place);
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    flow();
+    return;
+  }
+
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: '.sc-crew .crew-rows',
+      start: 'top 85%',
+      once: true
+    },
+    onStart: flow
+  })
+    .fromTo('.sc-crew .row01', { x: -800, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 2.6, ease: 'power3.out' }, 0)
+    .fromTo('.sc-crew .row02', { x: 800, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 2.6, ease: 'power3.out' }, 0);
 }
 
 function doStepScroll() {

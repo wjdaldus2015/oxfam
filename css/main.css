@@ -495,14 +495,6 @@
   margin-left: calc(50% - 987px);
 }
 
-.crew-row[data-aos="fade-right"] {
-  transform: translate3d(-800px, 0, 0);
-}
-
-.crew-row[data-aos="fade-left"] {
-  transform: translate3d(800px, 0, 0);
-}
-
 .crew-track {
   display: flex;
   align-items: flex-end;
