@@ -20,12 +20,38 @@ AOS.init({
 });
 
 $(function () {
+  headerScroll();
   btnBite();
   storyDonutRoll();
   doStepScroll();
   rollSlide();
   crewFlow();
 });
+
+function headerScroll() {
+  var header = document.querySelector('.header');
+  if (!header) return;
+
+  var lastY = window.scrollY;
+
+  function update(y) {
+    var delta = y - lastY;
+    if (Math.abs(delta) < 5) return;
+
+    if (y > header.offsetHeight && delta > 0) header.classList.add('is-hide');
+    else header.classList.remove('is-hide');
+
+    lastY = y;
+  }
+
+  lenis.on('scroll', function (e) {
+    update(e.scroll);
+  });
+
+  header.addEventListener('focusin', function () {
+    header.classList.remove('is-hide');
+  });
+}
 
 function btnBite() {
   var delays = [0, 0.12, 0.24];
