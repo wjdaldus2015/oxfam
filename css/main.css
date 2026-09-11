@@ -413,11 +413,29 @@
   height: 85px;
   border-radius: 50%;
   background: url(../image/main/icon-next-bg.svg) no-repeat center / 100% 100%;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s;
 }
 
 .btn-next img {
   width: 43px;
   height: 44.18px;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-next:hover,
+.btn-next:focus-visible {
+  transform: scale(1.08);
+  filter: brightness(0.9);
+}
+
+.btn-next:hover img,
+.btn-next:focus-visible img {
+  transform: translateX(4px);
+}
+
+.btn-next:active {
+  transform: scale(0.95);
+  transition-duration: 0.15s;
 }
 
 /* Goal */

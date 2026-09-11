@@ -155,28 +155,31 @@ function rollSlide() {
     return;
   }
 
-  function rollDistance(i, el) {
-    return window.innerWidth - el.offsetLeft + 40;
-  }
+  var rollIn = 120;
 
-  gsap.fromTo($frames.get(), {
-    x: rollDistance,
-    rotation: function (i, el) {
-      return (rollDistance(i, el) / (el.offsetWidth / 2)) * (180 / Math.PI);
-    }
-  }, {
-    x: 0,
-    rotation: 0,
-    duration: 1.6,
-    ease: 'power2.out',
-    stagger: 0.15,
+  gsap.timeline({
     scrollTrigger: {
       trigger: '.sc-roll .roll-list',
       start: 'top 85%',
       once: true
     },
     onComplete: play
-  });
+  })
+    .fromTo($frames.get(), {
+      x: rollIn,
+      rotation: function (i, el) {
+        return (rollIn / (el.offsetWidth / 2)) * (180 / Math.PI);
+      },
+      autoAlpha: 0
+    }, {
+      x: 0,
+      rotation: 0,
+      autoAlpha: 1,
+      duration: 1.4,
+      ease: 'power3.out',
+      stagger: 0.12
+    })
+    .fromTo('.sc-roll .btn-next', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, '-=0.6');
 }
 
 function storyDonutRoll() {
