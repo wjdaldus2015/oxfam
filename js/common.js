@@ -85,6 +85,25 @@ function doStepScroll() {
   var stride = 45;
   var mm = gsap.matchMedia();
 
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.fromTo(section.querySelector('.do-donut'), {
+      x: 240,
+      y: -240,
+      autoAlpha: 0
+    }, {
+      x: 0,
+      y: 0,
+      autoAlpha: 1,
+      duration: 1.6,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 70%',
+        once: true
+      }
+    });
+  }
+
   function walk() {
     var x = gsap.getProperty(deco, 'x');
     var swing = Math.sin((x / stride) * Math.PI);
