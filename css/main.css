@@ -16,24 +16,58 @@
   display: block;
 }
 
+.visual-bg img,
+.intro-bg img,
+.goal-bg img,
+.do-donut,
+.do-deco .char01,
+.do-deco .char02,
+.crew-track img {
+  max-width: none;
+}
+
+.visual-bg img,
+.intro-bg img,
+.goal-bg img,
+.do-donut,
+.do-deco .char01,
+.do-deco .char02 {
+  position: absolute;
+}
+
+.sc-visual .inner,
+.sc-story .inner {
+  z-index: 1;
+}
+
+.sc-intro .tit,
+.sc-goal .tit {
+  position: relative;
+  padding-top: 333px;
+  text-align: center;
+}
+
 /* Visual */
 .sc-visual {
   height: 940px;
   background: #000;
 }
 
-.visual-bg img {
-  position: absolute;
-  max-width: none;
-}
-
-.visual-bg .bg01 {
-  left: calc(50% - 1077px);
+.visual-bg .bg01,
+.visual-bg .bg02 {
   top: 0;
   width: 2162px;
   height: 940px;
   object-fit: cover;
+}
+
+.visual-bg .bg01 {
+  left: calc(50% - 1077px);
   opacity: 0.85;
+}
+
+.visual-bg .bg02 {
+  left: calc(50% - 1076px);
 }
 
 .visual-bg .donut01 {
@@ -41,14 +75,6 @@
   top: -432.65px;
   width: 868.7px;
   height: 865.85px;
-}
-
-.visual-bg .bg02 {
-  left: calc(50% - 1076px);
-  top: 0;
-  width: 2162px;
-  height: 940px;
-  object-fit: cover;
 }
 
 .visual-bg .donut02 {
@@ -59,7 +85,6 @@
 }
 
 .sc-visual .inner {
-  z-index: 1;
   padding-top: 222px;
 }
 
@@ -98,10 +123,8 @@
 }
 
 .intro-bg img {
-  position: absolute;
   left: 0;
   width: 100%;
-  max-width: none;
   object-fit: cover;
 }
 
@@ -114,12 +137,6 @@
 .intro-bg .edge {
   bottom: -4px;
   height: 194px;
-}
-
-.sc-intro .tit {
-  position: relative;
-  padding-top: 333px;
-  text-align: center;
 }
 
 /* Donut Story */
@@ -151,10 +168,6 @@
 
 .story-track .track-guide {
   fill: none;
-}
-
-.sc-story .inner {
-  z-index: 1;
 }
 
 .story-txt {
@@ -219,12 +232,10 @@
 }
 
 .do-donut {
-  position: absolute;
   left: calc(50% + 497.43px);
   top: -275.73px;
   width: 723.79px;
   height: 699.17px;
-  max-width: none;
 }
 
 .do-list {
@@ -273,22 +284,13 @@
   margin-left: 20px;
 }
 
-.do-deco .char01,
-.do-deco .char02 {
-  position: absolute;
-  max-width: none;
-}
-
-.do-deco .char01 {
-  overflow: visible;
-  fill: #fff;
-}
-
 .do-deco .char01 {
   left: 0;
   top: 62.6px;
   width: 106.45px;
   height: 131.14px;
+  overflow: visible;
+  fill: #fff;
 }
 
 .do-deco .char02 {
@@ -398,14 +400,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .roll-frame .swiper-slide-active,
-  .roll-frame .swiper-slide-active .img img,
-  .roll-frame .swiper-slide-prev .img img {
-    animation: none;
-  }
-}
-
 .roll-card {
   display: block;
   position: relative;
@@ -450,15 +444,6 @@
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.6s 0.8s, transform 0.6s 0.8s;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .roll-card .tit,
-  .swiper-slide-active .roll-card .tit {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
 }
 
 .btn-next {
@@ -507,17 +492,11 @@
   background: #000;
 }
 
-.goal-bg img {
-  position: absolute;
-  max-width: none;
-}
-
 .goal-bg .bg {
-  left: 50%;
+  left: calc(50% - 1246px);
   top: -214px;
   width: 2492px;
   height: 1043px;
-  margin-left: -1246px;
   opacity: 0.46;
 }
 
@@ -527,12 +506,6 @@
   width: 1920px;
   height: 132px;
   object-fit: cover;
-}
-
-.sc-goal .tit {
-  position: relative;
-  padding-top: 333px;
-  text-align: center;
 }
 
 /* Let’s Roll the World! */
@@ -545,13 +518,8 @@
   margin-top: 126px;
 }
 
-.crew-row.row01 {
-  margin-left: calc(50% - 1138px);
-}
-
 .crew-row.row02 {
   margin-top: 19px;
-  margin-left: calc(50% - 987px);
 }
 
 .crew-track {
@@ -588,12 +556,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .crew-track.is-flow {
-    animation: none;
-  }
-}
-
 .crew-track li {
   flex: none;
   margin-right: 46px;
@@ -602,7 +564,6 @@
 .crew-track img {
   width: auto;
   height: 230px;
-  max-width: none;
 }
 
 .crew-track .char {
@@ -628,6 +589,22 @@
 
 .crew-btn .btn-round {
   padding: 14.4px 50.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roll-frame .swiper-slide-active,
+  .roll-frame .swiper-slide-active .img img,
+  .roll-frame .swiper-slide-prev .img img,
+  .crew-track.is-flow {
+    animation: none;
+  }
+
+  .roll-card .tit,
+  .swiper-slide-active .roll-card .tit {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 @media all and (max-width: 1024px) {
@@ -682,7 +659,8 @@
     height: 500px;
   }
 
-  .sc-intro .tit {
+  .sc-intro .tit,
+  .sc-goal .tit {
     padding-top: 200px;
   }
 
@@ -810,10 +788,6 @@
     height: 500px;
   }
 
-  .sc-goal .tit {
-    padding-top: 200px;
-  }
-
   .goal-bg .edge {
     top: auto;
     bottom: 0;
@@ -836,13 +810,8 @@
     height: 120px;
   }
 
-  .crew-row.row01 {
-    margin-left: -90px;
-  }
-
   .crew-row.row02 {
     margin-top: 10px;
-    margin-left: -14px;
   }
 
   .crew-track .char {
