@@ -86,8 +86,13 @@ function quickMenu() {
         else root.classList.remove('is-quick');
       }
     })
-      .to(ghost, $.extend({ duration: 0.8, ease: 'power3.inOut' }, to), 0)
+      .to(ghost, $.extend({ duration: 0.8, ease: 'power3.inOut', rotation: show ? 360 : 0 }, to), 0)
       .to(label, { autoAlpha: show ? 0 : 1, duration: 0.25 }, show ? 0 : 0.55);
+
+    if (show) {
+      tl.to(ghost, { scaleX: 1.08, scaleY: 0.9, duration: 0.12, ease: 'power2.out' }, 0.8)
+        .to(ghost, { scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+    }
   }
 
   function toggle(y) {
