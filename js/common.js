@@ -102,11 +102,11 @@ function quickMenu() {
 
     if (show) {
       tl.fromTo(ghost, { scale: 0.6 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' }, 0)
-        .to(ghost, $.extend({ duration: 1.2, ease: 'power1.inOut', rotation: 360 }, to), 0)
+        .to(ghost, $.extend({ duration: 1, ease: 'power1.inOut', rotation: 360 }, to), 0)
         .add(function () {
           menu.classList.add('is-show');
-        }, 1.2)
-        .to(ghost, { scaleX: 1.08, scaleY: 0.9, duration: 0.12, ease: 'power2.out' }, 1.2)
+        }, 1)
+        .to(ghost, { scaleX: 1.08, scaleY: 0.9, duration: 0.12, ease: 'power2.out' }, 1)
         .to(ghost, { scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
       return;
     }
