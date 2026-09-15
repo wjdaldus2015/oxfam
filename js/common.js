@@ -58,24 +58,37 @@ function quickMenu() {
   }
 
   function morph(show) {
-    var from = ghost ? rectOf(ghost) : rectOf(show ? headerBtn : join);
-    var to = rectOf(show ? join : headerBtn);
+    var target = show ? join : headerBtn;
+    var to = rectOf(target);
+    var from;
+
+    if (ghost) {
+      from = rectOf(ghost);
+    } else if (show) {
+      var hb = rectOf(headerBtn);
+      from = { left: hb.left + (hb.width - to.width) / 2, top: hb.top + (hb.height - to.height) / 2, width: to.width, height: to.height };
+    } else {
+      from = rectOf(join);
+    }
 
     if (tl) tl.kill();
     if (!ghost) {
       ghost = document.createElement('div');
       ghost.className = 'quick-ghost';
       ghost.setAttribute('aria-hidden', 'true');
-      ghost.innerHTML = '<span>' + headerBtn.textContent.trim() + '</span>';
-      ghost.style.fontSize = getComputedStyle(headerBtn).fontSize;
       document.body.appendChild(ghost);
     }
+
+    var style = getComputedStyle(target);
+    ghost.innerHTML = '<span>' + (show ? join.innerHTML.trim() : headerBtn.textContent.trim()) + '</span>';
+    ghost.style.fontSize = style.fontSize;
+    ghost.style.lineHeight = style.lineHeight;
+    ghost.style.textAlign = style.textAlign;
 
     var label = ghost.firstChild;
     root.classList.add('is-quick');
     gsap.set(join, { autoAlpha: 0 });
     gsap.set(ghost, from);
-    if (!show) gsap.set(label, { autoAlpha: 0 });
 
     tl = gsap.timeline({
       onComplete: function () {
@@ -85,27 +98,36 @@ function quickMenu() {
         if (show) gsap.set(join, { autoAlpha: 1 });
         else root.classList.remove('is-quick');
       }
-    })
-      .to(ghost, $.extend({ duration: 0.8, ease: 'power3.inOut', rotation: show ? 360 : 0 }, to), 0)
-      .to(label, { autoAlpha: show ? 0 : 1, duration: 0.25 }, show ? 0 : 0.55);
+    });
 
     if (show) {
-      tl.to(ghost, { scaleX: 1.08, scaleY: 0.9, duration: 0.12, ease: 'power2.out' }, 0.8)
+      tl.fromTo(ghost, { scale: 0.6 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' }, 0)
+        .to(ghost, $.extend({ duration: 1.8, ease: 'power1.inOut', rotation: 360 }, to), 0)
+        .add(function () {
+          menu.classList.add('is-show');
+        }, 1.8)
+        .to(ghost, { scaleX: 1.08, scaleY: 0.9, duration: 0.12, ease: 'power2.out' }, 1.8)
         .to(ghost, { scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+      return;
     }
+
+    gsap.set(label, { autoAlpha: 0 });
+    tl.to(ghost, $.extend({ duration: 0.8, ease: 'power3.inOut', rotation: 0, scale: 1 }, to), 0)
+      .to(label, { autoAlpha: 1, duration: 0.25 }, 0.55);
   }
 
   function toggle(y) {
     var show = y > window.innerHeight * 0.6;
     if (show === state) return;
     state = show;
-    menu.classList.toggle('is-show', show);
 
     if (reduceMotion) {
+      menu.classList.toggle('is-show', show);
       root.classList.toggle('is-quick', show);
       gsap.set(join, { autoAlpha: show ? 1 : 0 });
       return;
     }
+    if (!show) menu.classList.remove('is-show');
     morph(show);
   }
 
