@@ -51,6 +51,16 @@ function quickMenu() {
   var state = false;
   var ghost = null;
   var tl = null;
+  var biteTimer = null;
+
+  function biteOnce() {
+    clearTimeout(biteTimer);
+    $(join).trigger('mouseenter');
+    join.classList.add('is-bite');
+    biteTimer = setTimeout(function () {
+      join.classList.remove('is-bite');
+    }, 1400);
+  }
 
   function rectOf(el) {
     var r = el.getBoundingClientRect();
@@ -72,6 +82,8 @@ function quickMenu() {
     }
 
     if (tl) tl.kill();
+    clearTimeout(biteTimer);
+    join.classList.remove('is-bite');
     if (!ghost) {
       ghost = document.createElement('div');
       ghost.className = 'quick-ghost';
@@ -95,8 +107,12 @@ function quickMenu() {
         ghost.remove();
         ghost = null;
         tl = null;
-        if (show) gsap.set(join, { autoAlpha: 1 });
-        else root.classList.remove('is-quick');
+        if (show) {
+          gsap.set(join, { autoAlpha: 1 });
+          biteOnce();
+        } else {
+          root.classList.remove('is-quick');
+        }
       }
     });
 

@@ -146,7 +146,8 @@
 }
 
 .btn-round:hover::before,
-.btn-round:focus-visible::before {
+.btn-round:focus-visible::before,
+.btn-round.is-bite::before {
   --bite1: 1;
   --bite2: 1;
   --bite3: 1;
@@ -209,7 +210,8 @@
 }
 
 .btn-round:hover .btn-crumb,
-.btn-round:focus-visible .btn-crumb {
+.btn-round:focus-visible .btn-crumb,
+.btn-round.is-bite .btn-crumb {
   animation-name: crumbFall;
   animation-duration: 0.9s;
   animation-fill-mode: forwards;
