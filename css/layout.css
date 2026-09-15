@@ -40,7 +40,13 @@
   left: 0;
   right: 0;
   z-index: 100;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  background: transparent;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s ease;
+}
+
+.header:hover,
+.header:focus-within {
+  background: #fff;
 }
 
 .header.is-hide {
