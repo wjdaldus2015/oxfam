@@ -40,16 +40,11 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background: #fff;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .header.is-hide {
   transform: translateY(-100%);
-}
-
-.header + #container {
-  padding-top: 171px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -139,7 +134,8 @@
   opacity: 1;
   visibility: visible;
   transform: none;
-  transition: opacity 0.35s 0.7s, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s, visibility 0s 0.7s;
+  transition: opacity 0.35s 0.7s,
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s, visibility 0s 0.7s;
 }
 
 .quick-top img {
@@ -262,10 +258,6 @@
 @media all and (max-width: 768px) {
   .header .inner {
     height: 80px;
-  }
-
-  .header + #container {
-    padding-top: 80px;
   }
 
   .quick-menu {
