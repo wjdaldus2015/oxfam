@@ -91,6 +91,10 @@
 }
 
 .btn-round::before {
+  /* 자국이 0이면 원 중심을 버튼 밖으로 보내 반지름 0 그라디언트가 가장자리에 남기는 잔상 방지 */
+  --c1x: calc(var(--b1x) + (1 - min(var(--bite1) * 1000, 1)) * 3000px);
+  --c2x: calc(var(--b2x) + (1 - min(var(--bite2) * 1000, 1)) * 3000px);
+  --c3x: calc(var(--b3x) + (1 - min(var(--bite3) * 1000, 1)) * 3000px);
   content: "";
   position: absolute;
   inset: 0;
@@ -98,14 +102,14 @@
   clip-path: inset(0 round 999px);
   background: var(--color-green);
   -webkit-mask-image: radial-gradient(
-      circle at var(--b1x) var(--b1y),
+      circle at var(--c1x) var(--b1y),
       transparent calc(var(--bite1) * var(--b1s) * 0.42em - 0.5px),
       #000 calc(var(--bite1) * var(--b1s) * 0.42em)
     ),
     radial-gradient(
       circle at
         calc(
-          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+          var(--c1x) + var(--bite1) * var(--b1s) * 0.42em *
             cos(var(--b1a) - 70deg)
         )
         calc(
@@ -118,7 +122,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+          var(--c1x) + var(--bite1) * var(--b1s) * 0.42em *
             cos(var(--b1a) - 35deg)
         )
         calc(
@@ -130,7 +134,7 @@
     ),
     radial-gradient(
       circle at
-        calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a)))
+        calc(var(--c1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a)))
         calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a))),
       transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
       #000 calc(var(--bite1) * var(--b1s) * 0.27em)
@@ -138,7 +142,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+          var(--c1x) + var(--bite1) * var(--b1s) * 0.42em *
             cos(var(--b1a) + 35deg)
         )
         calc(
@@ -151,7 +155,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+          var(--c1x) + var(--bite1) * var(--b1s) * 0.42em *
             cos(var(--b1a) + 70deg)
         )
         calc(
@@ -162,14 +166,14 @@
       #000 calc(var(--bite1) * var(--b1s) * 0.27em)
     ),
     radial-gradient(
-      circle at var(--b2x) var(--b2y),
+      circle at var(--c2x) var(--b2y),
       transparent calc(var(--bite2) * var(--b2s) * 0.42em - 0.5px),
       #000 calc(var(--bite2) * var(--b2s) * 0.42em)
     ),
     radial-gradient(
       circle at
         calc(
-          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+          var(--c2x) + var(--bite2) * var(--b2s) * 0.42em *
             cos(var(--b2a) - 70deg)
         )
         calc(
@@ -182,7 +186,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+          var(--c2x) + var(--bite2) * var(--b2s) * 0.42em *
             cos(var(--b2a) - 35deg)
         )
         calc(
@@ -194,7 +198,7 @@
     ),
     radial-gradient(
       circle at
-        calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a)))
+        calc(var(--c2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a)))
         calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a))),
       transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
       #000 calc(var(--bite2) * var(--b2s) * 0.27em)
@@ -202,7 +206,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+          var(--c2x) + var(--bite2) * var(--b2s) * 0.42em *
             cos(var(--b2a) + 35deg)
         )
         calc(
@@ -215,7 +219,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+          var(--c2x) + var(--bite2) * var(--b2s) * 0.42em *
             cos(var(--b2a) + 70deg)
         )
         calc(
@@ -226,14 +230,14 @@
       #000 calc(var(--bite2) * var(--b2s) * 0.27em)
     ),
     radial-gradient(
-      circle at var(--b3x) var(--b3y),
+      circle at var(--c3x) var(--b3y),
       transparent calc(var(--bite3) * var(--b3s) * 0.42em - 0.5px),
       #000 calc(var(--bite3) * var(--b3s) * 0.42em)
     ),
     radial-gradient(
       circle at
         calc(
-          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+          var(--c3x) + var(--bite3) * var(--b3s) * 0.42em *
             cos(var(--b3a) - 70deg)
         )
         calc(
@@ -246,7 +250,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+          var(--c3x) + var(--bite3) * var(--b3s) * 0.42em *
             cos(var(--b3a) - 35deg)
         )
         calc(
@@ -258,7 +262,7 @@
     ),
     radial-gradient(
       circle at
-        calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a)))
+        calc(var(--c3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a)))
         calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a))),
       transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
       #000 calc(var(--bite3) * var(--b3s) * 0.27em)
@@ -266,7 +270,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+          var(--c3x) + var(--bite3) * var(--b3s) * 0.42em *
             cos(var(--b3a) + 35deg)
         )
         calc(
@@ -279,7 +283,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+          var(--c3x) + var(--bite3) * var(--b3s) * 0.42em *
             cos(var(--b3a) + 70deg)
         )
         calc(
@@ -290,14 +294,14 @@
       #000 calc(var(--bite3) * var(--b3s) * 0.27em)
     );
   mask-image: radial-gradient(
-      circle at var(--b1x) var(--b1y),
+      circle at var(--c1x) var(--b1y),
       transparent calc(var(--bite1) * var(--b1s) * 0.42em - 0.5px),
       #000 calc(var(--bite1) * var(--b1s) * 0.42em)
     ),
     radial-gradient(
       circle at
         calc(
-          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+          var(--c1x) + var(--bite1) * var(--b1s) * 0.42em *
             cos(var(--b1a) - 70deg)
         )
         calc(
@@ -310,7 +314,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+          var(--c1x) + var(--bite1) * var(--b1s) * 0.42em *
             cos(var(--b1a) - 35deg)
         )
         calc(
@@ -322,7 +326,7 @@
     ),
     radial-gradient(
       circle at
-        calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a)))
+        calc(var(--c1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a)))
         calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a))),
       transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
       #000 calc(var(--bite1) * var(--b1s) * 0.27em)
@@ -330,7 +334,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+          var(--c1x) + var(--bite1) * var(--b1s) * 0.42em *
             cos(var(--b1a) + 35deg)
         )
         calc(
@@ -343,7 +347,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+          var(--c1x) + var(--bite1) * var(--b1s) * 0.42em *
             cos(var(--b1a) + 70deg)
         )
         calc(
@@ -354,14 +358,14 @@
       #000 calc(var(--bite1) * var(--b1s) * 0.27em)
     ),
     radial-gradient(
-      circle at var(--b2x) var(--b2y),
+      circle at var(--c2x) var(--b2y),
       transparent calc(var(--bite2) * var(--b2s) * 0.42em - 0.5px),
       #000 calc(var(--bite2) * var(--b2s) * 0.42em)
     ),
     radial-gradient(
       circle at
         calc(
-          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+          var(--c2x) + var(--bite2) * var(--b2s) * 0.42em *
             cos(var(--b2a) - 70deg)
         )
         calc(
@@ -374,7 +378,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+          var(--c2x) + var(--bite2) * var(--b2s) * 0.42em *
             cos(var(--b2a) - 35deg)
         )
         calc(
@@ -386,7 +390,7 @@
     ),
     radial-gradient(
       circle at
-        calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a)))
+        calc(var(--c2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a)))
         calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a))),
       transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
       #000 calc(var(--bite2) * var(--b2s) * 0.27em)
@@ -394,7 +398,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+          var(--c2x) + var(--bite2) * var(--b2s) * 0.42em *
             cos(var(--b2a) + 35deg)
         )
         calc(
@@ -407,7 +411,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+          var(--c2x) + var(--bite2) * var(--b2s) * 0.42em *
             cos(var(--b2a) + 70deg)
         )
         calc(
@@ -418,14 +422,14 @@
       #000 calc(var(--bite2) * var(--b2s) * 0.27em)
     ),
     radial-gradient(
-      circle at var(--b3x) var(--b3y),
+      circle at var(--c3x) var(--b3y),
       transparent calc(var(--bite3) * var(--b3s) * 0.42em - 0.5px),
       #000 calc(var(--bite3) * var(--b3s) * 0.42em)
     ),
     radial-gradient(
       circle at
         calc(
-          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+          var(--c3x) + var(--bite3) * var(--b3s) * 0.42em *
             cos(var(--b3a) - 70deg)
         )
         calc(
@@ -438,7 +442,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+          var(--c3x) + var(--bite3) * var(--b3s) * 0.42em *
             cos(var(--b3a) - 35deg)
         )
         calc(
@@ -450,7 +454,7 @@
     ),
     radial-gradient(
       circle at
-        calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a)))
+        calc(var(--c3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a)))
         calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a))),
       transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
       #000 calc(var(--bite3) * var(--b3s) * 0.27em)
@@ -458,7 +462,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+          var(--c3x) + var(--bite3) * var(--b3s) * 0.42em *
             cos(var(--b3a) + 35deg)
         )
         calc(
@@ -471,7 +475,7 @@
     radial-gradient(
       circle at
         calc(
-          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+          var(--c3x) + var(--bite3) * var(--b3s) * 0.42em *
             cos(var(--b3a) + 70deg)
         )
         calc(
