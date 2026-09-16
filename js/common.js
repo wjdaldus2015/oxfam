@@ -230,6 +230,8 @@ function btnBite() {
     var sizes = [rand(0.5, 0.7), rand(0.8, 1), rand(1.15, 1.35)].sort(function () {
       return Math.random() - 0.5;
     });
+    // 둥근 끝에 찍는 자국은 캡 반지름(r)보다 충분히 작아야 곡선이 남는다
+    var capMax = (0.6 * r) / em;
     var pill = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '"><rect width="' + w + '" height="' + h + '" rx="' + r + '"/></svg>';
 
     btn.style.setProperty('--pill', 'url("data:image/svg+xml,' + encodeURIComponent(pill) + '")');
@@ -239,16 +241,17 @@ function btnBite() {
       var cx = bite.cx;
       var cy = bite.cy;
       var n = k + 1;
+      var size = k < 2 ? Math.min(sizes[k], capMax) : sizes[k];
 
       btn.style.setProperty('--b' + n + 'x', cx.toFixed(1) + 'px');
       btn.style.setProperty('--b' + n + 'y', cy.toFixed(1) + 'px');
       btn.style.setProperty('--b' + n + 'a', (bite.deg + 180).toFixed(1) + 'deg');
-      btn.style.setProperty('--b' + n + 's', sizes[k].toFixed(2));
+      btn.style.setProperty('--b' + n + 's', size.toFixed(2));
 
       for (var j = 0; j < 2; j++) {
         var crumb = crumbs[k * 2 + j];
         var spread = rad + ((j ? 1 : -1) * rand(10, 35) * Math.PI) / 180;
-        var dist = em * rand(0.7, 1.1) * sizes[k];
+        var dist = em * rand(0.7, 1.1) * size;
 
         crumb.style.left = cx.toFixed(1) + 'px';
         crumb.style.top = cy.toFixed(1) + 'px';
