@@ -59,6 +59,7 @@ function quickMenu() {
     join.classList.add('is-bite');
     biteTimer = setTimeout(function () {
       join.classList.remove('is-bite');
+      $(join).trigger('mouseleave');
     }, 1400);
   }
 
@@ -83,7 +84,7 @@ function quickMenu() {
 
     if (tl) tl.kill();
     clearTimeout(biteTimer);
-    join.classList.remove('is-bite');
+    join.classList.remove('is-bite', 'is-bitten');
     if (!ghost) {
       ghost = document.createElement('div');
       ghost.className = 'quick-ghost';
@@ -207,8 +208,16 @@ function btnBite() {
 
   $('.btn-round').each(function () {
     for (var i = 0; i < 6; i++) $(this).append('<span class="btn-crumb" aria-hidden="true"></span>');
+  }).on('mouseleave focusout', function () {
+    var btn = this;
+    clearTimeout($(btn).data('biteTimer'));
+    $(btn).data('biteTimer', setTimeout(function () {
+      btn.classList.remove('is-bitten');
+    }, 700));
   }).on('mouseenter focusin', function () {
     var btn = this;
+    clearTimeout($(btn).data('biteTimer'));
+    btn.classList.add('is-bitten');
     var w = btn.offsetWidth;
     var h = btn.offsetHeight;
     var r = h / 2;

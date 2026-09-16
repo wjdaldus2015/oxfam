@@ -99,8 +99,18 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  clip-path: inset(0 round 999px);
+  border-radius: 999px;
   background: var(--color-green);
+  transition: --bite1 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    --bite2 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.12s,
+    --bite3 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.24s;
+}
+
+/* 자국 마스크는 베어 무는 동안(is-bitten)만 적용 — 평소엔 마스크·clip-path 없는 순수 알약 */
+.btn-round.is-bitten::before,
+.btn-round.is-bite::before {
+  border-radius: 0;
+  clip-path: inset(0 round 999px);
   -webkit-mask-image: radial-gradient(
       circle at var(--c1x) var(--b1y),
       transparent calc(var(--bite1) * var(--b1s) * 0.42em - 0.5px),
@@ -489,9 +499,6 @@
   mask-repeat: no-repeat;
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
-  transition: --bite1 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-    --bite2 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.12s,
-    --bite3 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.24s;
 }
 
 .btn-round:hover::before,
