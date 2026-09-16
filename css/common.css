@@ -97,50 +97,395 @@
   z-index: -1;
   clip-path: inset(0 round 999px);
   background: var(--color-green);
-  -webkit-mask-image:
-    radial-gradient(circle at var(--b1x) var(--b1y), transparent calc(var(--bite1) * var(--b1s) * 0.42em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.42em)),
-    radial-gradient(circle at calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a) - 70deg)) calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a) - 70deg)), transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a) - 35deg)) calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a) - 35deg)), transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a))) calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a))), transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a) + 35deg)) calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a) + 35deg)), transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a) + 70deg)) calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a) + 70deg)), transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.27em)),
-    radial-gradient(circle at var(--b2x) var(--b2y), transparent calc(var(--bite2) * var(--b2s) * 0.42em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.42em)),
-    radial-gradient(circle at calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a) - 70deg)) calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a) - 70deg)), transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a) - 35deg)) calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a) - 35deg)), transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a))) calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a))), transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a) + 35deg)) calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a) + 35deg)), transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a) + 70deg)) calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a) + 70deg)), transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.27em)),
-    radial-gradient(circle at var(--b3x) var(--b3y), transparent calc(var(--bite3) * var(--b3s) * 0.42em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.42em)),
-    radial-gradient(circle at calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a) - 70deg)) calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a) - 70deg)), transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a) - 35deg)) calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a) - 35deg)), transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a))) calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a))), transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a) + 35deg)) calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a) + 35deg)), transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a) + 70deg)) calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a) + 70deg)), transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.27em));
-  mask-image:
-    radial-gradient(circle at var(--b1x) var(--b1y), transparent calc(var(--bite1) * var(--b1s) * 0.42em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.42em)),
-    radial-gradient(circle at calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a) - 70deg)) calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a) - 70deg)), transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a) - 35deg)) calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a) - 35deg)), transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a))) calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a))), transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a) + 35deg)) calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a) + 35deg)), transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a) + 70deg)) calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a) + 70deg)), transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px), #000 calc(var(--bite1) * var(--b1s) * 0.27em)),
-    radial-gradient(circle at var(--b2x) var(--b2y), transparent calc(var(--bite2) * var(--b2s) * 0.42em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.42em)),
-    radial-gradient(circle at calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a) - 70deg)) calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a) - 70deg)), transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a) - 35deg)) calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a) - 35deg)), transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a))) calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a))), transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a) + 35deg)) calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a) + 35deg)), transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a) + 70deg)) calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a) + 70deg)), transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px), #000 calc(var(--bite2) * var(--b2s) * 0.27em)),
-    radial-gradient(circle at var(--b3x) var(--b3y), transparent calc(var(--bite3) * var(--b3s) * 0.42em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.42em)),
-    radial-gradient(circle at calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a) - 70deg)) calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a) - 70deg)), transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a) - 35deg)) calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a) - 35deg)), transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a))) calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a))), transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a) + 35deg)) calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a) + 35deg)), transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.27em)),
-    radial-gradient(circle at calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a) + 70deg)) calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a) + 70deg)), transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px), #000 calc(var(--bite3) * var(--b3s) * 0.27em));
+  -webkit-mask-image: radial-gradient(
+      circle at var(--b1x) var(--b1y),
+      transparent calc(var(--bite1) * var(--b1s) * 0.42em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.42em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+            cos(var(--b1a) - 70deg)
+        )
+        calc(
+          var(--b1y) + var(--bite1) * var(--b1s) * 0.42em *
+            sin(var(--b1a) - 70deg)
+        ),
+      transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+            cos(var(--b1a) - 35deg)
+        )
+        calc(
+          var(--b1y) + var(--bite1) * var(--b1s) * 0.42em *
+            sin(var(--b1a) - 35deg)
+        ),
+      transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a)))
+        calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a))),
+      transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+            cos(var(--b1a) + 35deg)
+        )
+        calc(
+          var(--b1y) + var(--bite1) * var(--b1s) * 0.42em *
+            sin(var(--b1a) + 35deg)
+        ),
+      transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+            cos(var(--b1a) + 70deg)
+        )
+        calc(
+          var(--b1y) + var(--bite1) * var(--b1s) * 0.42em *
+            sin(var(--b1a) + 70deg)
+        ),
+      transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at var(--b2x) var(--b2y),
+      transparent calc(var(--bite2) * var(--b2s) * 0.42em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.42em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+            cos(var(--b2a) - 70deg)
+        )
+        calc(
+          var(--b2y) + var(--bite2) * var(--b2s) * 0.42em *
+            sin(var(--b2a) - 70deg)
+        ),
+      transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+            cos(var(--b2a) - 35deg)
+        )
+        calc(
+          var(--b2y) + var(--bite2) * var(--b2s) * 0.42em *
+            sin(var(--b2a) - 35deg)
+        ),
+      transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a)))
+        calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a))),
+      transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+            cos(var(--b2a) + 35deg)
+        )
+        calc(
+          var(--b2y) + var(--bite2) * var(--b2s) * 0.42em *
+            sin(var(--b2a) + 35deg)
+        ),
+      transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+            cos(var(--b2a) + 70deg)
+        )
+        calc(
+          var(--b2y) + var(--bite2) * var(--b2s) * 0.42em *
+            sin(var(--b2a) + 70deg)
+        ),
+      transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at var(--b3x) var(--b3y),
+      transparent calc(var(--bite3) * var(--b3s) * 0.42em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.42em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+            cos(var(--b3a) - 70deg)
+        )
+        calc(
+          var(--b3y) + var(--bite3) * var(--b3s) * 0.42em *
+            sin(var(--b3a) - 70deg)
+        ),
+      transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+            cos(var(--b3a) - 35deg)
+        )
+        calc(
+          var(--b3y) + var(--bite3) * var(--b3s) * 0.42em *
+            sin(var(--b3a) - 35deg)
+        ),
+      transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a)))
+        calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a))),
+      transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+            cos(var(--b3a) + 35deg)
+        )
+        calc(
+          var(--b3y) + var(--bite3) * var(--b3s) * 0.42em *
+            sin(var(--b3a) + 35deg)
+        ),
+      transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+            cos(var(--b3a) + 70deg)
+        )
+        calc(
+          var(--b3y) + var(--bite3) * var(--b3s) * 0.42em *
+            sin(var(--b3a) + 70deg)
+        ),
+      transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.27em)
+    );
+  mask-image: radial-gradient(
+      circle at var(--b1x) var(--b1y),
+      transparent calc(var(--bite1) * var(--b1s) * 0.42em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.42em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+            cos(var(--b1a) - 70deg)
+        )
+        calc(
+          var(--b1y) + var(--bite1) * var(--b1s) * 0.42em *
+            sin(var(--b1a) - 70deg)
+        ),
+      transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+            cos(var(--b1a) - 35deg)
+        )
+        calc(
+          var(--b1y) + var(--bite1) * var(--b1s) * 0.42em *
+            sin(var(--b1a) - 35deg)
+        ),
+      transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(var(--b1x) + var(--bite1) * var(--b1s) * 0.42em * cos(var(--b1a)))
+        calc(var(--b1y) + var(--bite1) * var(--b1s) * 0.42em * sin(var(--b1a))),
+      transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+            cos(var(--b1a) + 35deg)
+        )
+        calc(
+          var(--b1y) + var(--bite1) * var(--b1s) * 0.42em *
+            sin(var(--b1a) + 35deg)
+        ),
+      transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b1x) + var(--bite1) * var(--b1s) * 0.42em *
+            cos(var(--b1a) + 70deg)
+        )
+        calc(
+          var(--b1y) + var(--bite1) * var(--b1s) * 0.42em *
+            sin(var(--b1a) + 70deg)
+        ),
+      transparent calc(var(--bite1) * var(--b1s) * 0.27em - 0.5px),
+      #000 calc(var(--bite1) * var(--b1s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at var(--b2x) var(--b2y),
+      transparent calc(var(--bite2) * var(--b2s) * 0.42em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.42em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+            cos(var(--b2a) - 70deg)
+        )
+        calc(
+          var(--b2y) + var(--bite2) * var(--b2s) * 0.42em *
+            sin(var(--b2a) - 70deg)
+        ),
+      transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+            cos(var(--b2a) - 35deg)
+        )
+        calc(
+          var(--b2y) + var(--bite2) * var(--b2s) * 0.42em *
+            sin(var(--b2a) - 35deg)
+        ),
+      transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(var(--b2x) + var(--bite2) * var(--b2s) * 0.42em * cos(var(--b2a)))
+        calc(var(--b2y) + var(--bite2) * var(--b2s) * 0.42em * sin(var(--b2a))),
+      transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+            cos(var(--b2a) + 35deg)
+        )
+        calc(
+          var(--b2y) + var(--bite2) * var(--b2s) * 0.42em *
+            sin(var(--b2a) + 35deg)
+        ),
+      transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b2x) + var(--bite2) * var(--b2s) * 0.42em *
+            cos(var(--b2a) + 70deg)
+        )
+        calc(
+          var(--b2y) + var(--bite2) * var(--b2s) * 0.42em *
+            sin(var(--b2a) + 70deg)
+        ),
+      transparent calc(var(--bite2) * var(--b2s) * 0.27em - 0.5px),
+      #000 calc(var(--bite2) * var(--b2s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at var(--b3x) var(--b3y),
+      transparent calc(var(--bite3) * var(--b3s) * 0.42em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.42em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+            cos(var(--b3a) - 70deg)
+        )
+        calc(
+          var(--b3y) + var(--bite3) * var(--b3s) * 0.42em *
+            sin(var(--b3a) - 70deg)
+        ),
+      transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+            cos(var(--b3a) - 35deg)
+        )
+        calc(
+          var(--b3y) + var(--bite3) * var(--b3s) * 0.42em *
+            sin(var(--b3a) - 35deg)
+        ),
+      transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(var(--b3x) + var(--bite3) * var(--b3s) * 0.42em * cos(var(--b3a)))
+        calc(var(--b3y) + var(--bite3) * var(--b3s) * 0.42em * sin(var(--b3a))),
+      transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+            cos(var(--b3a) + 35deg)
+        )
+        calc(
+          var(--b3y) + var(--bite3) * var(--b3s) * 0.42em *
+            sin(var(--b3a) + 35deg)
+        ),
+      transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.27em)
+    ),
+    radial-gradient(
+      circle at
+        calc(
+          var(--b3x) + var(--bite3) * var(--b3s) * 0.42em *
+            cos(var(--b3a) + 70deg)
+        )
+        calc(
+          var(--b3y) + var(--bite3) * var(--b3s) * 0.42em *
+            sin(var(--b3a) + 70deg)
+        ),
+      transparent calc(var(--bite3) * var(--b3s) * 0.27em - 0.5px),
+      #000 calc(var(--bite3) * var(--b3s) * 0.27em)
+    );
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
-  transition:
-    --bite1 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+  transition: --bite1 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
     --bite2 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.12s,
     --bite3 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.24s;
 }
@@ -225,7 +570,8 @@
   }
 
   35% {
-    transform: translate(calc(var(--dx) * 0.6), var(--dy)) rotate(calc(var(--rot) * 0.4)) scale(1);
+    transform: translate(calc(var(--dx) * 0.6), var(--dy))
+      rotate(calc(var(--rot) * 0.4)) scale(1);
     animation-timing-function: cubic-bezier(0.5, 0, 0.8, 0.5);
   }
 
@@ -235,7 +581,8 @@
 
   100% {
     opacity: 0;
-    transform: translate(var(--dx), calc(var(--dy) + 1.4em)) rotate(var(--rot)) scale(1);
+    transform: translate(var(--dx), calc(var(--dy) + 1.4em)) rotate(var(--rot))
+      scale(1);
   }
 }
 
