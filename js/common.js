@@ -191,19 +191,23 @@ function btnBite() {
     return min + Math.random() * (max - min);
   }
 
-  function pickBites() {
-    var right = rand(-55, 55);
-    var left = rand(125, 235);
-    var extraOnRight = Math.random() < 0.5;
-    var extra = extraOnRight
-      ? (right > 0 ? rand(-75, -45) : rand(45, 75))
-      : (left > 180 ? rand(105, 135) : rand(225, 255));
+  // 둥근 끝(캡)마다 자국은 하나씩만 두고, 세 번째는 위/아래 직선 변에 둔다.
+  // 한 캡에 두 개가 겹치면 곡선이 다 먹혀 끝이 잘린 것처럼 보인다.
+  function pickBites(w, h, r, em) {
+    function onCap(cx0, deg) {
+      var rad = (deg * Math.PI) / 180;
+      return { cx: cx0 + r * Math.cos(rad), cy: r + r * Math.sin(rad), deg: deg };
+    }
 
-    return [
-      { side: 'right', deg: right },
-      { side: 'left', deg: left },
-      { side: extraOnRight ? 'right' : 'left', deg: extra }
-    ];
+    var top = Math.random() < 0.5;
+    var bites = [onCap(w - r, rand(-40, 40)), onCap(r, rand(140, 220))];
+
+    if (w - 2 * r > em * 2) {
+      bites.push({ cx: rand(r + em * 0.8, w - r - em * 0.8), cy: top ? 0 : h, deg: top ? -90 : 90 });
+    } else {
+      bites.push(onCap(r, (top ? -90 : 90) + rand(-20, 20)));
+    }
+    return bites;
   }
 
   $('.btn-round').each(function () {
@@ -226,11 +230,14 @@ function btnBite() {
     var sizes = [rand(0.5, 0.7), rand(0.8, 1), rand(1.15, 1.35)].sort(function () {
       return Math.random() - 0.5;
     });
+    var pill = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '"><rect width="' + w + '" height="' + h + '" rx="' + r + '"/></svg>';
 
-    pickBites().forEach(function (bite, k) {
+    btn.style.setProperty('--pill', 'url("data:image/svg+xml,' + encodeURIComponent(pill) + '")');
+
+    pickBites(w, h, r, em).forEach(function (bite, k) {
       var rad = (bite.deg * Math.PI) / 180;
-      var cx = (bite.side === 'right' ? w - r : r) + r * Math.cos(rad);
-      var cy = r + r * Math.sin(rad);
+      var cx = bite.cx;
+      var cy = bite.cy;
       var n = k + 1;
 
       btn.style.setProperty('--b' + n + 'x', cx.toFixed(1) + 'px');
