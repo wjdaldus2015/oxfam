@@ -5,7 +5,8 @@
 
 /* Title */
 .tit {
-  font-weight: 800;
+  font-family: "dunkel-sans-medium", "SUIT", "pretendard", "Noto Sans KR", sans-serif;
+  font-weight: 900;
   line-height: 1.25;
   letter-spacing: -0.02em;
   color: #000;
@@ -152,8 +153,8 @@
 
   100% {
     opacity: 0;
-    transform: translate(var(--dx), calc(var(--dy) + var(--fall, 1.4em))) rotate(var(--rot))
-      scale(1);
+    transform: translate(var(--dx), calc(var(--dy) + var(--fall, 1.4em)))
+      rotate(var(--rot)) scale(1);
   }
 }
 
