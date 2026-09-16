@@ -224,8 +224,9 @@ function btnBite() {
 
     pickBites(w, h, r, em).forEach(function (bite, k) {
       var rad = (bite.deg * Math.PI) / 180;
-      var cx = bite.cx;
-      var cy = bite.cy;
+      // 출발점을 부스러기 크기만큼 가장자리 바깥으로 밀어 처음부터 버튼과 겹치지 않게 한다
+      var cx = bite.cx + Math.cos(rad) * em * 0.25;
+      var cy = bite.cy + Math.sin(rad) * em * 0.25;
       var size = sizes[k];
 
       for (var j = 0; j < 2; j++) {
