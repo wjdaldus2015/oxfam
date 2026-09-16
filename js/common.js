@@ -84,7 +84,7 @@ function quickMenu() {
 
     if (tl) tl.kill();
     clearTimeout(biteTimer);
-    join.classList.remove('is-bite', 'is-bitten');
+    join.classList.remove('is-bite');
     if (!ghost) {
       ghost = document.createElement('div');
       ghost.className = 'quick-ghost';
@@ -191,8 +191,7 @@ function btnBite() {
     return min + Math.random() * (max - min);
   }
 
-  // 둥근 끝(캡)마다 자국은 하나씩만 두고, 세 번째는 위/아래 직선 변에 둔다.
-  // 한 캡에 두 개가 겹치면 곡선이 다 먹혀 끝이 잘린 것처럼 보인다.
+  // 부스러기 출발점: 둥근 끝 양쪽에 하나씩, 세 번째는 위/아래 직선 변 중 무작위
   function pickBites(w, h, r, em) {
     function onCap(cx0, deg) {
       var rad = (deg * Math.PI) / 180;
@@ -212,16 +211,8 @@ function btnBite() {
 
   $('.btn-round').each(function () {
     for (var i = 0; i < 6; i++) $(this).append('<span class="btn-crumb" aria-hidden="true"></span>');
-  }).on('mouseleave focusout', function () {
-    var btn = this;
-    clearTimeout($(btn).data('biteTimer'));
-    $(btn).data('biteTimer', setTimeout(function () {
-      btn.classList.remove('is-bitten');
-    }, 700));
   }).on('mouseenter focusin', function () {
     var btn = this;
-    clearTimeout($(btn).data('biteTimer'));
-    btn.classList.add('is-bitten');
     var w = btn.offsetWidth;
     var h = btn.offsetHeight;
     var r = h / 2;
@@ -230,33 +221,33 @@ function btnBite() {
     var sizes = [rand(0.5, 0.7), rand(0.8, 1), rand(1.15, 1.35)].sort(function () {
       return Math.random() - 0.5;
     });
-    // 둥근 끝에 찍는 자국은 캡 반지름(r)보다 충분히 작아야 곡선이 남는다
-    var capMax = (0.6 * r) / em;
-    var pill = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '"><rect width="' + w + '" height="' + h + '" rx="' + r + '"/></svg>';
-
-    btn.style.setProperty('--pill', 'url("data:image/svg+xml,' + encodeURIComponent(pill) + '")');
 
     pickBites(w, h, r, em).forEach(function (bite, k) {
       var rad = (bite.deg * Math.PI) / 180;
       var cx = bite.cx;
       var cy = bite.cy;
-      var n = k + 1;
-      var size = k < 2 ? Math.min(sizes[k], capMax) : sizes[k];
-
-      btn.style.setProperty('--b' + n + 'x', cx.toFixed(1) + 'px');
-      btn.style.setProperty('--b' + n + 'y', cy.toFixed(1) + 'px');
-      btn.style.setProperty('--b' + n + 'a', (bite.deg + 180).toFixed(1) + 'deg');
-      btn.style.setProperty('--b' + n + 's', size.toFixed(2));
+      var size = sizes[k];
 
       for (var j = 0; j < 2; j++) {
         var crumb = crumbs[k * 2 + j];
-        var spread = rad + ((j ? 1 : -1) * rand(10, 35) * Math.PI) / 180;
-        var dist = em * rand(0.7, 1.1) * size;
+        var tilt = ((j ? 1 : -1) * rand(10, 35) * Math.PI) / 180;
+        var spread = rad + tilt;
+        // 바깥쪽 이동량이 최소 1em은 되게 해 부스러기가 항상 버튼 밖에 머물게 한다
+        var dist = Math.max(em * rand(0.7, 1.1) * size, em / Math.cos(tilt));
+        var dx = Math.cos(spread) * dist;
+        var dy = Math.sin(spread) * dist - em * 0.3;
+        var fall = em * 1.4;
+
+        // 위쪽으로 튄 부스러기는 떨어지는 양을 줄여 버튼 위로 되돌아오지 않게 한다
+        if (Math.sin(rad) < 0) {
+          fall = Math.max(0, Math.min(fall, (dx * Math.cos(rad) + dy * Math.sin(rad) - em * 0.4) / -Math.sin(rad)));
+        }
 
         crumb.style.left = cx.toFixed(1) + 'px';
         crumb.style.top = cy.toFixed(1) + 'px';
-        crumb.style.setProperty('--dx', (Math.cos(spread) * dist).toFixed(1) + 'px');
-        crumb.style.setProperty('--dy', (Math.sin(spread) * dist - em * 0.3).toFixed(1) + 'px');
+        crumb.style.setProperty('--dx', dx.toFixed(1) + 'px');
+        crumb.style.setProperty('--dy', dy.toFixed(1) + 'px');
+        crumb.style.setProperty('--fall', fall.toFixed(1) + 'px');
         crumb.style.animationDelay = (delays[k] + 0.08 + j * 0.03).toFixed(2) + 's';
       }
     });
