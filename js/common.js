@@ -550,9 +550,26 @@ function rollSlide() {
     play();
   });
 
+  // 터치는 mouseenter만 흉내 내고 mouseleave가 없어 재생이 영영 멈추므로, 마우스 포인터와 키보드 포커스일 때만 정지한다
+  function isKeyboardFocus(el) {
+    try {
+      return el.matches(':focus-visible');
+    } catch (e) {
+      return true;
+    }
+  }
+
   $('.sc-roll .roll-slide')
-    .on('mouseenter focusin', stop)
-    .on('mouseleave focusout', play);
+    .on('pointerenter', function (e) {
+      if (e.originalEvent.pointerType === 'mouse') stop();
+    })
+    .on('pointerleave', function (e) {
+      if (e.originalEvent.pointerType === 'mouse') play();
+    })
+    .on('focusin', function (e) {
+      if (isKeyboardFocus(e.target)) stop();
+    })
+    .on('focusout', play);
 
   if (reduceMotion) {
     play();
