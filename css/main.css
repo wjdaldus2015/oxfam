@@ -1168,12 +1168,12 @@
 
 /* Let’s Roll the World! */
 .sc-crew {
-  padding: 108px 0 155px;
+  padding: 178px 0 160px;
   background: #fff;
 }
 
 .crew-rows {
-  margin-top: 126px;
+  margin-top: 69px;
 }
 
 .crew-row.row02 {
@@ -1241,13 +1241,15 @@
 }
 
 .crew-btn {
-  margin-top: 148px;
+  margin-top: 125px;
   text-align: center;
 }
 
+/* 새 시안(533:2077)은 .btn-round-m 규격(226×57)이라 별도 패딩 불필요
 .crew-btn .btn-round {
   padding: 14.4px 50.5px;
 }
+*/
 
 @media (prefers-reduced-motion: reduce) {
   .roll-frame .swiper-slide-active,

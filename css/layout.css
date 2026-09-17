@@ -62,14 +62,14 @@
 
 .header .inner {
   max-width: 1440px;
-  height: 171px;
+  height: 117px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .header .logo {
-  width: 170px;
+  width: 104px;
 }
 
 .header .logo a,
@@ -171,7 +171,7 @@
 }
 
 .footer .inner {
-  max-width: 1440px;
+  max-width: 1222px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -254,8 +254,7 @@
 }
 
 @media all and (max-width: 1520px) {
-  .header .inner,
-  .footer .inner {
+  .header .inner {
     max-width: calc(100% - 80px);
   }
 }
