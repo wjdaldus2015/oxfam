@@ -247,7 +247,8 @@
 }
 
 .who-deco .spr {
-  background: url(../image/main/img-who-spr-white.svg) no-repeat center / contain;
+  background: url(../image/main/img-who-spr-white.svg) no-repeat center /
+    contain;
 }
 
 .who-deco .spr-green {
@@ -1091,7 +1092,7 @@
   left: 0;
   right: 0;
   top: 244px;
-  font-family: "SUIT", "pretendard", "Noto Sans KR", sans-serif;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
   font-weight: 700;
   text-align: center;
   opacity: 0;
