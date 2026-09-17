@@ -227,12 +227,23 @@
   height: 693px;
 }
 
+/* 시안: 2604.5×856.5 박스를 16.26° 회전, 회전 후 바운딩 박스 (-295, 88) 2740×1552 → 중심 (1075, 864) */
 .who-deco .line {
-  left: calc(50% + 355px);
+  position: absolute;
+  left: calc(50% + 115px);
   top: 864px;
   width: 2604.5px;
+  height: 856.5px;
+  overflow: hidden;
   opacity: 0.6;
   transform: translate(-50%, -50%) rotate(16.26deg);
+}
+
+.who-deco .line img {
+  left: -3.47%;
+  top: -10.78%;
+  width: 100%;
+  height: 101.36%;
 }
 
 .who-deco .spr {
