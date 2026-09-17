@@ -669,11 +669,76 @@
 }
 
 .roll-deco .strip {
-  left: 0;
-  right: 0;
+  left: -1143px;
+  right: -1143px;
   top: 394px;
   height: 381px;
   background: url(../image/main/img-roll-map-strip.png) repeat-x calc(50% - 1006px) 0 / auto 100%;
+  animation: rollStrip 48s linear infinite;
+}
+
+.roll-deco .dot,
+.roll-deco .star {
+  animation: rollFloat 6s ease-in-out infinite;
+}
+
+.roll-deco .star {
+  animation-name: rollTwinkle;
+  animation-duration: 7s;
+}
+
+.roll-deco .dot02,
+.roll-deco .star02 {
+  animation-delay: -2s;
+}
+
+.roll-deco .dot03 {
+  animation-duration: 7.5s;
+  animation-delay: -4s;
+}
+
+.roll-deco .dot04 {
+  animation-duration: 5.5s;
+  animation-delay: -1s;
+}
+
+.roll-deco .dot05 {
+  animation-duration: 6.5s;
+  animation-delay: -3s;
+}
+
+@keyframes rollStrip {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-1143px);
+  }
+}
+
+@keyframes rollFloat {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(6px, -14px);
+  }
+}
+
+@keyframes rollTwinkle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0) scale(1);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(25deg) scale(1.15);
+    opacity: 0.55;
+  }
 }
 
 .roll-deco .glow {
@@ -1045,6 +1110,9 @@
   .roll-frame .swiper-slide-active,
   .roll-frame .swiper-slide-active .img img,
   .roll-frame .swiper-slide-prev .img img,
+  .roll-deco .strip,
+  .roll-deco .dot,
+  .roll-deco .star,
   .crew-track.is-flow {
     animation: none;
   }
