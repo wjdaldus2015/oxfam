@@ -25,7 +25,7 @@ $(function () {
   visualDonut();
   btnBite();
   storyDonutRoll();
-  whoFilm();
+  whoIntro();
   doStepScroll();
   rollSlide();
   crewFlow();
@@ -301,6 +301,22 @@ function crewFlow() {
     .fromTo('.sc-crew .row02', { x: 800, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 3.6, ease: 'power3.out' }, 0);
 }
 
+function whoIntro() {
+  var section = document.querySelector('.sc-who');
+  if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: 'top 70%',
+      once: true
+    }
+  })
+    .fromTo(section.querySelector('.who-film'), { scale: 0.96, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.8, ease: 'power2.out' }, 0)
+    .fromTo(section.querySelectorAll('.who-deco .spr'), { y: -40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, ease: 'power2.out', stagger: 0.06 }, 0.3);
+}
+
+/* 브랜드필름 스토리보드(CSS/JS 애니메이션 버전) — 실제 영상으로 교체 예정이라 보류
 function whoFilm() {
   var box = document.querySelector('.sc-who .who-film');
   if (!box) return;
@@ -388,6 +404,7 @@ function whoFilm() {
     onLeaveBack: function () { tl.pause(); }
   });
 }
+*/
 
 function doStepScroll() {
   var section = document.querySelector('.sc-do');

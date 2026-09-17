@@ -302,8 +302,138 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #000;
+  box-shadow: 0 0 0 rgba(68, 132, 26, 0);
+  transition: box-shadow 0.5s ease;
 }
 
+.who-film:hover {
+  box-shadow: 0 0 64px rgba(68, 132, 26, 0.35);
+}
+
+.film-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s;
+}
+
+.who-film:hover .film-thumb {
+  opacity: 0.8;
+  transform: scale(1.03);
+}
+
+.film-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 88px;
+  height: 88px;
+  margin: -44px 0 0 -44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.film-play::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-style: solid;
+  border-width: 13px 0 13px 22px;
+  border-color: transparent transparent transparent var(--color-green);
+  transform: translate(-38%, -50%);
+}
+
+.who-film:hover .film-play {
+  transform: scale(1.08);
+}
+
+/* 스프링클 둥실·기울임, 도넛 느린 자전 (translate/rotate 개별 속성이라 .flip의 scaleX(-1)와 겹쳐도 됨) */
+.who-deco .spr {
+  animation: whoFloat 9s ease-in-out infinite;
+}
+
+.who-deco .spr-green {
+  animation-name: whoFloatGreen;
+}
+
+.who-deco .spr02 {
+  animation-duration: 8s;
+  animation-delay: -3s;
+}
+
+.who-deco .spr03 {
+  animation-duration: 10s;
+  animation-delay: -5s;
+}
+
+.who-deco .spr04 {
+  animation-duration: 7.5s;
+  animation-delay: -1.5s;
+}
+
+.who-deco .spr05 {
+  animation-duration: 8.5s;
+  animation-delay: -6s;
+}
+
+.who-deco .spr06 {
+  animation-duration: 7s;
+  animation-delay: -2.5s;
+}
+
+.who-deco .spr07 {
+  animation-duration: 9.5s;
+  animation-delay: -4s;
+}
+
+.who-deco .donut01,
+.who-deco .donut02 {
+  animation: whoSpin 90s linear infinite;
+}
+
+.who-deco .donut02 {
+  animation-direction: reverse;
+}
+
+@keyframes whoFloat {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+
+  50% {
+    translate: 0 -10px;
+    rotate: 8deg;
+  }
+}
+
+@keyframes whoFloatGreen {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+
+  50% {
+    translate: 0 -12px;
+    rotate: -8deg;
+  }
+}
+
+@keyframes whoSpin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* 브랜드필름 스토리보드(CSS/JS 애니메이션 버전) — 실제 영상으로 교체 예정이라 보류
 .film-stage {
   position: absolute;
   left: 0;
@@ -535,6 +665,7 @@
   width: 512px;
   height: 236px;
 }
+*/
 
 /* What We Do */
 .sc-do {
@@ -1114,8 +1245,17 @@
   .roll-deco .strip,
   .roll-deco .dot,
   .roll-deco .star,
+  .who-deco .spr,
+  .who-deco .donut01,
+  .who-deco .donut02,
   .crew-track.is-flow {
     animation: none;
+  }
+
+  .who-film,
+  .film-thumb,
+  .film-play {
+    transition: none;
   }
 
   .roll-card .tit,
@@ -1243,6 +1383,16 @@
 
   .who-film {
     margin-top: 24px;
+  }
+
+  .film-play {
+    width: 56px;
+    height: 56px;
+    margin: -28px 0 0 -28px;
+  }
+
+  .film-play::before {
+    border-width: 9px 0 9px 15px;
   }
 
   .sc-do {
