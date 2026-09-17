@@ -409,8 +409,8 @@
   }
 
   50% {
-    translate: 0 -10px;
-    rotate: 8deg;
+    translate: 6px -22px;
+    rotate: 14deg;
   }
 }
 
@@ -422,8 +422,8 @@
   }
 
   50% {
-    translate: 0 -12px;
-    rotate: -8deg;
+    translate: -6px -26px;
+    rotate: -14deg;
   }
 }
 
