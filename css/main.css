@@ -1332,70 +1332,209 @@
 }
 
 @media all and (max-width: 768px) {
-  .sc-visual {
-    height: 600px;
+  .main .inner {
+    max-width: none;
   }
 
-  .sc-visual .inner {
-    padding-top: 140px;
+  /* Visual: 시안(360)은 타이틀이 프레임 밖이라 화면에서만 숨기고 사진·도넛만 보인다 */
+  .sc-visual {
+    height: 680px;
+  }
+
+  .sc-visual .tit {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    clip: rect(1px, 1px, 1px, 1px);
+  }
+
+  .visual-bg .bg01 {
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-position: 67.5% 50%;
+    opacity: 1;
+  }
+
+  .visual-bg .bg02 {
+    display: none;
+  }
+
+  .visual-bg .donut01 {
+    left: calc(50% + 39px);
+    top: -147px;
+    width: 283px;
+    height: 276px;
+  }
+
+  .visual-bg .donut02 {
+    left: calc(50% - 346px);
+    top: 453px;
+    width: 290px;
+    height: 283px;
   }
 
   .scroll-hint {
     top: auto;
-    bottom: 40px;
+    bottom: 29px;
   }
 
   .scroll-hint .ico {
-    width: 50px;
-    height: 40px;
+    width: 40px;
+    height: 32px;
   }
 
   .scroll-hint p {
-    font-size: 1rem;
+    font-size: 0.875rem;
   }
 
   .sc-intro {
-    height: 500px;
+    height: 680px;
   }
 
-  .sc-intro .tit,
-  .sc-goal .tit {
-    padding-top: 200px;
+  .sc-intro .tit {
+    padding: 267px 20px 0;
+  }
+
+  .intro-bg .bg {
+    left: 50%;
+    top: -108px;
+    width: 1286px;
+    height: 965px;
+    margin-left: -643px;
   }
 
   .intro-bg .edge {
-    height: 80px;
+    bottom: 0;
+    height: 175px;
   }
 
   .sc-story {
     height: auto;
-    padding: 60px 0 80px;
+    padding: 84px 0 437px;
+  }
+
+  /* 시안 도넛 295px = PC 트랙(도넛 682px)의 0.4329배. 도넛 중심을 가로 가운데, 바닥 위 219px에 맞춤 */
+  .story-track {
+    left: calc(50% - 1918px);
+    top: auto;
+    bottom: -58px;
+    width: 2041px;
+    height: 508.4px;
   }
 
   .story-txt {
-    margin-top: 32px;
+    margin-top: 40px;
   }
 
   .story-txt p {
-    font-size: 0.9375rem;
-    line-height: 1.73;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   .story-txt p + p {
-    margin-top: 26px;
+    margin-top: 24px;
+  }
+
+  .story-point {
+    margin-top: 40px;
   }
 
   .story-point p {
-    font-size: 1.0625rem;
-    line-height: 1.53;
+    font-size: 1.25rem;
+    line-height: 1.5;
   }
 
   .sc-who {
-    padding: 50px 0;
+    padding: 83px 0 67px;
+  }
+
+  .who-deco .donut01 {
+    left: calc(50% + 36px);
+    top: 66px;
+    width: 239px;
+    height: 233px;
+  }
+
+  .who-deco .donut02 {
+    left: calc(50% - 304px);
+    top: 620px;
+    width: 249px;
+    height: 243px;
+  }
+
+  /* 시안: 897×295 박스를 73.74° 회전·상하반전, 회전 후 바운딩 박스 (-51, 59) 534.5×944 → 중심 (216, 531) */
+  .who-deco .line {
+    display: block;
+    left: calc(50% + 36px);
+    top: 531px;
+    width: 897.17px;
+    height: 295.04px;
+    transform: translate(-50%, -50%) rotate(73.74deg) scaleY(-1);
+  }
+
+  .who-deco .spr {
+    display: block;
+  }
+
+  .who-deco .spr01 {
+    left: calc(50% + 163px);
+    top: 620px;
+    width: 22px;
+    height: 19px;
+  }
+
+  .who-deco .spr02 {
+    left: calc(50% - 174px);
+    top: 192px;
+    width: 22px;
+    height: 18px;
+  }
+
+  .who-deco .spr03 {
+    left: calc(50% - 78px);
+    top: 197px;
+    width: 13px;
+    height: 12px;
+    background-image: url(../image/main/img-who-spr-white.svg);
+  }
+
+  .who-deco .spr04 {
+    left: calc(50% - 225px);
+    top: 403px;
+    width: 22px;
+    height: 18px;
+  }
+
+  .who-deco .spr05 {
+    left: calc(50% - 166px);
+    top: 557px;
+    width: 15px;
+    height: 13px;
+  }
+
+  .who-deco .spr06 {
+    left: calc(50% + 174px);
+    top: 415px;
+    width: 15px;
+    height: 13px;
+  }
+
+  .who-deco .spr07 {
+    left: calc(50% + 48px);
+    top: 779px;
+    width: 13px;
+    height: 11px;
   }
 
   .who-film {
-    margin-top: 24px;
+    margin: 22px -20px 0;
+    aspect-ratio: 360 / 344;
+  }
+
+  .film-thumb {
+    width: 50%;
   }
 
   .film-play {
@@ -1409,44 +1548,140 @@
   }
 
   .sc-do {
-    padding-top: 60px;
+    padding: 127px 0 48px;
   }
 
   .do-donut {
-    left: auto;
-    right: -80px;
-    top: -100px;
-    width: 300px;
-    height: auto;
+    left: calc(50% + 28px);
+    top: -97px;
+    width: 303px;
+    height: 293px;
   }
 
   .do-list {
-    margin-top: 50px;
+    flex-direction: column;
+    gap: 65px;
+    margin-top: 40px;
   }
 
   .do-list li {
     width: 100%;
-    padding: 0 16px;
+  }
+
+  .do-icon {
+    width: 40px;
+    height: 40px;
   }
 
   .do-sub {
-    margin-top: 8px;
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
 
   .do-desc {
-    font-size: 0.9375rem;
+    width: 100%;
+    font-size: 1rem;
     white-space: normal;
   }
 
   .do-deco {
-    margin-left: auto;
-    margin-right: auto;
+    width: 158.3px;
+    height: 101px;
+    margin: 69px 0 0 3px;
+  }
+
+  .do-deco .char01 {
+    top: 32.5px;
+    width: 55.2px;
+    height: 68px;
+  }
+
+  .do-deco .char02 {
+    left: 53px;
+    width: 105.2px;
+    height: 101px;
   }
 
   .sc-roll {
     height: auto;
-    padding: 60px 0 80px;
+    padding: 84px 0 75px;
+  }
+
+  .roll-deco .map {
+    left: calc(50% - 154px);
+    top: 150px;
+    width: 627px;
+    height: 353px;
+  }
+
+  .roll-deco .strip {
+    top: 339px;
+    height: 190px;
+    background-size: 250px 190px;
+    animation-duration: 48s;
+  }
+
+  .roll-deco .glow {
+    filter: blur(30px);
+  }
+
+  .roll-deco .glow01 {
+    left: calc(50% - 328px);
+    top: 353px;
+    width: 117px;
+    height: 117px;
+  }
+
+  .roll-deco .glow02 {
+    left: calc(50% + 366px);
+    top: 339px;
+    width: 125px;
+    height: 125px;
+  }
+
+  .roll-deco .dot01 {
+    left: calc(50% - 126px);
+    top: 345px;
+    width: 15px;
+    height: 15px;
+  }
+
+  .roll-deco .dot02 {
+    left: calc(50% - 76px);
+    top: 531px;
+    width: 7px;
+    height: 7px;
+  }
+
+  .roll-deco .dot03 {
+    left: calc(50% + 300px);
+    top: 560px;
+    width: 9px;
+    height: 9px;
+  }
+
+  .roll-deco .dot04 {
+    left: calc(50% + 470px);
+    top: 357px;
+    width: 7px;
+    height: 7px;
+  }
+
+  .roll-deco .dot05 {
+    display: none;
+  }
+
+  .roll-deco .star01 {
+    left: calc(50% - 342px);
+    top: 457px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .roll-deco .star02 {
+    left: calc(50% + 491px);
+    top: 424px;
+    width: 31px;
+    height: 31px;
   }
 
   .roll-head {
@@ -1455,88 +1690,88 @@
     gap: 20px;
   }
 
+  /* 시안엔 다음 버튼이 없어 원형 카드 줄을 가로 스크롤로 넘긴다 */
   .roll-slide {
-    margin-top: 40px;
+    margin-top: 71px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .roll-slide::-webkit-scrollbar {
+    display: none;
   }
 
   .roll-list {
-    gap: 12px;
-    padding-left: 3.90625%;
+    width: max-content;
+    gap: 8px;
+    padding: 12px 20px;
   }
 
   .roll-frame {
-    width: 280px;
-    height: 280px;
-    border-width: 12px;
+    width: 180px;
+    height: 180px;
+    border-width: 4px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
   }
 
   .roll-card .img::after {
-    top: 150px;
-    height: 118px;
+    top: 101px;
+    height: 79px;
   }
 
   .roll-card .tit {
-    top: 180px;
+    top: 121px;
   }
 
   .btn-next {
-    left: auto;
-    right: 16px;
-    top: 107px;
-    width: 60px;
-    height: 60px;
-  }
-
-  .btn-next img {
-    width: 28px;
-    height: 29px;
+    display: none;
   }
 
   .goal-box {
-    height: 500px;
+    height: 680px;
+  }
+
+  .sc-goal .tit {
+    padding: 256px 20px 0;
   }
 
   .goal-bg .edge {
-    height: 80px;
+    display: none;
   }
 
   .sc-crew {
-    padding: 60px 0 80px;
+    padding: 86px 0 85px;
   }
 
   .crew-rows {
-    margin-top: 50px;
-  }
-
-  .crew-track li {
-    margin-right: 24px;
-  }
-
-  .crew-track img {
-    height: 120px;
+    margin-top: 53px;
   }
 
   .crew-row.row02 {
-    margin-top: 10px;
+    margin-top: 12px;
+  }
+
+  .crew-track li {
+    margin-right: 29px;
+  }
+
+  .crew-track img {
+    height: 144px;
   }
 
   .crew-track .char {
-    margin: 0 0 0 -18px;
+    margin: 0 0 0 -22px;
   }
 
   .crew-track .char img {
-    height: 66px;
+    height: 80px;
   }
 
   .crew-track .char.flip {
-    margin: 0 6px 0 -25px;
+    margin: 0 7px 0 -30px;
   }
 
   .crew-btn {
-    margin-top: 60px;
-  }
-
-  .crew-btn .btn-round {
-    padding: 12px 32px;
+    margin-top: 53px;
   }
 }

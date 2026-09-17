@@ -597,9 +597,13 @@ function storyDonutRoll() {
   var total = guide.getTotalLength();
   var radius = 341;
   var endAngle = -96.86;
-  var originX = 4084;
+  var viewWidth = svg.viewBox.baseVal.width;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var startLen = 0;
+
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
 
   function lengthAtX(x) {
     var lo = 0;
@@ -624,10 +628,17 @@ function storyDonutRoll() {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.create({
     trigger: section,
-    start: 'top 80%',
-    end: 'top top',
+    // 모바일은 도넛이 섹션 바닥 쪽에 있어 바닥 기준으로 구간을 잡는다
+    start: function () {
+      return isMobile() ? 'bottom bottom+=380' : 'top 80%';
+    },
+    end: function () {
+      return isMobile() ? 'bottom bottom-=40' : 'top top';
+    },
     onRefresh: function (self) {
-      startLen = lengthAtX(originX - window.innerWidth / 2 - radius);
+      // 화면 왼쪽 가장자리를 SVG 좌표로 환산해 도넛이 화면 밖에서 출발하게 한다 (모바일은 SVG가 축소됨)
+      var rect = svg.getBoundingClientRect();
+      startLen = lengthAtX(-rect.left / (rect.width / viewWidth) - radius);
       render(self.progress);
     },
     onUpdate: function (self) {
