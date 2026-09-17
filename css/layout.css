@@ -61,7 +61,7 @@
 }
 
 .header .inner {
-  max-width: 1222px;
+  max-width: 1440px;
   height: 171px;
   display: flex;
   align-items: center;
@@ -171,7 +171,7 @@
 }
 
 .footer .inner {
-  max-width: 1222px;
+  max-width: 1440px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -251,6 +251,13 @@
 .ft-sns img {
   display: block;
   height: 32px;
+}
+
+@media all and (max-width: 1520px) {
+  .header .inner,
+  .footer .inner {
+    max-width: calc(100% - 80px);
+  }
 }
 
 @media all and (max-width: 1200px) {

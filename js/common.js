@@ -25,6 +25,7 @@ $(function () {
   visualDonut();
   btnBite();
   storyDonutRoll();
+  whoFilm();
   doStepScroll();
   rollSlide();
   crewFlow();
@@ -300,6 +301,94 @@ function crewFlow() {
     .fromTo('.sc-crew .row02', { x: 800, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 3.6, ease: 'power3.out' }, 0);
 }
 
+function whoFilm() {
+  var box = document.querySelector('.sc-who .who-film');
+  if (!box) return;
+
+  var stage = box.querySelector('.film-stage');
+  var scenes = stage.querySelectorAll('.film-scene');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function fit() {
+    stage.style.transform = 'scale(' + box.clientWidth / 1440 + ')';
+  }
+
+  fit();
+  window.addEventListener('resize', fit);
+  if (reduceMotion) return;
+
+  function s(n) {
+    return stage.querySelector('.s' + (n < 10 ? '0' : '') + n);
+  }
+
+  var tl = gsap.timeline({ repeat: -1, paused: true });
+
+  function cut(n, at, fade) {
+    tl.to(s(n), { autoAlpha: 1, duration: fade || 0.4 }, at);
+    if (n > 1) tl.to(s(n - 1), { autoAlpha: 0, duration: fade || 0.4 }, at);
+  }
+
+  tl.set(scenes, { autoAlpha: 0 }, 0);
+
+  // 1. 세상은 저절로 굴러가지 않는다
+  cut(1, 0, 0.5);
+  tl.fromTo(s(1).querySelector('.film-txt'), { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: 'power2.out' }, 0);
+
+  // 2~3. 불평등 / 환경문제 사진
+  cut(2, 2, 0.3);
+  tl.fromTo(s(2).querySelector('.film-photo'), { scale: 1.05 }, { scale: 1, duration: 3, ease: 'power1.inOut' }, 2.5);
+  cut(3, 5, 0.3);
+  tl.fromTo(s(3).querySelector('.film-photo'), { scale: 1.05 }, { scale: 1, duration: 3, ease: 'power1.inOut' }, 5);
+
+  // 4~6. 두 단어 + 물결 사진 띠 + 캐릭터 등장
+  cut(4, 8, 0.3);
+  cut(5, 10, 0.3);
+  tl.fromTo(s(5).querySelector('.wave01'), { x: -500 }, { x: 0, duration: 2.5, ease: 'power2.out' }, 10)
+    .fromTo(s(5).querySelector('.wave02'), { x: 500, scaleX: -1 }, { x: 0, scaleX: -1, duration: 2.5, ease: 'power2.out' }, 10)
+    .fromTo(s(5).querySelector('.char-green'), { x: 400 }, { x: 0, duration: 2, ease: 'power2.out' }, 10)
+    .fromTo(s(5).querySelector('.char-blue'), { x: -400 }, { x: 0, duration: 2, ease: 'power2.out' }, 10);
+  cut(6, 12.5, 0.3);
+  tl.fromTo(s(6).querySelector('.wave01'), { x: 600 }, { x: 750, duration: 3, ease: 'power2.out' }, 12.5)
+    .fromTo(s(6).querySelector('.wave02'), { x: -600, scaleX: -1 }, { x: -750, scaleX: -1, duration: 3, ease: 'power2.out' }, 12.5)
+    .fromTo(s(6).querySelector('.char-green'), { x: 200 }, { x: 0, duration: 2, ease: 'power2.out' }, 12.5)
+    .fromTo(s(6).querySelector('.char-blue'), { x: -200 }, { x: 0, duration: 2, ease: 'power2.out' }, 12.5);
+
+  // 7. 세상이 더 잘 굴러가도록
+  cut(7, 15, 0.3);
+  tl.fromTo(s(7).querySelector('.char-green'), { x: 300, rotation: -15 }, { x: 0, rotation: 0, duration: 2, ease: 'power2.out' }, 15)
+    .fromTo(s(7).querySelector('.char-blue'), { x: -300, rotation: 15 }, { x: 0, rotation: 0, duration: 2, ease: 'power2.out' }, 15)
+    .fromTo(s(7).querySelector('.film-txt'), { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: 'power2.out' }, 16.5);
+
+  // 8. 여러분의 행동이 더해질수록 도넛은 더 크게 굴러갑니다
+  cut(8, 18, 0.3);
+  tl.fromTo(s(8).querySelector('.film-donut'), { rotation: 270, scale: 0.5 }, { rotation: 90, scale: 1, duration: 2.5, ease: 'power2.inOut' }, 18);
+
+  // 9. 세상을 굴리는 힘
+  cut(9, 20.5, 0.3);
+  tl.fromTo(s(9).querySelector('.film-donut'), { rotation: 120 }, { rotation: 90, duration: 2, ease: 'power2.out' }, 20.5)
+    .fromTo(s(9).querySelectorAll('.film-word'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6, stagger: 0.5 }, 20.5);
+
+  // 10. 도넛 크루가 되어 주세요
+  cut(10, 24, 0.3);
+  tl.fromTo(s(10).querySelector('.row01'), { x: 200 }, { x: -200, duration: 3.5, ease: 'none' }, 24)
+    .fromTo(s(10).querySelector('.row02'), { x: -200 }, { x: 200, duration: 3.5, ease: 'none' }, 24);
+
+  // 11. 로고
+  cut(11, 27, 0.3);
+  tl.fromTo(s(11).querySelector('.film-logo'), { autoAlpha: 0, scale: 0.7 }, { autoAlpha: 1, scale: 1, duration: 1, ease: 'power2.out' }, 27)
+    .to({}, { duration: 2.5 }, 27.5);
+
+  ScrollTrigger.create({
+    trigger: box,
+    start: 'top 85%',
+    end: 'bottom 15%',
+    onEnter: function () { tl.play(); },
+    onEnterBack: function () { tl.play(); },
+    onLeave: function () { tl.pause(); },
+    onLeaveBack: function () { tl.pause(); }
+  });
+}
+
 function doStepScroll() {
   var section = document.querySelector('.sc-do');
   if (!section) return;
@@ -312,7 +401,6 @@ function doStepScroll() {
   var donut = deco.querySelector('.char02');
   var donutRadius = 98;
   var stride = 45;
-  var decoGap = 20;
   var mm = gsap.matchMedia();
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -364,7 +452,7 @@ function doStepScroll() {
     tl.fromTo(items, { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 1, stagger: 1 }, 0)
       .fromTo(deco, { x: 0 }, {
         x: function () {
-          return section.clientWidth - deco.offsetWidth - decoGap * 2;
+          return deco.parentElement.clientWidth - deco.offsetWidth;
         },
         duration: items.length,
         ease: 'none',
@@ -492,7 +580,7 @@ function storyDonutRoll() {
   var total = guide.getTotalLength();
   var radius = 341;
   var endAngle = -96.86;
-  var originX = 4042.5;
+  var originX = 4084;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var startLen = 0;
 
