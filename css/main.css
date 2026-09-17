@@ -668,13 +668,14 @@
   opacity: 0.12;
 }
 
+/* 시안의 선 PNG는 양 끝이 이어지지 않아, 같은 색·두께·주기의 한 주기짜리 파형 SVG를 반복한다 */
 .roll-deco .strip {
-  left: -1143px;
-  right: -1143px;
+  left: -500px;
+  right: -500px;
   top: 394px;
   height: 381px;
-  background: url(../image/main/img-roll-map-strip.png) repeat-x calc(50% - 1006px) 0 / auto 100%;
-  animation: rollStrip 48s linear infinite;
+  background: url(../image/main/img-roll-wave.svg) repeat-x 0 0 / 500px 381px;
+  animation: rollStrip 24s linear infinite;
 }
 
 .roll-deco .dot,
@@ -713,7 +714,7 @@
   }
 
   to {
-    transform: translateX(-1143px);
+    transform: translateX(-500px);
   }
 }
 
