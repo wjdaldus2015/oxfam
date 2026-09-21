@@ -811,7 +811,6 @@
   z-index: 1;
 }
 
-/* 피드백으로 배경 요소(지도·물결 선·블러 원·점·별) 전체 삭제 — 되돌릴 경우 대비해 보류
 .roll-deco > * {
   position: absolute;
 }
@@ -826,7 +825,7 @@
   opacity: 0.12;
 }
 
-시안의 선 PNG는 양 끝이 이어지지 않아, 같은 색·두께·주기의 한 주기짜리 파형 SVG를 반복했었다
+/* 시안의 선 PNG는 양 끝이 이어지지 않아, 같은 색·두께·주기의 한 주기짜리 파형 SVG를 반복한다 */
 .roll-deco .strip {
   left: -500px;
   right: -500px;
@@ -979,7 +978,6 @@
   height: 62px;
   opacity: 0.9;
 }
-*/
 
 .roll-head {
   display: flex;
@@ -1000,7 +998,9 @@
 /* 피드백: 제자리에서 내용만 바뀌던 방식 대신 목록이 좌우로 이동하는 캐러셀.
    순환용 복제 카드가 왼쪽에 비치면 안 되므로 컨테이너를 margin으로 밀어 잘라내고,
    padding 30px만큼은 열어 둬 첫 카드의 그림자가 살아 있게 한다 */
+/* 콘텐츠 폭 안에서 카드가 4장까지만 보이도록 폭을 묶는다 (355×4 + 사이 7×3 + 왼쪽 여백 30) */
 .roll-slide .roll-swiper {
+  width: 1471px;
   margin-left: calc(50% - 750px);
   padding: 30px 0 30px 30px;
 }
@@ -1241,6 +1241,9 @@
 */
 
 @media (prefers-reduced-motion: reduce) {
+  .roll-deco .strip,
+  .roll-deco .dot,
+  .roll-deco .star,
   .who-deco .spr,
   .who-deco .donut01,
   .who-deco .donut02,
@@ -1269,6 +1272,7 @@
   }
 
   .roll-slide .roll-swiper {
+    width: auto;
     margin-left: 10px;
   }
 
