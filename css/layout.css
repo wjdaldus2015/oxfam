@@ -34,24 +34,23 @@
 }
 
 /* Header */
+/* 피드백: 흰 박스를 항상 노출하고 높이를 줄인다. 콘텐츠는 그만큼 내려 사진이 가리지 않게 한다 */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: transparent;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 0.35s ease;
-}
-
-.header:hover,
-.header:focus-within {
   background: #fff;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .header.is-hide {
   transform: translateY(-100%);
+}
+
+#container.main {
+  padding-top: 96px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -62,14 +61,14 @@
 
 .header .inner {
   max-width: 1440px;
-  height: 117px;
+  height: 96px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .header .logo {
-  width: 104px;
+  width: 130px;
 }
 
 .header .logo a,
@@ -94,6 +93,8 @@
   gap: 12px;
 }
 
+/* 피드백: 헤더에서 굴러 내려오던 모핑 대신, 기존 맨 위로 버튼과 같은 팝 등장으로 통일.
+   호버 확대(transform)와 겹치지 않도록 등장은 translate/scale 개별 속성을 쓴다 */
 .quick-join {
   width: 120px;
   height: 120px;
@@ -102,8 +103,29 @@
   text-align: center;
   opacity: 0;
   visibility: hidden;
+  translate: 0 16px;
+  scale: 0.6;
+  transition: opacity 0.3s, translate 0.4s, scale 0.4s, visibility 0s 0.4s;
 }
 
+.quick-menu.is-show .quick-join {
+  opacity: 1;
+  visibility: visible;
+  translate: none;
+  scale: none;
+  transition: opacity 0.35s,
+    translate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-join,
+  .quick-menu.is-show .quick-join {
+    transition: none;
+  }
+}
+
+/* 헤더 버튼이 굴러 내려오던 모핑과 맨 위로 버튼은 피드백으로 삭제 — 되돌릴 경우 대비해 보류
 .quick-ghost {
   position: fixed;
   z-index: 95;
@@ -155,13 +177,7 @@
 .quick-top:focus-visible img {
   transform: rotate(-90deg) translateX(4px);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .quick-menu.is-show .quick-top,
-  .quick-top {
-    transition: none;
-  }
-}
+*/
 
 /* Footer */
 .footer {

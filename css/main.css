@@ -77,9 +77,10 @@
   height: 865.85px;
 }
 
+/* 피드백: 메시지와 도넛 사이를 더 벌린다 */
 .visual-bg .donut02 {
   left: calc(50% - 1153.8px);
-  top: 528.35px;
+  top: 588px;
   width: 914.58px;
   height: 911.59px;
 }
@@ -194,6 +195,14 @@
   font-weight: 700;
   line-height: 1.5;
   color: var(--color-green);
+}
+
+.story-note {
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #767676;
 }
 
 /* Who We Are */
@@ -769,15 +778,18 @@
   margin-top: 51px;
 }
 
-/* 크림보이 걷기 스프라이트: 한 사이클 24프레임을 6×4 격자로, 프레임 영역 518×699 기준 */
+/* 크림보이 걷기 스프라이트: 한 사이클 24프레임 가로 한 줄, 프레임 영역 518×699 기준 */
+.cream-boy {
+  -webkit-mask: url(../image/main/img-do-walk.png) no-repeat 0 0 / 2400% 100%;
+  mask: url(../image/main/img-do-walk.png) no-repeat 0 0 / 2400% 100%;
+}
+
 .do-deco .char01 {
   left: 0;
   top: 56px;
   width: 101.4px;
   height: 136.8px;
   background: #fff;
-  -webkit-mask: url(../image/main/img-do-walk.png) no-repeat 0 0 / 600% 400%;
-  mask: url(../image/main/img-do-walk.png) no-repeat 0 0 / 600% 400%;
 }
 
 .do-deco .char02 {
@@ -799,6 +811,7 @@
   z-index: 1;
 }
 
+/* 피드백으로 배경 요소(지도·물결 선·블러 원·점·별) 전체 삭제 — 되돌릴 경우 대비해 보류
 .roll-deco > * {
   position: absolute;
 }
@@ -813,7 +826,7 @@
   opacity: 0.12;
 }
 
-/* 시안의 선 PNG는 양 끝이 이어지지 않아, 같은 색·두께·주기의 한 주기짜리 파형 SVG를 반복한다 */
+시안의 선 PNG는 양 끝이 이어지지 않아, 같은 색·두께·주기의 한 주기짜리 파형 SVG를 반복했었다
 .roll-deco .strip {
   left: -500px;
   right: -500px;
@@ -966,6 +979,7 @@
   height: 62px;
   opacity: 0.9;
 }
+*/
 
 .roll-head {
   display: flex;
@@ -983,81 +997,29 @@
   margin-top: 94px;
 }
 
-.roll-list {
-  display: flex;
-  gap: 7px;
+/* 피드백: 제자리에서 내용만 바뀌던 방식 대신 목록이 좌우로 이동하는 캐러셀 */
+.roll-swiper {
+  overflow: visible;
   padding-left: calc(50% - 720px);
 }
 
-.roll-frame {
+.roll-list {
+  align-items: center;
+}
+
+/* 스와이퍼 CSS가 main.css보다 뒤에 실려 .swiper-slide 크기를 덮어쓰므로 선택자를 한 단계 더 준다 */
+.roll-list .roll-frame {
   flex: none;
   position: relative;
   width: 355px;
   height: 355px;
+  margin-right: 7px;
   border: 8px solid #fff;
   border-radius: 50%;
   overflow: hidden;
   isolation: isolate;
   background: #fff;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
-}
-
-.roll-frame .swiper {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  clip-path: circle(50%);
-}
-
-.roll-frame .swiper-slide {
-  opacity: 1 !important;
-}
-
-.roll-frame .swiper-slide-prev {
-  z-index: 1;
-}
-
-.roll-frame .swiper-slide-active {
-  z-index: 2;
-  animation: rollReveal 1.2s cubic-bezier(0.65, 0, 0.35, 1) both;
-}
-
-.roll-frame .swiper-slide-active .img img {
-  animation: rollZoomIn 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.roll-frame .swiper-slide-prev .img img {
-  animation: rollZoomOut 1.2s cubic-bezier(0.65, 0, 0.35, 1) both;
-}
-
-@keyframes rollReveal {
-  from {
-    clip-path: circle(0% at 50% 50%);
-  }
-
-  to {
-    clip-path: circle(71% at 50% 50%);
-  }
-}
-
-@keyframes rollZoomIn {
-  from {
-    transform: scale(1.25);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes rollZoomOut {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(1.08);
-  }
 }
 
 .roll-card {
@@ -1097,15 +1059,6 @@
   font-family: "Pretendard", "Noto Sans KR", sans-serif;
   font-weight: 700;
   text-align: center;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.swiper-slide-active .roll-card .tit {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s 0.8s, transform 0.6s 0.8s;
 }
 
 .btn-next {
@@ -1152,12 +1105,14 @@
   background: #000;
 }
 
+/* 피드백: 인물 얼굴이 문구에 가리지 않도록 사진을 키워 인물을 문구 위쪽으로 올린다 */
 .goal-bg .bg {
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 140%;
   object-fit: cover;
+  object-position: center top;
   opacity: 0.46;
 }
 
@@ -1231,16 +1186,44 @@
   margin: 0 0 0 -35px;
 }
 
-.crew-track .char img {
+/* 피드백: 줄이 흐르는 동안 도넛은 구르고 크림보이는 걷는다.
+   주기는 JS가 흐름 속도에 맞춰 --crew-spin / --crew-walk로 넣는다 */
+.crew-track .char .cream-boy {
+  display: block;
+  width: 94.5px;
   height: 127.5px;
+  background: var(--color-green);
+  animation: crewWalk var(--crew-walk, 2s) steps(24) infinite;
 }
 
 .crew-track .char.flip {
   margin: 0 11px 0 -48px;
 }
 
-.crew-track .char.flip img {
+.crew-track .char.flip .cream-boy {
   transform: scaleX(-1);
+}
+
+.crew-track li:not(.char) img {
+  animation: crewSpin var(--crew-spin, 17s) linear infinite;
+}
+
+.row02 .crew-track li:not(.char) img {
+  animation-direction: reverse;
+}
+
+@keyframes crewSpin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* 24프레임을 균등히 지나도록 끝 위치를 100% × 24/23로 잡는다 */
+@keyframes crewWalk {
+  to {
+    -webkit-mask-position: 104.3478% 0;
+    mask-position: 104.3478% 0;
+  }
 }
 
 .crew-btn {
@@ -1255,29 +1238,18 @@
 */
 
 @media (prefers-reduced-motion: reduce) {
-  .roll-frame .swiper-slide-active,
-  .roll-frame .swiper-slide-active .img img,
-  .roll-frame .swiper-slide-prev .img img,
-  .roll-deco .strip,
-  .roll-deco .dot,
-  .roll-deco .star,
   .who-deco .spr,
   .who-deco .donut01,
   .who-deco .donut02,
-  .crew-track.is-flow {
+  .crew-track.is-flow,
+  .crew-track .char .cream-boy,
+  .crew-track li:not(.char) img {
     animation: none;
   }
 
   .who-film,
   .film-thumb,
   .film-play {
-    transition: none;
-  }
-
-  .roll-card .tit,
-  .swiper-slide-active .roll-card .tit {
-    opacity: 1;
-    transform: none;
     transition: none;
   }
 }
@@ -1290,10 +1262,10 @@
   .do-list {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 40px 30px;
+    gap: 40px 20px;
   }
 
-  .roll-list {
+  .roll-swiper {
     padding-left: 40px;
   }
 
@@ -1693,26 +1665,18 @@
     gap: 20px;
   }
 
-  /* 시안엔 다음 버튼이 없어 원형 카드 줄을 가로 스크롤로 넘긴다 */
   .roll-slide {
     margin-top: 71px;
-    overflow-x: auto;
-    scrollbar-width: none;
   }
 
-  .roll-slide::-webkit-scrollbar {
-    display: none;
-  }
-
-  .roll-list {
-    width: max-content;
-    gap: 8px;
+  .roll-swiper {
     padding: 12px 20px;
   }
 
-  .roll-frame {
+  .roll-list .roll-frame {
     width: 180px;
     height: 180px;
+    margin-right: 8px;
     border-width: 4px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
   }

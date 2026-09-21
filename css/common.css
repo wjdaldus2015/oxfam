@@ -9,7 +9,13 @@
   font-weight: 900;
   line-height: 1.25;
   letter-spacing: -0.02em;
-  color: #000;
+  color: #221e1f;
+}
+
+/* 둥켈산스 대신 본문 서체를 쓰는 제목 */
+.tit-pre {
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  font-weight: 700;
 }
 
 .tit-xxl {
@@ -74,8 +80,24 @@
   background: var(--color-green);
 }
 
+.btn-round:hover,
+.btn-round:focus-visible {
+  transform: scale(1.06);
+}
+
 .btn-round:active {
   transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-round {
+    transition: none;
+  }
+
+  .btn-round:hover,
+  .btn-round:focus-visible {
+    transform: none;
+  }
 }
 
 .btn-crumb {

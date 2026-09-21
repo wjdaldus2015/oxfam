@@ -50,8 +50,6 @@ function quickMenu() {
   var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var state = false;
-  var ghost = null;
-  var tl = null;
   var biteTimer = null;
 
   function biteOnce() {
@@ -64,99 +62,23 @@ function quickMenu() {
     }, 1400);
   }
 
-  function rectOf(el) {
-    var r = el.getBoundingClientRect();
-    return { left: r.left, top: r.top, width: r.width, height: r.height };
-  }
-
-  function morph(show) {
-    var target = show ? join : headerBtn;
-    var to = rectOf(target);
-    var from;
-
-    if (ghost) {
-      from = rectOf(ghost);
-    } else if (show) {
-      var hb = rectOf(headerBtn);
-      from = { left: hb.left + (hb.width - to.width) / 2, top: hb.top + (hb.height - to.height) / 2, width: to.width, height: to.height };
-    } else {
-      from = rectOf(join);
-    }
-
-    if (tl) tl.kill();
-    clearTimeout(biteTimer);
-    join.classList.remove('is-bite');
-    if (!ghost) {
-      ghost = document.createElement('div');
-      ghost.className = 'quick-ghost';
-      ghost.setAttribute('aria-hidden', 'true');
-      document.body.appendChild(ghost);
-    }
-
-    var style = getComputedStyle(target);
-    ghost.innerHTML = '<span>' + (show ? join.innerHTML.trim() : headerBtn.textContent.trim()) + '</span>';
-    ghost.style.fontSize = style.fontSize;
-    ghost.style.lineHeight = style.lineHeight;
-    ghost.style.textAlign = style.textAlign;
-
-    var label = ghost.firstChild;
-    root.classList.add('is-quick');
-    gsap.set(join, { autoAlpha: 0 });
-    gsap.set(ghost, from);
-
-    tl = gsap.timeline({
-      onComplete: function () {
-        ghost.remove();
-        ghost = null;
-        tl = null;
-        if (show) {
-          gsap.set(join, { autoAlpha: 1 });
-          biteOnce();
-        } else {
-          root.classList.remove('is-quick');
-        }
-      }
-    });
-
-    if (show) {
-      tl.fromTo(ghost, { scale: 0.6 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' }, 0)
-        .to(ghost, $.extend({ duration: 1, ease: 'power1.inOut', rotation: 360 }, to), 0)
-        .add(function () {
-          menu.classList.add('is-show');
-        }, 1)
-        .to(ghost, { scaleX: 1.08, scaleY: 0.9, duration: 0.12, ease: 'power2.out' }, 1)
-        .to(ghost, { scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
-      return;
-    }
-
-    gsap.set(label, { autoAlpha: 0 });
-    tl.to(ghost, $.extend({ duration: 0.8, ease: 'power3.inOut', rotation: 0, scale: 1 }, to), 0)
-      .to(label, { autoAlpha: 1, duration: 0.25 }, 0.55);
-  }
-
+  // 피드백: 헤더 버튼이 굴러 내려오던 모핑 대신 제자리에서 팝 등장 (CSS .is-show가 처리)
   function toggle(y) {
     var show = y > window.innerHeight * 0.6;
     if (show === state) return;
     state = show;
 
-    if (reduceMotion) {
-      menu.classList.toggle('is-show', show);
-      root.classList.toggle('is-quick', show);
-      gsap.set(join, { autoAlpha: show ? 1 : 0 });
-      return;
-    }
-    if (!show) menu.classList.remove('is-show');
-    morph(show);
+    menu.classList.toggle('is-show', show);
+    root.classList.toggle('is-quick', show);
+
+    clearTimeout(biteTimer);
+    join.classList.remove('is-bite');
+    if (show && !reduceMotion) biteTimer = setTimeout(biteOnce, 620);
   }
 
   toggle(window.scrollY);
   lenis.on('scroll', function (e) {
     toggle(e.scroll);
-  });
-
-  menu.querySelector('.quick-top').addEventListener('click', function () {
-    lenis.scrollTo(0, { duration: 1.4 });
-    document.querySelector('.header .logo a').focus({ preventScroll: true });
   });
 }
 
@@ -274,6 +196,17 @@ function crewFlow() {
 
     row01.style.marginLeft = (window.innerWidth - setWidth * 2 + edge) + 'px';
     row02.style.marginLeft = -edge + 'px';
+
+    // 줄은 60초에 한 세트 폭만큼 흐른다. 그 속도에 맞춰 도넛 자전·걷기 주기를 맞춘다
+    var speed = setWidth / 60;
+    var donut = row01.querySelector('li:not(.char) img');
+    var boy = document.querySelector('.crew-track .char .cream-boy');
+    if (!speed || !donut || !boy) return;
+
+    var root = document.documentElement;
+    root.style.setProperty('--crew-spin', (Math.PI * donut.offsetHeight / speed).toFixed(2) + 's');
+    // What We Do와 같은 비율의 보폭(표시 높이 136.8px에 90px)
+    root.style.setProperty('--crew-walk', ((90 * boy.offsetHeight / 136.8) / speed).toFixed(2) + 's');
   }
 
   function flow() {
@@ -415,10 +348,8 @@ function doStepScroll() {
   var char = deco.querySelector('.char01');
   var donut = deco.querySelector('.char02');
   var donutRadius = 98;
-  // 크림보이 걷기 스프라이트(6열 4행 24프레임)와 양발 한 사이클에 나아가는 거리
-  var walkCols = 6;
-  var walkRows = 4;
-  var walkFrames = walkCols * walkRows;
+  // 크림보이 걷기 스프라이트(가로 한 줄 24프레임)와 양발 한 사이클에 나아가는 거리
+  var walkFrames = 24;
   var stride = 90;
   var mm = gsap.matchMedia();
 
@@ -447,9 +378,7 @@ function doStepScroll() {
     if (phase < 0) phase += 1;
 
     var frame = Math.floor(phase * walkFrames) % walkFrames;
-    var col = frame % walkCols;
-    var row = Math.floor(frame / walkCols);
-    var pos = (col / (walkCols - 1)) * 100 + '% ' + (row / (walkRows - 1)) * 100 + '%';
+    var pos = (frame / (walkFrames - 1)) * 100 + '% 0';
 
     char.style.webkitMaskPosition = pos;
     char.style.maskPosition = pos;
@@ -489,112 +418,48 @@ function doStepScroll() {
   });
 }
 
+// 피드백: 원 안에서 사진만 바뀌던 방식 대신 목록이 좌우로 밀려 이동하는 캐러셀
 function rollSlide() {
-  var $frames = $('.sc-roll .roll-frame');
-  if (!$frames.length || typeof Swiper === 'undefined') return;
+  var el = document.querySelector('.sc-roll .roll-swiper');
+  if (!el || typeof Swiper === 'undefined') return;
 
-  var slides = $frames.map(function () {
-    return $(this).find('.swiper-slide')[0].outerHTML;
-  }).get();
-  var total = slides.length;
-  var swipers = [];
-
-  function syncFocus(swiper) {
-    swiper.slides.forEach(function (slide) {
-      var active = slide.classList.contains('swiper-slide-active');
-      slide.setAttribute('aria-hidden', active ? 'false' : 'true');
-      $(slide).find('a').attr('tabindex', active ? '0' : '-1');
-    });
-  }
-
-  $frames.each(function (i) {
-    var html = '';
-    for (var k = 0; k < total; k++) html += slides[(i + k) % total];
-    $(this).find('.swiper-wrapper').html(html);
-
-    swipers.push(new Swiper($(this).find('.swiper')[0], {
-      loop: true,
-      speed: 0,
-      effect: 'fade',
-      fadeEffect: { crossFade: false },
-      allowTouchMove: false,
-      a11y: { enabled: false },
-      on: {
-        afterInit: syncFocus,
-        slideChangeTransitionEnd: syncFocus
-      }
-    }));
-  });
-
+  var $list = $(el).find('.roll-list');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var timer = null;
-  var locked = false;
 
-  function next() {
-    if (locked) return;
-    locked = true;
-    setTimeout(function () {
-      locked = false;
-    }, 1200);
-    swipers.forEach(function (swiper) {
-      swiper.slideNext();
-    });
-  }
+  // 한 화면에 4장이 보여 원본 4장만으로는 순환이 끊기므로 한 벌 복제해 둔다
+  $list.append($list.children().clone());
 
-  function stop() {
-    clearInterval(timer);
-  }
-
-  function play() {
-    stop();
-    if (!reduceMotion) timer = setInterval(next, 5000);
-  }
+  var swiper = new Swiper(el, {
+    slidesPerView: 'auto',
+    loop: true,
+    speed: 700,
+    a11y: { enabled: false },
+    autoplay: reduceMotion ? false : {
+      delay: 5000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true
+    }
+  });
 
   $('.sc-roll .btn-next').on('click', function () {
-    next();
-    play();
+    swiper.slideNext();
   });
 
-  // 터치는 mouseenter만 흉내 내고 mouseleave가 없어 재생이 영영 멈추므로, 마우스 포인터와 키보드 포커스일 때만 정지한다
-  function isKeyboardFocus(el) {
-    try {
-      return el.matches(':focus-visible');
-    } catch (e) {
-      return true;
-    }
-  }
-
-  $('.sc-roll .roll-slide')
-    .on('pointerenter', function (e) {
-      if (e.originalEvent.pointerType === 'mouse') stop();
-    })
-    .on('pointerleave', function (e) {
-      if (e.originalEvent.pointerType === 'mouse') play();
-    })
-    .on('focusin', function (e) {
-      if (isKeyboardFocus(e.target)) stop();
-    })
-    .on('focusout', play);
-
-  if (reduceMotion) {
-    play();
-    return;
-  }
+  if (reduceMotion) return;
 
   var rollIn = 120;
 
   gsap.timeline({
     scrollTrigger: {
-      trigger: '.sc-roll .roll-list',
+      trigger: '.sc-roll .roll-slide',
       start: 'top 85%',
       once: true
-    },
-    onComplete: play
+    }
   })
-    .fromTo($frames.get(), {
+    .fromTo('.sc-roll .roll-frame', {
       x: rollIn,
-      rotation: function (i, el) {
-        return (rollIn / (el.offsetWidth / 2)) * (180 / Math.PI);
+      rotation: function (i, target) {
+        return (rollIn / (target.offsetWidth / 2)) * (180 / Math.PI);
       },
       autoAlpha: 0
     }, {
@@ -650,12 +515,13 @@ function storyDonutRoll() {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.create({
     trigger: section,
-    // 모바일은 도넛이 섹션 바닥 쪽에 있어 바닥 기준으로 구간을 잡는다
+    // 모바일은 도넛이 섹션 바닥 쪽에 있어 바닥 기준으로 구간을 잡는다.
+    // 피드백으로 구간을 2배로 늘려 도넛이 더 천천히 굴러오게 했다
     start: function () {
-      return isMobile() ? 'bottom bottom+=380' : 'top 80%';
+      return isMobile() ? 'bottom bottom+=800' : 'top bottom';
     },
     end: function () {
-      return isMobile() ? 'bottom bottom-=40' : 'top top';
+      return isMobile() ? 'bottom bottom-=40' : 'top top-=' + window.innerHeight * 0.6;
     },
     onRefresh: function (self) {
       // 화면 왼쪽 가장자리를 SVG 좌표로 환산해 도넛이 화면 밖에서 출발하게 한다 (모바일은 SVG가 축소됨)
