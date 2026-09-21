@@ -1022,8 +1022,8 @@
   overflow: hidden;
   isolation: isolate;
   background: #fff;
-  /* 좌우로는 4px만 퍼지게 해 카드 사이 간격 안에서 그림자가 온전히 보이도록 한다 */
-  box-shadow: 0 6px 16px -4px rgba(0, 0, 0, 0.3);
+  /* 번짐 반경(7px)을 카드 사이 간격·컨테이너 좌우 여백과 똑같이 맞춰 어느 쪽도 잘리지 않게 한다 */
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.28);
 }
 
 .roll-card {
