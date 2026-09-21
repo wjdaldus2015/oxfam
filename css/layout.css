@@ -289,6 +289,15 @@
     margin-right: 20px;
   }
 
+  /* 아이폰 노치·상태바와 겹치지 않게 그만큼 아래로 민다 */
+  .header {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  #container.main {
+    padding-top: calc(89px + env(safe-area-inset-top, 0px));
+  }
+
   .header .inner {
     max-width: none;
     height: 89px;
@@ -298,9 +307,9 @@
     width: 83px;
   }
 
+  /* 피드백: 모바일은 상단 CTA를 없애고 우하단 퀵버튼으로만 통일한다 */
   .header .btn-round {
-    padding: 16px 14.5px;
-    font-size: 0.875rem;
+    display: none;
   }
 
   .quick-menu {

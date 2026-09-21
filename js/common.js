@@ -26,6 +26,7 @@ $(function () {
   btnBite();
   storyDonutRoll();
   whoIntro();
+  doMobileSlide();
   doStepScroll();
   rollSlide();
   crewFlow();
@@ -62,9 +63,10 @@ function quickMenu() {
     }, 1400);
   }
 
-  // 피드백: 헤더 버튼이 굴러 내려오던 모핑 대신 제자리에서 팝 등장 (CSS .is-show가 처리)
+  // 피드백: 헤더 버튼이 굴러 내려오던 모핑 대신 제자리에서 팝 등장 (CSS .is-show가 처리).
+  // 모바일은 상단 CTA가 없어 이 버튼이 유일한 진입점이므로 처음부터 띄운다
   function toggle(y) {
-    var show = y > window.innerHeight * 0.6;
+    var show = window.innerWidth <= 768 || y > window.innerHeight * 0.6;
     if (show === state) return;
     state = show;
 
@@ -339,6 +341,30 @@ function whoFilm() {
 }
 */
 
+// 피드백: 모바일에서는 네 항목을 좌우로 넘겨 보게 한다
+function doMobileSlide() {
+  var list = document.querySelector('.sc-do .do-list');
+  if (!list || typeof Swiper === 'undefined' || window.innerWidth > 768) return;
+
+  list.classList.add('swiper-wrapper');
+  $(list).children().addClass('swiper-slide');
+
+  var wrap = document.createElement('div');
+  wrap.className = 'swiper do-swiper';
+  list.parentNode.insertBefore(wrap, list);
+  wrap.appendChild(list);
+
+  new Swiper(wrap, {
+    slidesPerView: 1.12,
+    spaceBetween: 16,
+    a11y: { enabled: false },
+    pagination: {
+      el: '.sc-do .do-pager',
+      clickable: true
+    }
+  });
+}
+
 function doStepScroll() {
   var section = document.querySelector('.sc-do');
   if (!section) return;
@@ -437,6 +463,11 @@ function rollSlide() {
       pauseOnMouseEnter: true
     },
     slidesPerGroup: 1,
+    // 모바일에 옆으로 넘길 수 있다는 표시를 둔다
+    pagination: {
+      el: '.sc-roll .roll-pager',
+      clickable: true
+    },
     // 모바일은 손으로 밀어 보고, PC는 컨테이너를 4등분해 카드 폭을 딱 맞춘다
     breakpoints: {
       0: {

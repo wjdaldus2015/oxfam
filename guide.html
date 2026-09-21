@@ -118,10 +118,11 @@
           <h2 class="tit tit-xl">그래서<br /><span class="txt-green">옥스팜 도넛</span>이 있습니다.</h2>
         </div>
         <div class="story-txt">
-          <p>물 부족으로 하루를 시작하는 사람들,<br />교육받을 기회조차 없는 아이들,<br />기후변화로 삶의 터전을 잃어가는 공동체들.</p>
+          <!-- 좁은 화면에서는 br을 숨기고 자동 흐름에 맡기므로 br 앞에 공백을 둔다 -->
+          <p>물 부족으로 하루를 시작하는 사람들, <br />교육받을 기회조차 없는 아이들, <br />기후변화로 삶의 터전을 잃어가는 공동체들.</p>
           <p>이 문제들은 하나의 도넛 위에서 연결되어 있습니다.</p>
-          <p>세상을 바꾸는 힘은 같은 뜻을 가진 사람들이 함께 움직일 때 생겨요.<br />누구나 어디서든 지금 당장 시작할 수 있죠.<br />관심 있는 문제 하나를 골라 참여하고, 기부하고, 주변에
-            알리면<br />그 행동들이 모여 세상을 굴리는 힘이 된답니다.</p>
+          <p>세상을 바꾸는 힘은 같은 뜻을 가진 사람들이 함께 움직일 때 생겨요. <br />누구나 어디서든 지금 당장 시작할 수 있죠. <br />관심 있는 문제 하나를 골라 참여하고, 기부하고, 주변에
+            알리면 <br />그 행동들이 모여 세상을 굴리는 힘이 된답니다.</p>
         </div>
         <div class="story-point">
           <p>당신의 행동이 더해질수록 도넛은 더 크게 굴러가요.</p>
@@ -251,6 +252,7 @@
             <p class="do-desc">옥스팜의 캠페인, 서명, 후원 등<br />다양한 활동에 참여합니다.</p>
           </li>
         </ul>
+        <div class="do-pager" aria-hidden="true"></div>
         <div class="do-deco" aria-hidden="true">
           <span class="char01 cream-boy"></span>
           <!-- 크림보이 영상 스프라이트로 교체 전 SVG 캐릭터(다리 분리 걷기) — 되돌릴 경우 대비해 보류
@@ -354,7 +356,8 @@
               </a>
             </li>
             <li class="swiper-slide roll-frame">
-              <a href="https://www.oxfam.or.kr/action-poverty/?idx=420" target="_blank" title="새 창 열림" class="roll-card">
+              <a href="https://www.oxfam.or.kr/action-poverty/?idx=420" target="_blank" title="새 창 열림"
+                class="roll-card">
                 <span class="img"><img src="image/main/img-roll02.png" alt="" /></span>
                 <h3 class="tit tit-s txt-white">“시각장애가 한계가 될 수 없어!”<br />보이지 않는 장벽을 넘어서는 힘</h3>
               </a>
@@ -362,6 +365,7 @@
           </ul>
         </div>
         <button type="button" class="btn-next"><img src="image/main/icon-next-arrow.svg" alt="다음 이야기 보기" /></button>
+        <div class="roll-pager" aria-hidden="true"></div>
       </div>
     </section>
 
@@ -457,7 +461,7 @@
 
   <!--Quick Menu-->
   <nav class="quick-menu" aria-label="퀵 메뉴">
-    <a href="#" class="btn-round quick-join">옥스팜 도넛<br />함께하기</a>
+    <a href="#" class="btn-round quick-join">도넛<br />함께하기</a>
     <!-- 피드백으로 맨 위로 이동 버튼 삭제
     <button type="button" class="quick-top"><img src="image/main/icon-next-arrow.svg" alt="맨 위로" /></button>
     -->
