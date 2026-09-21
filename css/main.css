@@ -769,13 +769,15 @@
   margin-top: 51px;
 }
 
+/* 크림보이 걷기 스프라이트: 한 사이클 24프레임을 6×4 격자로, 프레임 영역 518×699 기준 */
 .do-deco .char01 {
   left: 0;
   top: 56px;
-  width: 95.13px;
-  height: 117.2px;
-  overflow: visible;
-  fill: #fff;
+  width: 101.4px;
+  height: 136.8px;
+  background: #fff;
+  -webkit-mask: url(../image/main/img-do-walk.png) no-repeat 0 0 / 600% 400%;
+  mask: url(../image/main/img-do-walk.png) no-repeat 0 0 / 600% 400%;
 }
 
 .do-deco .char02 {
@@ -1592,8 +1594,8 @@
 
   .do-deco .char01 {
     top: 32.5px;
-    width: 55.2px;
-    height: 68px;
+    width: 58.9px;
+    height: 79.4px;
   }
 
   .do-deco .char02 {

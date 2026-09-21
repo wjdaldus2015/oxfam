@@ -412,12 +412,14 @@ function doStepScroll() {
 
   var items = section.querySelectorAll('.do-list li');
   var deco = section.querySelector('.do-deco');
-  var body = deco.querySelector('.char-body');
-  var legBack = deco.querySelector('.char-leg-back');
-  var legFront = deco.querySelector('.char-leg-front');
+  var char = deco.querySelector('.char01');
   var donut = deco.querySelector('.char02');
   var donutRadius = 98;
-  var stride = 45;
+  // 크림보이 걷기 스프라이트(6열 4행 24프레임)와 양발 한 사이클에 나아가는 거리
+  var walkCols = 6;
+  var walkRows = 4;
+  var walkFrames = walkCols * walkRows;
+  var stride = 90;
   var mm = gsap.matchMedia();
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -441,12 +443,16 @@ function doStepScroll() {
 
   function walk() {
     var x = gsap.getProperty(deco, 'x');
-    var swing = Math.sin((x / stride) * Math.PI);
-    var bob = -Math.abs(swing) * 3;
+    var phase = (x / stride) % 1;
+    if (phase < 0) phase += 1;
 
-    legBack.setAttribute('transform', 'rotate(' + (-14 * swing) + ' 34 95)');
-    legFront.setAttribute('transform', 'rotate(' + (14 * swing) + ' 64 97)');
-    body.setAttribute('transform', 'translate(0 ' + bob + ')');
+    var frame = Math.floor(phase * walkFrames) % walkFrames;
+    var col = frame % walkCols;
+    var row = Math.floor(frame / walkCols);
+    var pos = (col / (walkCols - 1)) * 100 + '% ' + (row / (walkRows - 1)) * 100 + '%';
+
+    char.style.webkitMaskPosition = pos;
+    char.style.maskPosition = pos;
     gsap.set(donut, { rotation: (x / donutRadius) * (180 / Math.PI) });
   }
 
@@ -477,9 +483,8 @@ function doStepScroll() {
       }, 0);
 
     return function () {
-      legBack.removeAttribute('transform');
-      legFront.removeAttribute('transform');
-      body.removeAttribute('transform');
+      char.style.webkitMaskPosition = '';
+      char.style.maskPosition = '';
     };
   });
 }
