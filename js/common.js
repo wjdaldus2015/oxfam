@@ -430,7 +430,6 @@ function rollSlide() {
   $list.append($list.children().clone());
 
   var swiper = new Swiper(el, {
-    slidesPerView: 'auto',
     loop: true,
     speed: 700,
     a11y: { enabled: false },
@@ -438,6 +437,19 @@ function rollSlide() {
       delay: 5000,
       disableOnInteraction: false,
       pauseOnMouseEnter: true
+    },
+    slidesPerGroup: 1,
+    // 모바일은 손으로 밀어 보고, PC는 컨테이너를 4등분해 카드 폭을 딱 맞춘다
+    breakpoints: {
+      0: {
+        slidesPerView: 'auto',
+        allowTouchMove: true
+      },
+      769: {
+        slidesPerView: 4,
+        spaceBetween: 7,
+        allowTouchMove: false
+      }
     }
   });
 

@@ -1010,13 +1010,12 @@
   align-items: center;
 }
 
-/* 스와이퍼 CSS가 main.css보다 뒤에 실려 .swiper-slide 크기를 덮어쓰므로 선택자를 한 단계 더 준다 */
+/* 폭은 스와이퍼가 컨테이너를 4등분해 정해 준다(정지 위치가 항상 딱 맞아 가장자리가 잘리지 않는다).
+   스와이퍼 CSS가 main.css보다 뒤에 실리므로 선택자를 한 단계 더 준다 */
 .roll-list .roll-frame {
   flex: none;
   position: relative;
-  width: 355px;
-  height: 355px;
-  margin-right: 7px;
+  aspect-ratio: 1;
   border: 8px solid #fff;
   border-radius: 50%;
   overflow: hidden;
@@ -1045,13 +1044,14 @@
   object-fit: cover;
 }
 
+/* 카드 지름이 화면에 따라 달라지므로 안쪽 좌표는 비율로 잡는다 (355px 기준) */
 .roll-card .img::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  top: 200px;
-  height: 155px;
+  top: 56.3%;
+  height: 43.7%;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
 }
 
@@ -1059,7 +1059,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 244px;
+  top: 68.7%;
   font-family: "Pretendard", "Noto Sans KR", sans-serif;
   font-weight: 700;
   text-align: center;
@@ -1685,7 +1685,6 @@
 
   .roll-list .roll-frame {
     width: 180px;
-    height: 180px;
     margin-right: 8px;
     border-width: 4px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
