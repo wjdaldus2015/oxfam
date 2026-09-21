@@ -994,13 +994,15 @@
 
 .roll-slide {
   position: relative;
-  margin-top: 94px;
+  margin-top: 64px;
 }
 
-/* 피드백: 제자리에서 내용만 바뀌던 방식 대신 목록이 좌우로 이동하는 캐러셀 */
-.roll-swiper {
-  overflow: visible;
-  padding-left: calc(50% - 720px);
+/* 피드백: 제자리에서 내용만 바뀌던 방식 대신 목록이 좌우로 이동하는 캐러셀.
+   순환용 복제 카드가 왼쪽에 비치면 안 되므로 컨테이너를 margin으로 밀어 잘라내고,
+   padding 30px만큼은 열어 둬 첫 카드의 그림자가 살아 있게 한다 */
+.roll-slide .roll-swiper {
+  margin-left: calc(50% - 750px);
+  padding: 30px 0 30px 30px;
 }
 
 .roll-list {
@@ -1064,7 +1066,8 @@
 .btn-next {
   position: absolute;
   left: calc(50% + 672px);
-  top: 135px;
+  top: 165px;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1265,8 +1268,8 @@
     gap: 40px 20px;
   }
 
-  .roll-swiper {
-    padding-left: 40px;
+  .roll-slide .roll-swiper {
+    margin-left: 10px;
   }
 
   .btn-next {
@@ -1669,8 +1672,9 @@
     margin-top: 71px;
   }
 
-  .roll-swiper {
-    padding: 12px 20px;
+  .roll-slide .roll-swiper {
+    margin-left: 0;
+    padding: 20px 0 20px 20px;
   }
 
   .roll-list .roll-frame {
