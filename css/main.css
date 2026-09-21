@@ -998,11 +998,12 @@
 /* 피드백: 제자리에서 내용만 바뀌던 방식 대신 목록이 좌우로 이동하는 캐러셀.
    순환용 복제 카드가 왼쪽에 비치면 안 되므로 컨테이너를 margin으로 밀어 잘라내고,
    padding 30px만큼은 열어 둬 첫 카드의 그림자가 살아 있게 한다 */
-/* 콘텐츠 폭 안에서 카드가 4장까지만 보이도록 폭을 묶는다 (355×4 + 사이 7×3 + 왼쪽 여백 30) */
+/* 카드가 4장까지만 보이도록 폭을 묶는다. 좌우 여백은 카드 사이 간격(7px)과 같게 둬야
+   다섯 번째 카드가 경계 밖에서 시작하고, 네 번째 카드의 그림자는 잘리지 않는다 */
 .roll-slide .roll-swiper {
-  width: 1471px;
-  margin-left: calc(50% - 750px);
-  padding: 30px 0 30px 30px;
+  width: 1455px;
+  margin-left: calc(50% - 727px);
+  padding: 30px 7px;
 }
 
 .roll-list {
@@ -1021,7 +1022,8 @@
   overflow: hidden;
   isolation: isolate;
   background: #fff;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  /* 좌우로는 4px만 퍼지게 해 카드 사이 간격 안에서 그림자가 온전히 보이도록 한다 */
+  box-shadow: 0 6px 16px -4px rgba(0, 0, 0, 0.3);
 }
 
 .roll-card {
