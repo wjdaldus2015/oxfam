@@ -433,6 +433,8 @@ function rollSlide() {
     loop: true,
     speed: 700,
     a11y: { enabled: false },
+    // 화면에 걸린 카드에만 swiper-slide-visible이 붙는다 (바깥 카드를 CSS로 감춘다)
+    watchSlidesProgress: true,
     autoplay: reduceMotion ? false : {
       delay: 5000,
       disableOnInteraction: false,
@@ -468,7 +470,7 @@ function rollSlide() {
       once: true
     }
   })
-    .fromTo('.sc-roll .roll-frame', {
+    .fromTo('.sc-roll .roll-frame.swiper-slide-visible', {
       x: rollIn,
       rotation: function (i, target) {
         return (rollIn / (target.offsetWidth / 2)) * (180 / Math.PI);
@@ -480,7 +482,9 @@ function rollSlide() {
       autoAlpha: 1,
       duration: 1.4,
       ease: 'power3.out',
-      stagger: 0.12
+      stagger: 0.12,
+      // 인라인 opacity가 남으면 화면 밖 카드를 감추는 CSS를 덮어쓴다
+      clearProps: 'opacity,visibility,transform'
     })
     .fromTo('.sc-roll .btn-next', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, '-=0.6');
 }
