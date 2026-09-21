@@ -423,11 +423,7 @@ function rollSlide() {
   var el = document.querySelector('.sc-roll .roll-swiper');
   if (!el || typeof Swiper === 'undefined') return;
 
-  var $list = $(el).find('.roll-list');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // 한 화면에 4장이 보여 원본 4장만으로는 순환이 끊기므로 한 벌 복제해 둔다
-  $list.append($list.children().clone());
 
   var swiper = new Swiper(el, {
     loop: true,

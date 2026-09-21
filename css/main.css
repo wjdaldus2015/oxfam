@@ -1056,17 +1056,20 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 56.3%;
-  height: 43.7%;
+  top: 52%;
+  height: 48%;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
 }
 
+/* 원형이라 아래로 갈수록 폭이 좁다. 제목이 긴 글도 들어가도록 위치를 조금 올리고 좌우를 띄운다 */
 .roll-card .tit {
   position: absolute;
   left: 0;
   right: 0;
-  top: 68.7%;
+  top: 64%;
+  padding: 0 14px;
   font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 1.125rem;
   font-weight: 700;
   text-align: center;
 }
