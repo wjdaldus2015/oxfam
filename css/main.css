@@ -691,7 +691,7 @@
 /* What We Do */
 .sc-do {
   height: 920px;
-  padding-top: 159px;
+  padding-top: 117px;
   background: #fe71ad;
 }
 
@@ -706,24 +706,37 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  gap: 65px;
-  margin-top: 41px;
+  gap: 27px;
+  margin-top: 49px;
   text-align: center;
   color: #fff;
 }
 
+/* 피드백: 항목을 흰 카드로 묶고 아이콘은 핑크, 제목은 진한 색으로 */
 .do-list li {
   flex: none;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 340px;
+  height: 290px;
+  padding: 14px;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.do-list .tit {
+  font-size: 2rem;
+  line-height: 1.2;
+  color: #221e1f;
 }
 
 .do-icon {
   width: 60px;
   height: 60px;
-  margin-bottom: 12px;
-  background: #fff;
+  background: #fe71ad;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
@@ -760,10 +773,6 @@
 }
 
 .do-desc {
-  margin-top: 24px;
-  padding: 14px;
-  border-radius: 10px;
-  background: #fff;
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.5;
@@ -775,7 +784,7 @@
   position: relative;
   width: 273px;
   height: 174px;
-  margin-top: 51px;
+  margin-top: 49px;
 }
 
 /* 크림보이 걷기 스프라이트: 한 사이클 24프레임 가로 한 줄, 프레임 영역 518×699 기준 */
@@ -1563,9 +1572,21 @@
     margin-top: 0;
   }
 
+  /* 모바일은 아직 이전 시안(흰 글자, 설명만 흰 박스) 유지 */
   .do-list li {
     width: 100%;
+    height: auto;
     justify-content: flex-start;
+    gap: 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+  }
+
+  .do-list .tit {
+    font-size: 1.75rem;
+    line-height: 1;
+    color: #fff;
   }
 
   .do-pager,
@@ -1603,6 +1624,8 @@
   .do-icon {
     width: 40px;
     height: 40px;
+    margin-bottom: 12px;
+    background: #fff;
   }
 
   .do-sub {
@@ -1611,6 +1634,10 @@
 
   .do-desc {
     width: 100%;
+    margin-top: 24px;
+    padding: 14px;
+    border-radius: 10px;
+    background: #fff;
     font-size: 1rem;
     white-space: normal;
   }
