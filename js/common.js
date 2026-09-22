@@ -345,27 +345,69 @@ function whoFilm() {
 }
 */
 
-// 피드백: 모바일에서는 네 항목을 좌우로 넘겨 보게 한다
+// 피드백: 모바일에서는 네 항목을 좌우로 넘겨 보게 한다.
+// 창 크기가 경계를 넘나들 수 있으므로 스와이퍼 구조를 그때그때 씌우고 걷어낸다
 function doMobileSlide() {
   var list = document.querySelector('.sc-do .do-list');
-  if (!list || typeof Swiper === 'undefined' || window.innerWidth > 768) return;
+  var pager = document.querySelector('.sc-do .do-pager');
+  if (!list || typeof Swiper === 'undefined') return;
 
-  list.classList.add('swiper-wrapper');
-  $(list).children().addClass('swiper-slide');
+  var swiper = null;
+  var wrap = null;
+  var timer = null;
 
-  var wrap = document.createElement('div');
-  wrap.className = 'swiper do-swiper';
-  list.parentNode.insertBefore(wrap, list);
-  wrap.appendChild(list);
+  function build() {
+    if (swiper) return false;
 
-  new Swiper(wrap, {
-    slidesPerView: 1.12,
-    spaceBetween: 22,
-    a11y: { enabled: false },
-    scrollbar: {
-      el: '.sc-do .do-pager',
-      draggable: true
-    }
+    list.classList.add('swiper-wrapper');
+    $(list).children().addClass('swiper-slide');
+
+    wrap = document.createElement('div');
+    wrap.className = 'swiper do-swiper';
+    list.parentNode.insertBefore(wrap, list);
+    wrap.appendChild(list);
+
+    swiper = new Swiper(wrap, {
+      slidesPerView: 1.12,
+      spaceBetween: 22,
+      a11y: { enabled: false },
+      scrollbar: {
+        el: pager,
+        draggable: true
+      }
+    });
+
+    return true;
+  }
+
+  // PC 폭으로 넓어지면 걷어내야 한다. 그대로 두면 네 항목이 한 칸 폭에 갇힌다
+  function destroy() {
+    if (!swiper) return false;
+
+    swiper.destroy(true, true);
+    swiper = null;
+
+    wrap.parentNode.insertBefore(list, wrap);
+    wrap.parentNode.removeChild(wrap);
+    wrap = null;
+
+    list.classList.remove('swiper-wrapper');
+    $(list).children().removeClass('swiper-slide');
+    $(pager).empty();
+
+    return true;
+  }
+
+  function update() {
+    var changed = window.innerWidth <= 768 ? build() : destroy();
+    if (changed && typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+  }
+
+  update();
+
+  $(window).on('resize', function () {
+    clearTimeout(timer);
+    timer = setTimeout(update, 200);
   });
 }
 
