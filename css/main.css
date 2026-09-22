@@ -1004,7 +1004,8 @@
   margin-top: 64px;
 }
 
-/* 넘길 수 있다는 표시는 모바일에서만 쓴다 */
+/* 넘길 수 있다는 표시(안내 문구·스크롤바)는 모바일에서만 쓴다 */
+.swipe-hint,
 .do-pager,
 .roll-pager {
   display: none;
@@ -1549,7 +1550,16 @@
   }
 
   .sc-do {
-    padding: 127px 0 48px;
+    padding: 94px 0 60px;
+  }
+
+  .swipe-hint {
+    display: block;
+    margin-top: 23px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
   }
 
   .do-donut {
@@ -1561,7 +1571,7 @@
 
   /* 피드백: 좌우로 넘겨 보는 캐러셀 (JS가 스와이퍼 구조를 입힌다) */
   .do-swiper {
-    margin-top: 40px;
+    margin-top: 14px;
   }
 
   .do-list {
@@ -1572,60 +1582,49 @@
     margin-top: 0;
   }
 
-  /* 모바일은 아직 이전 시안(흰 글자, 설명만 흰 박스) 유지 */
   .do-list li {
     width: 100%;
-    height: auto;
-    justify-content: flex-start;
-    gap: 0;
-    padding: 0;
-    border-radius: 0;
-    background: none;
+    height: 242px;
   }
 
   .do-list .tit {
-    font-size: 1.75rem;
-    line-height: 1;
-    color: #fff;
+    font-size: 1.5rem;
   }
 
-  .do-pager,
-  .roll-pager {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 28px;
-  }
-
-  .do-pager .swiper-pagination-bullet,
-  .roll-pager .swiper-pagination-bullet {
-    width: 7px;
-    height: 7px;
+  /* 피드백: 불렛 대신 스크롤바. 스와이퍼 기본 CSS가 absolute·좌우 1% 여백을 주므로 흐름 안에 되돌린다 */
+  .sc-do .do-pager.swiper-scrollbar-horizontal,
+  .sc-roll .roll-pager.swiper-scrollbar-horizontal {
+    position: relative;
+    left: 0;
+    bottom: auto;
+    width: auto;
+    height: 4px;
     border-radius: 999px;
-    background: currentColor;
-    opacity: 0.35;
-    transition: width 0.3s, opacity 0.3s;
   }
 
-  .do-pager .swiper-pagination-bullet-active,
-  .roll-pager .swiper-pagination-bullet-active {
-    width: 20px;
-    opacity: 1;
+  .do-pager.swiper-scrollbar .swiper-scrollbar-drag,
+  .roll-pager.swiper-scrollbar .swiper-scrollbar-drag {
+    border-radius: 999px;
   }
 
-  .do-pager {
-    color: #fff;
+  .sc-do .do-pager {
+    display: block;
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.2);
   }
 
-  .roll-pager {
-    color: var(--color-green);
-  }
-
-  .do-icon {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 12px;
+  .do-pager .swiper-scrollbar-drag {
     background: #fff;
+  }
+
+  .sc-roll .roll-pager {
+    display: block;
+    margin: 0 20px;
+    background: #ededed;
+  }
+
+  .roll-pager .swiper-scrollbar-drag {
+    background: var(--color-green);
   }
 
   .do-sub {
@@ -1634,35 +1633,31 @@
 
   .do-desc {
     width: 100%;
-    margin-top: 24px;
-    padding: 14px;
-    border-radius: 10px;
-    background: #fff;
     font-size: 1rem;
     white-space: normal;
   }
 
   .do-deco {
-    width: 158.3px;
-    height: 101px;
-    margin: 69px 0 0 3px;
+    width: 221px;
+    height: 141px;
+    margin: 31px 0 0 3px;
   }
 
   .do-deco .char01 {
-    top: 32.5px;
-    width: 58.9px;
-    height: 79.4px;
+    top: 45.4px;
+    width: 82.1px;
+    height: 110.8px;
   }
 
   .do-deco .char02 {
-    left: 53px;
-    width: 105.2px;
-    height: 101px;
+    left: 74.1px;
+    width: 146.9px;
+    height: 141px;
   }
 
   .sc-roll {
     height: auto;
-    padding: 84px 0 75px;
+    padding: 84px 0 81px;
   }
 
   .roll-deco .map {
@@ -1749,8 +1744,13 @@
     gap: 20px;
   }
 
+  .sc-roll .swipe-hint {
+    margin-top: 24px;
+    color: var(--color-green);
+  }
+
   .roll-slide {
-    margin-top: 71px;
+    margin-top: 0;
   }
 
   .roll-slide .roll-swiper {
@@ -1759,15 +1759,12 @@
   }
 
   .roll-list .roll-frame {
-    width: 180px;
-    margin-right: 8px;
-    border-width: 4px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+    width: 269px;
+    margin-right: 5px;
   }
 
   .roll-card .tit {
-    padding: 0 10px;
-    font-size: 0.8125rem;
+    font-size: 1rem;
   }
 
   .btn-next {

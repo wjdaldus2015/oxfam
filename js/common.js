@@ -360,11 +360,11 @@ function doMobileSlide() {
 
   new Swiper(wrap, {
     slidesPerView: 1.12,
-    spaceBetween: 16,
+    spaceBetween: 22,
     a11y: { enabled: false },
-    pagination: {
+    scrollbar: {
       el: '.sc-do .do-pager',
-      clickable: true
+      draggable: true
     }
   });
 }
@@ -454,9 +454,11 @@ function rollSlide() {
   if (!el || typeof Swiper === 'undefined') return;
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 모바일은 스크롤바로 위치를 보여 주므로 순환하지 않는다 (순환하면 스크롤바가 튄다)
+  var isMobile = window.innerWidth <= 768;
 
   var swiper = new Swiper(el, {
-    loop: true,
+    loop: !isMobile,
     speed: 700,
     a11y: { enabled: false },
     // 화면에 걸린 카드에만 swiper-slide-visible이 붙는다 (바깥 카드를 CSS로 감춘다)
@@ -468,9 +470,9 @@ function rollSlide() {
     },
     slidesPerGroup: 1,
     // 모바일에 옆으로 넘길 수 있다는 표시를 둔다
-    pagination: {
+    scrollbar: {
       el: '.sc-roll .roll-pager',
-      clickable: true
+      draggable: true
     },
     // 모바일은 손으로 밀어 보고, PC는 컨테이너를 4등분해 카드 폭을 딱 맞춘다
     breakpoints: {
