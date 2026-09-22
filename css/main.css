@@ -1625,8 +1625,10 @@
     color: #fff;
   }
 
+  /* 시안(667:4118)은 303×293 박스 안에서 도넛 그림만 18px 오른쪽으로 밀려 있다.
+     그만큼 옮겨야 제목 오른쪽 끝과 겹치지 않는다 */
   .do-donut {
-    left: calc(50% + 28px);
+    left: calc(50% + 46px);
     top: -97px;
     width: 303px;
     height: 293px;
