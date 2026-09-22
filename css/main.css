@@ -1057,13 +1057,76 @@
   background: #7d7d7d;
 }
 
-.roll-card .img,
-.roll-card .img img {
+.roll-card .img {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+}
+
+/* 시안은 카드마다 사진을 다르게 확대·이동해 썼다. 카드 지름 기준 비율이라 PC·모바일 공용 */
+.roll-card .img img {
+  position: absolute;
+  left: var(--img-x, 0);
+  top: var(--img-y, 0);
+  width: var(--img-w, 100%);
+  height: var(--img-h, 100%);
+  max-width: none;
   object-fit: cover;
+}
+
+.roll-frame.card01 .img img {
+  --img-x: -55.87%;
+  --img-y: -44.62%;
+  --img-w: 212.02%;
+  --img-h: 168.28%;
+}
+
+.roll-frame.card02 .img img {
+  --img-x: -58.7%;
+  --img-y: -2.36%;
+  --img-w: 187.32%;
+  --img-h: 117.11%;
+}
+
+.roll-frame.card03 .img img {
+  --img-x: -20.35%;
+  --img-y: -52.21%;
+  --img-w: 157.82%;
+  --img-h: 157.82%;
+}
+
+.roll-frame.card04 .img img {
+  --img-x: -79.15%;
+  --img-y: -37.5%;
+  --img-w: 194.95%;
+  --img-h: 146.21%;
+}
+
+.roll-frame.card05 .img img {
+  --img-x: -22.42%;
+  --img-y: -2.95%;
+  --img-w: 159.59%;
+  --img-h: 105.31%;
+}
+
+.roll-frame.card06 .img img {
+  --img-x: -31.56%;
+  --img-y: -8.55%;
+  --img-w: 187.32%;
+  --img-h: 117.11%;
+}
+
+.roll-frame.card07 .img img {
+  --img-x: -20.32%;
+  --img-y: 0.58%;
+  --img-w: 157.77%;
+  --img-h: 105.07%;
+}
+
+.roll-frame.card08 .img img {
+  --img-x: -36.02%;
+  --img-y: -6.8%;
+  --img-w: 203.74%;
+  --img-h: 135.69%;
 }
 
 /* 카드 지름이 화면에 따라 달라지므로 안쪽 좌표는 비율로 잡는다 (355px 기준) */

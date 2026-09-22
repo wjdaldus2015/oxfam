@@ -211,8 +211,8 @@ function crewFlow() {
 
     var root = document.documentElement;
     root.style.setProperty('--crew-spin', (Math.PI * donut.offsetHeight / speed).toFixed(2) + 's');
-    // What We Do와 같은 비율의 보폭(표시 높이 136.8px에 90px)
-    root.style.setProperty('--crew-walk', ((90 * boy.offsetHeight / 136.8) / speed).toFixed(2) + 's');
+    // What We Do와 같은 비율의 보폭(표시 높이 136.8px에 170px)
+    root.style.setProperty('--crew-walk', ((170 * boy.offsetHeight / 136.8) / speed).toFixed(2) + 's');
   }
 
   function flow() {
@@ -379,8 +379,9 @@ function doStepScroll() {
   var donut = deco.querySelector('.char02');
   var donutRadius = 98;
   // 크림보이 걷기 스프라이트(가로 한 줄 24프레임)와 양발 한 사이클에 나아가는 거리
+  // 피드백: 보폭이 짧아 허둥대 보여 한 사이클에 나아가는 거리를 늘려 천천히 걷게 한다
   var walkFrames = 24;
-  var stride = 90;
+  var stride = 170;
   var mm = gsap.matchMedia();
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -494,32 +495,43 @@ function rollSlide() {
 
   if (reduceMotion) return;
 
-  var rollIn = 120;
+  var rollIn = 140;
+  // 등장 전에 슬라이드가 넘어가면 굴러 들어오는 카드와 화면에 보이는 카드가 어긋난다.
+  // 자동 넘김은 멈춰 두고, 처음 화면에 보이는 카드만 굴린 뒤 다시 시작한다
+  swiper.autoplay.stop();
 
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: '.sc-roll .roll-slide',
-      start: 'top 85%',
-      once: true
+  var cards = el.querySelectorAll('.roll-frame.swiper-slide-visible');
+  gsap.set(cards, { autoAlpha: 0 });
+
+  ScrollTrigger.create({
+    trigger: '.sc-roll .roll-slide',
+    start: 'top 85%',
+    once: true,
+    onEnter: function () {
+      gsap.timeline({
+        onComplete: function () {
+          swiper.autoplay.start();
+        }
+      })
+        .fromTo(cards, {
+          x: rollIn,
+          rotation: function (i, target) {
+            return (rollIn / (target.offsetWidth / 2)) * (180 / Math.PI);
+          },
+          autoAlpha: 0
+        }, {
+          x: 0,
+          rotation: 0,
+          autoAlpha: 1,
+          duration: 2.2,
+          ease: 'power2.out',
+          stagger: 0.3,
+          // 인라인 opacity가 남으면 화면 밖 카드를 감추는 CSS를 덮어쓴다
+          clearProps: 'opacity,visibility,transform'
+        })
+        .fromTo('.sc-roll .btn-next', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, '-=0.8');
     }
-  })
-    .fromTo('.sc-roll .roll-frame.swiper-slide-visible', {
-      x: rollIn,
-      rotation: function (i, target) {
-        return (rollIn / (target.offsetWidth / 2)) * (180 / Math.PI);
-      },
-      autoAlpha: 0
-    }, {
-      x: 0,
-      rotation: 0,
-      autoAlpha: 1,
-      duration: 1.4,
-      ease: 'power3.out',
-      stagger: 0.12,
-      // 인라인 opacity가 남으면 화면 밖 카드를 감추는 CSS를 덮어쓴다
-      clearProps: 'opacity,visibility,transform'
-    })
-    .fromTo('.sc-roll .btn-next', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, '-=0.6');
+  });
 }
 
 function storyDonutRoll() {
