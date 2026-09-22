@@ -1632,9 +1632,12 @@
     height: 293px;
   }
 
-  /* 피드백: 좌우로 넘겨 보는 캐러셀 (JS가 스와이퍼 구조를 입힌다) */
-  .do-swiper {
-    margin-top: 14px;
+  /* 피드백: 좌우로 넘겨 보는 캐러셀 (JS가 스와이퍼 구조를 입힌다).
+     다음 카드가 여백에서 잘리지 않도록 잘라내는 범위만 화면 끝까지 넓힌다
+     (padding으로 되돌려 카드 크기·위치는 그대로) */
+  .sc-do .do-swiper {
+    margin: 14px -20px 0;
+    padding: 0 20px;
   }
 
   .do-list {
@@ -1826,8 +1829,17 @@
     margin-right: 5px;
   }
 
+  /* 시안: 모바일은 아래쪽 그라데이션 대신 사진 전체에 딤을 깔고 제목을 가운데 둔다 */
+  .roll-card .img::after {
+    top: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
   .roll-card .tit {
+    top: 50%;
     font-size: 1rem;
+    transform: translateY(-50%);
   }
 
   .btn-next {
