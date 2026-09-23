@@ -1136,6 +1136,13 @@
   transform: scale(1.08);
 }
 
+/* 슬라이드로 넘겨 보는 폭(모바일·태블릿)은 호버 대신 현재(맨 앞) 카드의 사진이 천천히 확대된다 */
+@media all and (max-width: 1024px) {
+  .roll-list .roll-frame.swiper-slide-active .img {
+    transform: scale(1.08);
+  }
+}
+
 /* 시안은 카드마다 사진을 다르게 확대·이동해 썼다. 카드 지름 기준 비율이라 PC·모바일 공용 */
 .roll-card .img img {
   position: absolute;
@@ -1828,21 +1835,7 @@
     width: 146.9px;
     height: 141px;
   }
-  .swiper-slide-active.roll-card .img {
-    position: absolute;
-    inset: 0;
-    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-  }
 
-  @media (hover: hover) {
-    .swiper-slide-active.roll-card:hover .img {
-      transform: scale(1.08);
-    }
-  }
-
-  .swiper-slide-active.roll-card:focus-visible .img {
-    transform: scale(1.08);
-  }
   /* 배경 요소는 새 시안에서 빠졌다 — 되돌릴 경우 대비해 보류
   .roll-deco .map {
     left: calc(50% - 154px);
