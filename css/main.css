@@ -147,6 +147,18 @@
   height: 303px;
 }
 
+/* 가장자리 PNG의 맨 아래 줄이 반투명이라 검정 배경이 비쳐 선이 생겼다.
+   마지막 몇 줄을 다음 섹션 색으로 확실히 채워 경계를 없앤다 */
+.sc-intro::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 24px;
+  background: linear-gradient(to bottom, rgba(247, 247, 235, 0), #f7f7eb 70%);
+}
+
 /* Donut Story */
 .sc-story {
   height: 1104px;
@@ -1743,10 +1755,10 @@
   }
 
   /* 이 폭부터 .inner 여백이 20px 고정이라 넘겨 쓰는 값도 맞춘다 */
-  /* 화면이 좁아 카드를 시안 폭(340)으로 둘 수 없으므로 화면 폭에 맞춘다 */
-
+  /* 시안(360): 카드 283 = 컨테이너 320의 88.4%. 스와이퍼 상자는 화면 폭이라
+     컨테이너 폭은 JS(bleedSwiper)가 --inner-w로 넘겨 준다 */
   .do-list li {
-    width: 100%;
+    width: calc(var(--inner-w, 320px) * 0.884);
     min-height: 0;
     height: 242px;
   }

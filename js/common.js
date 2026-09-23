@@ -462,9 +462,13 @@ function bleedSwiper(swiper, active) {
     var i = inner.getBoundingClientRect();
     var left = on ? Math.round(i.left - s.left) : 0;
     var right = on ? Math.round(s.right - i.right) : 0;
+    // 슬라이드 폭을 컨테이너 기준으로 잡을 수 있게 넘겨 준다 (스와이퍼 상자는 화면 폭이라 %로는 안 됨)
+    var width = Math.round(i.width) + 'px';
 
-    if (swiper.params.slidesOffsetBefore === left && swiper.params.slidesOffsetAfter === right) return;
+    if (swiper.params.slidesOffsetBefore === left && swiper.params.slidesOffsetAfter === right &&
+      el.style.getPropertyValue('--inner-w') === width) return;
 
+    el.style.setProperty('--inner-w', width);
     el.style.marginLeft = left ? -left + 'px' : '';
     el.style.marginRight = right ? -right + 'px' : '';
     swiper.params.slidesOffsetBefore = left;
@@ -498,8 +502,9 @@ function doMobileSlide() {
     list.parentNode.insertBefore(wrap, list);
     wrap.appendChild(list);
 
+    // 카드 폭은 CSS가 정한다(모바일: 컨테이너의 88.4% = 360에서 283, 태블릿: 340)
     swiper = new Swiper(wrap, {
-      slidesPerView: 1.12,
+      slidesPerView: 'auto',
       spaceBetween: 22,
       a11y: { enabled: false },
       scrollbar: {
