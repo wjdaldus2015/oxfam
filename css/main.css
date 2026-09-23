@@ -281,25 +281,6 @@
   height: 693px;
 }
 
-/* 시안: 2604.5×856.5 박스를 16.26° 회전, 회전 후 바운딩 박스 (-295, 88) 2740×1552 → 중심 (1075, 864) */
-.who-deco .line {
-  position: absolute;
-  left: calc(50% + 115px);
-  top: 864px;
-  width: 2604.5px;
-  height: 856.5px;
-  overflow: hidden;
-  opacity: 0.6;
-  transform: translate(-50%, -50%) rotate(16.26deg);
-}
-
-.who-deco .line img {
-  left: -3.47%;
-  top: -10.78%;
-  width: 100%;
-  height: 101.36%;
-}
-
 .who-deco .spr {
   background: url(../image/main/img-who-spr-white.svg) no-repeat center /
     contain;
@@ -1498,7 +1479,6 @@
     padding: 80px 0;
   }
 
-  .who-deco .line,
   .who-deco .spr {
     display: none;
   }
@@ -1755,16 +1735,6 @@
     top: 620px;
     width: 249px;
     height: 243px;
-  }
-
-  /* 시안: 897×295 박스를 73.74° 회전·상하반전, 회전 후 바운딩 박스 (-51, 59) 534.5×944 → 중심 (216, 531) */
-  .who-deco .line {
-    display: block;
-    left: calc(50% + 36px);
-    top: 531px;
-    width: 897.17px;
-    height: 295.04px;
-    transform: translate(-50%, -50%) rotate(73.74deg) scaleY(-1);
   }
 
   .who-deco .spr {
