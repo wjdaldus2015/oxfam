@@ -1,5 +1,9 @@
 /* Main */
+/* 화면 폭에 비례하는 장식은 "시안 px 값 × 단위"로 쓴다. 숫자는 Figma 값 그대로 옮기면 된다.
+   --px-pc: 시안 1920 기준 1px / --px-mo: 시안 360 기준 1px(414px 폭, 1.15배에서 멈춤) */
 .main {
+  --px-pc: calc(100vw / 1920);
+  --px-mo: min(100vw / 360, 1.15px);
   letter-spacing: -0.02em;
 }
 
@@ -75,21 +79,21 @@
   opacity: 0.85;
 }
 
-/* 시안 1920×920 기준 값을 vw로 환산해 폭에 비례. 위 도넛은 위쪽, 아래 도넛은 아래쪽 모서리 기준이라
+/* 시안 1920×920 값. 위 도넛은 위쪽, 아래 도넛은 아래쪽 모서리 기준이라
    화면 높이가 달라도 모서리에 걸치는 모양이 같다 */
 .visual-bg .donut01 {
-  left: calc(50% + 17.776vw);
-  top: -18.523vw;
-  width: 40.557vw;
-  height: 39.576vw;
+  left: calc(50% + 341.3 * var(--px-pc));
+  top: calc(-355.65 * var(--px-pc));
+  width: calc(778.7 * var(--px-pc));
+  height: calc(759.85 * var(--px-pc));
 }
 
-/* 피드백: 메시지와 도넛 사이를 더 벌린다 */
+/* 피드백: 메시지와 도넛 사이를 더 벌린다. 시안 top 588 → 아래로 367.59 넘침 */
 .visual-bg .donut02 {
-  left: calc(50% - 60.094vw);
-  bottom: -19.145vw;
-  width: 37.322vw;
-  height: 36.437vw;
+  left: calc(50% - 1153.8 * var(--px-pc));
+  bottom: calc(-367.59 * var(--px-pc));
+  width: calc(716.58 * var(--px-pc));
+  height: calc(699.59 * var(--px-pc));
 }
 
 /* 시안 920 기준 303px 자리 */
@@ -294,60 +298,65 @@
   transform: scaleX(-1);
 }
 
-/* 스프링클: 가로 위치·크기는 시안 1920 기준 vw로 화면 폭에 비례해 줄어든다.
-   세로는 필름(top 398, 16:9) 위쪽은 그대로, 옆·아래는 필름 높이를 따라 움직인다 */
+/* 스프링클: 가로 위치·크기는 시안 1920 값 × --px-pc로 화면 폭에 비례해 줄어든다.
+   세로는 필름(top 398, 시안 높이 810, 16:9) 위쪽은 그대로, 옆·아래는 필름 높이를 따라 움직인다 */
 .who-deco {
-  --film-h: calc(min(1440px, 100vw - 80px) * 0.5625);
+  --film-h: calc(min(1440px, 100vw - 80px) * 9 / 16);
 }
 
 .who-deco .spr01 {
-  left: calc(50% - 11.927vw);
+  left: calc(50% - 229 * var(--px-pc));
   top: 104px;
-  width: 2.917vw;
-  height: 3.385vw;
+  width: calc(56 * var(--px-pc));
+  height: calc(65 * var(--px-pc));
 }
 
 .who-deco .spr02 {
-  left: calc(50% + 11.875vw);
+  left: calc(50% + 228 * var(--px-pc));
   top: 278px;
-  width: 1.979vw;
-  height: 2.292vw;
+  width: calc(38 * var(--px-pc));
+  height: calc(44 * var(--px-pc));
 }
 
+/* 필름 아래 56 */
 .who-deco .spr03 {
-  left: calc(50% - 10vw);
+  left: calc(50% - 192 * var(--px-pc));
   top: calc(398px + var(--film-h) + 56px);
-  width: 1.979vw;
-  height: 2.292vw;
+  width: calc(38 * var(--px-pc));
+  height: calc(44 * var(--px-pc));
 }
 
+/* 필름 위에서 498/810 지점 */
 .who-deco .spr04 {
-  left: calc(50% + 46.25vw);
-  top: calc(398px + var(--film-h) * 0.6148);
-  width: 1.667vw;
-  height: 1.927vw;
+  left: calc(50% + 888 * var(--px-pc));
+  top: calc(398px + var(--film-h) * 498 / 810);
+  width: calc(32 * var(--px-pc));
+  height: calc(37 * var(--px-pc));
 }
 
+/* 필름 아래 24 */
 .who-deco .spr05 {
-  left: calc(50% + 21.771vw);
+  left: calc(50% + 418 * var(--px-pc));
   top: calc(398px + var(--film-h) + 24px);
-  width: 2.917vw;
-  height: 3.385vw;
+  width: calc(56 * var(--px-pc));
+  height: calc(65 * var(--px-pc));
 }
 
+/* 필름 위에서 134/810 지점 */
 .who-deco .spr06 {
-  left: calc(50% - 43.698vw);
-  top: calc(398px + var(--film-h) * 0.1654);
-  width: 1.719vw;
-  height: 1.979vw;
+  left: calc(50% - 839 * var(--px-pc));
+  top: calc(398px + var(--film-h) * 134 / 810);
+  width: calc(33 * var(--px-pc));
+  height: calc(38 * var(--px-pc));
 }
 
-/* 제목 바로 왼쪽이라 제목 왼쪽 끝(여백 40px 또는 폭/2 − 720) 기준으로 둬 겹치지 않게, 좁으면 화면 끝에 반쯤 걸친다 */
+/* 제목 바로 왼쪽이라 제목 왼쪽 끝(여백 40px 또는 폭/2 − 720)에서 시안 간격 135만큼 왼쪽에 둬 겹치지 않게,
+   좁으면 화면 끝에 반쯤(-19.2) 걸친다 */
 .who-deco .spr07 {
-  left: max(-1vw, calc(max(40px, 50% - 720px) - 7.031vw));
+  left: max(-19.2 * var(--px-pc), calc(max(40px, 50% - 720px) - 135 * var(--px-pc)));
   top: 253px;
-  width: 2.917vw;
-  height: 3.385vw;
+  width: calc(56 * var(--px-pc));
+  height: calc(65 * var(--px-pc));
 }
 
 .who-film {
@@ -728,12 +737,12 @@
   background: #fe71ad;
 }
 
-/* 시안 1920 기준 vw로 환산해 화면 폭에 비례 */
+/* 시안 1920 값 × --px-pc로 화면 폭에 비례 */
 .do-donut {
-  left: calc(50% + 25.99vw);
-  top: -15.313vw;
-  width: 34.01vw;
-  height: 32.865vw;
+  left: calc(50% + 499 * var(--px-pc));
+  top: calc(-294 * var(--px-pc));
+  width: calc(653 * var(--px-pc));
+  height: calc(631 * var(--px-pc));
 }
 
 /* 네 장을 항상 한 줄에 둔다. 1520 아래로는 줄바꿈 대신 카드와 글자가 같은 비율로 작아지고,
@@ -1619,26 +1628,23 @@
     display: none;
   }
 
-  /* 시안(122:1522) 360×680 기준. 1vw 단위로 키우되 414px 폭(1.15배)에서 멈춘다.
+  /* 시안(122:1522) 360×680 값 × --px-mo(414px 폭에서 크기 멈춤).
      사진은 화면 높이를 따라 커지므로 폭만 따라 계속 커지면 넓은 화면에서 도넛이 얼굴을 덮는다.
-     위 도넛은 오른쪽·헤더 아래 끝, 아래 도넛은 왼쪽·아래 끝 기준이라 모서리에 걸치는 모양이 유지된다 */
-  .visual-bg {
-    --mu: min(1vw, 4.14px);
-  }
-
+     위 도넛은 오른쪽·헤더 아래 끝, 아래 도넛은 왼쪽·아래 끝 기준이라 모서리에 걸치는 모양이 유지된다.
+     위 도넛: 시안 left 219 → 오른쪽으로 141.93 넘침, top -119 / 아래 도넛: top 536 → 아래로 139 넘침 */
   .visual-bg .donut01 {
     left: auto;
-    right: calc(var(--mu) * -39.425);
-    top: calc(70px + env(safe-area-inset-top, 0px) - var(--mu) * 33.056);
-    width: calc(var(--mu) * 78.591);
-    height: calc(var(--mu) * 76.667);
+    right: calc(-141.93 * var(--px-mo));
+    top: calc(70px + env(safe-area-inset-top, 0px) - 119 * var(--px-mo));
+    width: calc(282.93 * var(--px-mo));
+    height: calc(276 * var(--px-mo));
   }
 
   .visual-bg .donut02 {
-    left: calc(var(--mu) * -46.111);
-    bottom: calc(var(--mu) * -38.611);
-    width: calc(var(--mu) * 80.584);
-    height: calc(var(--mu) * 78.611);
+    left: calc(-166 * var(--px-mo));
+    bottom: calc(-139 * var(--px-mo));
+    width: calc(290.1 * var(--px-mo));
+    height: calc(283 * var(--px-mo));
   }
 
   .scroll-hint {
@@ -1802,14 +1808,14 @@
 
   /* 시안(667:4118)은 303×293 박스 안에서 도넛 그림만 18px 오른쪽으로 밀려 있다.
      그만큼 옮겨야 제목 오른쪽 끝과 겹치지 않는다 */
-  /* 시안 360 기준. 비주얼 도넛처럼 414px 폭(1.15배)에서 크기를 멈추고 오른쪽 끝 기준으로 걸친다 */
+  /* 시안 360 값 × --px-mo. 비주얼 도넛처럼 414px 폭에서 크기를 멈추고 오른쪽 끝 기준으로 걸친다.
+     시안 left 226(가운데+46) → 오른쪽으로 169 넘침 */
   .do-donut {
-    --mu: min(1vw, 4.14px);
     left: auto;
-    right: calc(var(--mu) * -46.944);
-    top: calc(var(--mu) * -26.944);
-    width: calc(var(--mu) * 84.167);
-    height: calc(var(--mu) * 81.389);
+    right: calc(-169 * var(--px-mo));
+    top: calc(-97 * var(--px-mo));
+    width: calc(303 * var(--px-mo));
+    height: calc(293 * var(--px-mo));
   }
 
   /* 이 폭부터 .inner 여백이 20px 고정이라 넘겨 쓰는 값도 맞춘다 */
