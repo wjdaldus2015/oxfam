@@ -524,10 +524,10 @@ function doStepScroll() {
   var char = deco.querySelector('.char01');
   var donut = deco.querySelector('.char02');
   var donutRadius = 98;
-  // 크림보이 걷기 스프라이트(가로 한 줄 24프레임)와 양발 한 사이클에 나아가는 거리
-  // 피드백: 보폭이 짧아 허둥대 보여 한 사이클에 나아가는 거리를 늘려 천천히 걷게 한다
+  // 크림보이 걷기 스프라이트(가로 한 줄 24프레임)와 양발 한 사이클에 나아가는 거리.
+  // 거리가 길수록 다리가 천천히 움직인다. 크루 줄의 초록 크림보이(170)의 절반 속도로 걷게 한다
   var walkFrames = 24;
-  var stride = 170;
+  var stride = 340;
   var mm = gsap.matchMedia();
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

@@ -821,6 +821,8 @@
   z-index: 1;
 }
 
+/* 새 시안(667:2742)은 배경이 색(#fffef8)만 있고 지도·물결 선·번짐 원·점·별이 모두 빠졌다.
+   되돌릴 경우 대비해 보류. 선은 시안 PNG 대신 한 주기짜리 파형 SVG를 반복해 썼었다
 .roll-deco > * {
   position: absolute;
 }
@@ -835,7 +837,6 @@
   opacity: 0.12;
 }
 
-/* 시안의 선 PNG는 양 끝이 이어지지 않아, 같은 색·두께·주기의 한 주기짜리 파형 SVG를 반복한다 */
 .roll-deco .strip {
   left: -500px;
   right: -500px;
@@ -988,6 +989,7 @@
   height: 62px;
   opacity: 0.9;
 }
+*/
 
 .roll-head {
   display: flex;
@@ -1332,9 +1334,6 @@
 */
 
 @media (prefers-reduced-motion: reduce) {
-  .roll-deco .strip,
-  .roll-deco .dot,
-  .roll-deco .star,
   .who-deco .spr,
   .who-deco .donut01,
   .who-deco .donut02,
@@ -1732,6 +1731,7 @@
     padding: 84px 0 81px;
   }
 
+  /* 배경 요소는 새 시안에서 빠졌다 — 되돌릴 경우 대비해 보류
   .roll-deco .map {
     left: calc(50% - 154px);
     top: 150px;
@@ -1809,6 +1809,7 @@
     width: 31px;
     height: 31px;
   }
+  */
 
   .roll-head {
     flex-direction: column;
