@@ -94,8 +94,7 @@
   gap: 12px;
 }
 
-/* 피드백: 헤더에서 굴러 내려오던 모핑 대신, 기존 맨 위로 버튼과 같은 팝 등장으로 통일.
-   호버 확대(transform)와 겹치지 않도록 등장은 translate/scale 개별 속성을 쓴다 */
+/* 등장·퇴장은 JS가 만드는 .quick-ghost가 대신하므로 평소에는 숨겨 둔다 */
 .quick-join {
   width: 120px;
   height: 120px;
@@ -104,31 +103,13 @@
   text-align: center;
   opacity: 0;
   visibility: hidden;
-  translate: 0 16px;
-  scale: 0.6;
-  transition: opacity 0.3s, translate 0.4s, scale 0.4s, visibility 0s 0.4s;
 }
 
-.quick-menu.is-show .quick-join {
-  opacity: 1;
-  visibility: visible;
-  translate: none;
-  scale: none;
-  transition: opacity 0.35s, translate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-    scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0s;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .quick-join,
-  .quick-menu.is-show .quick-join {
-    transition: none;
-  }
-}
-
-/* 헤더 버튼이 굴러 내려오던 모핑과 맨 위로 버튼은 피드백으로 삭제 — 되돌릴 경우 대비해 보류
+/* 헤더 버튼이 퀵버튼 자리로 굴러 내려오는 동안 잠깐 놓이는 대역 요소.
+   헤더 위를 지나가므로 헤더(100)보다 위에 둔다 */
 .quick-ghost {
   position: fixed;
-  z-index: 95;
+  z-index: 110;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,6 +124,7 @@
   pointer-events: none;
 }
 
+/* 맨 위로 버튼은 피드백으로 삭제 — 되돌릴 경우 대비해 보류
 .quick-top {
   display: flex;
   align-items: center;

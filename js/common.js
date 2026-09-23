@@ -48,9 +48,12 @@ function quickMenu() {
   if (!menu || !headerBtn) return;
 
   var join = menu.querySelector('.quick-join');
+  var header = document.querySelector('.header');
   var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var state = false;
+  var ghost = null;
+  var tl = null;
   var biteTimer = null;
 
   function biteOnce() {
@@ -63,19 +66,120 @@ function quickMenu() {
     }, 1400);
   }
 
-  // 피드백: 헤더 버튼이 굴러 내려오던 모핑 대신 제자리에서 팝 등장 (CSS .is-show가 처리).
-  // 모바일은 상단 CTA가 없어 이 버튼이 유일한 진입점이므로 처음부터 띄운다
+  function rectOf(el) {
+    var r = el.getBoundingClientRect();
+    return { left: r.left, top: r.top, width: r.width, height: r.height };
+  }
+
+  // 헤더는 스크롤 방향에 따라 위로 숨는 중일 수 있다. 그 이동량을 빼서
+  // 숨어 있든 내려오는 중이든 헤더 버튼의 제자리를 기준으로 삼는다
+  function headerBtnRect() {
+    var r = rectOf(headerBtn);
+    var value = header && getComputedStyle(header).transform;
+    var nums = value && value !== 'none' && value.match(/\(([^)]+)\)/);
+    var list = nums ? nums[1].split(',') : null;
+    var shift = list ? parseFloat(list.length > 6 ? list[13] : list[5]) || 0 : 0;
+
+    r.top -= shift;
+    return r;
+  }
+
+  // 헤더 버튼이 우하단 퀵버튼 자리로 굴러 내려오고, 올라갈 땐 알약 모양으로 되돌아간다.
+  // 실제 두 버튼은 감춰 두고 같은 모양의 대역 요소(ghost) 하나만 움직인다
+  function morph(show) {
+    // 올라갈 땐 헤더가 숨어 있으면 착지할 자리가 없다. 먼저 내려 둔다
+    if (!show && header) header.classList.remove('is-hide');
+
+    var target = show ? join : headerBtn;
+    var to = show ? rectOf(join) : headerBtnRect();
+    var from;
+
+    if (ghost) {
+      from = rectOf(ghost);
+    } else if (show) {
+      var hb = headerBtnRect();
+      from = { left: hb.left + (hb.width - to.width) / 2, top: hb.top + (hb.height - to.height) / 2, width: to.width, height: to.height };
+    } else {
+      from = rectOf(join);
+    }
+
+    if (tl) tl.kill();
+    clearTimeout(biteTimer);
+    join.classList.remove('is-bite');
+    if (!ghost) {
+      ghost = document.createElement('div');
+      ghost.className = 'quick-ghost';
+      ghost.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(ghost);
+    }
+
+    var style = getComputedStyle(target);
+    ghost.innerHTML = '<span>' + (show ? join.innerHTML.trim() : headerBtn.textContent.trim()) + '</span>';
+    ghost.style.fontSize = style.fontSize;
+    ghost.style.lineHeight = style.lineHeight;
+    ghost.style.textAlign = style.textAlign;
+
+    var label = ghost.firstChild;
+    root.classList.add('is-quick');
+    gsap.set(join, { autoAlpha: 0 });
+    gsap.set(ghost, from);
+
+    tl = gsap.timeline({
+      onComplete: function () {
+        ghost.remove();
+        ghost = null;
+        tl = null;
+        if (show) {
+          gsap.set(join, { autoAlpha: 1 });
+          biteOnce();
+        } else {
+          root.classList.remove('is-quick');
+        }
+      }
+    });
+
+    if (show) {
+      tl.fromTo(ghost, { scale: 0.6 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' }, 0)
+        .to(ghost, $.extend({ duration: 1, ease: 'power1.inOut', rotation: 360 }, to), 0)
+        .add(function () {
+          menu.classList.add('is-show');
+        }, 1)
+        .to(ghost, { scaleX: 1.08, scaleY: 0.9, duration: 0.12, ease: 'power2.out' }, 1)
+        .to(ghost, { scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+      return;
+    }
+
+    gsap.set(label, { autoAlpha: 0 });
+    tl.to(ghost, $.extend({ duration: 0.8, ease: 'power3.inOut', rotation: 0, scale: 1 }, to), 0)
+      .to(label, { autoAlpha: 1, duration: 0.25 }, 0.55);
+  }
+
+  // 모바일은 상단 CTA가 없어 굴러 내려올 자리가 없다. 이 버튼이 유일한 진입점이라 처음부터 띄운다
   function toggle(y) {
+    var plain = reduceMotion || window.innerWidth <= 768;
     var show = window.innerWidth <= 768 || y > window.innerHeight * 0.6;
     if (show === state) return;
     state = show;
 
-    menu.classList.toggle('is-show', show);
-    root.classList.toggle('is-quick', show);
+    if (plain) {
+      if (tl) tl.kill();
+      tl = null;
+      if (ghost) {
+        ghost.remove();
+        ghost = null;
+      }
+      menu.classList.toggle('is-show', show);
+      root.classList.toggle('is-quick', show);
+      gsap.set(join, { autoAlpha: show ? 1 : 0 });
 
-    clearTimeout(biteTimer);
-    join.classList.remove('is-bite');
-    if (show && !reduceMotion) biteTimer = setTimeout(biteOnce, 620);
+      clearTimeout(biteTimer);
+      join.classList.remove('is-bite');
+      if (show && !reduceMotion) biteTimer = setTimeout(biteOnce, 620);
+      return;
+    }
+
+    if (!show) menu.classList.remove('is-show');
+    morph(show);
   }
 
   toggle(window.scrollY);
