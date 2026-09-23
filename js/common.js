@@ -591,6 +591,25 @@ function doStepScroll() {
       char.style.maskPosition = '';
     };
   });
+
+  // 핀 구간을 스크롤하던 중 창을 좁히면 카드가 숨김 상태로 남아 분홍 배경만 보였다.
+  // 좁은 구간으로 넘어올 때마다 핀 애니메이션이 남긴 인라인 스타일을 걷어낸다
+  mm.add('(max-width: 1024px), (prefers-reduced-motion: reduce)', function () {
+    // 스와이퍼가 슬라이드에 넣는 width는 건드리면 안 되므로 핀 연출이 쓰는 속성만 지운다
+    var used = 'opacity,visibility,transform,translate,rotate,scale';
+
+    function clear() {
+      gsap.set(items, { clearProps: used });
+      gsap.set(deco, { clearProps: used });
+    }
+
+    clear();
+    ScrollTrigger.addEventListener('refresh', clear);
+
+    return function () {
+      ScrollTrigger.removeEventListener('refresh', clear);
+    };
+  });
 }
 
 // 피드백: 원 안에서 사진만 바뀌던 방식 대신 목록이 좌우로 밀려 이동하는 캐러셀
