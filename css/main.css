@@ -1600,6 +1600,7 @@
 
   /* 피드백: 인물의 머리와 팔이 잘리지 않도록 사진을 맞춘다 */
   .visual-bg .bg01 {
+    top: calc(70px + env(safe-area-inset-top, 0px));
     left: 0;
     width: 100%;
     height: 100%;
@@ -1940,6 +1941,14 @@
 
   .goal-bg .edge {
     display: none;
+  }
+
+  /* 모바일 시안(122:1697): 아래 길까지 이어진 세로 사진(img-goal-bg-mo.jpg)을
+     상자 높이 150.73%로 키워 아래로 28.12% 내린다. 가로는 인물이 가운데 오게 46% 지점 */
+  .goal-bg .bg {
+    bottom: -28.12%;
+    height: 150.73%;
+    object-position: 46.08% center;
   }
 
   .sc-crew {
