@@ -1474,8 +1474,9 @@
   /* 슬라이드로 바뀌면 카드가 화면 끝까지 흐르도록 컨테이너 여백을 넘어간다 */
   /* 카드는 컨테이너 왼쪽에 딱 맞추고 오른쪽 끝에서 잘린다.
      그림자까지 잘리지 않도록 잘라내는 상자만 왼쪽·위아래로 25px 넓혀 둔다 */
+  /* 시안: 안내 문구와 카드 사이 20px. 그림자 여유 25px 중 5px를 위로 당겨 맞춘다 */
   .roll-slide {
-    margin: 0 0 0 -25px;
+    margin: -5px 0 0 -25px;
     padding: 25px 0 0px 25px;
     overflow: hidden;
   }
@@ -1495,9 +1496,11 @@
     background: rgba(0, 0, 0, 0.4);
   }
 
+  /* 시안(667:4293) 20px. 글자 상자가 원 안쪽 253px 중 241px까지 쓰므로 좌우 여백을 6px로 */
   .roll-card .tit {
     top: 50%;
-    font-size: 1rem;
+    padding: 0 6px;
+    font-size: 1.25rem;
     transform: translateY(-50%);
   }
 
@@ -1865,6 +1868,12 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+  }
+
+  /* 시안(667:4139) 152×44: 위아래 14px, 글자 높이 16 */
+  .roll-head .btn-round {
+    padding: 14px 40px;
+    line-height: 1;
   }
 
   .sc-goal .tit {
