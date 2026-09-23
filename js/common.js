@@ -673,11 +673,13 @@ function rollSlide() {
     a11y: { enabled: false },
     // 화면에 걸린 카드에만 swiper-slide-visible이 붙는다 (바깥 카드를 CSS로 감춘다)
     watchSlidesProgress: true,
-    autoplay: reduceMotion ? false : {
-      delay: 5000,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: true
-    },
+    // 피드백: 자동 넘김을 끈다 (다시 켤 경우 대비해 보류)
+    autoplay: false,
+    // autoplay: reduceMotion ? false : {
+    //   delay: 5000,
+    //   disableOnInteraction: false,
+    //   pauseOnMouseEnter: true
+    // },
     slidesPerGroup: 1,
     // 모바일에 옆으로 넘길 수 있다는 표시를 둔다
     scrollbar: {
@@ -712,9 +714,9 @@ function rollSlide() {
   if (reduceMotion) return;
 
   var rollIn = 140;
-  // 등장 전에 슬라이드가 넘어가면 굴러 들어오는 카드와 화면에 보이는 카드가 어긋난다.
-  // 자동 넘김은 멈춰 두고, 처음 화면에 보이는 카드만 굴린 뒤 다시 시작한다
-  swiper.autoplay.stop();
+  // 처음 화면에 보이는 카드만 굴러 들어온다.
+  // (자동 넘김을 다시 켜면: 등장 전에 넘어가 카드가 어긋나지 않게 여기서 멈췄다가 등장이 끝나면 다시 시작)
+  // swiper.autoplay.stop();
 
   var cards = el.querySelectorAll('.roll-frame.swiper-slide-visible');
   gsap.set(cards, { autoAlpha: 0 });
@@ -725,9 +727,9 @@ function rollSlide() {
     once: true,
     onEnter: function () {
       gsap.timeline({
-        onComplete: function () {
-          swiper.autoplay.start();
-        }
+        // onComplete: function () {
+        //   swiper.autoplay.start();
+        // }
       })
         .fromTo(cards, {
           x: rollIn,
