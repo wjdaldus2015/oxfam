@@ -48,8 +48,9 @@
 }
 
 /* Visual */
+/* 항상 화면 한 칸을 채운다. 높이가 달라지므로 안쪽 요소는 비율이나 아래쪽 기준으로 잡는다 */
 .sc-visual {
-  height: 920px;
+  height: 100dvh;
   background: #000;
 }
 
@@ -57,7 +58,7 @@
 .visual-bg .bg02 {
   top: 0;
   width: 2162px;
-  height: 940px;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -85,14 +86,15 @@
   height: 911.59px;
 }
 
+/* 시안 920 기준 303px 자리 */
 .sc-visual .inner {
-  padding-top: 303px;
+  padding-top: 33dvh;
 }
 
 .scroll-hint {
   position: absolute;
   left: 50%;
-  top: 812px;
+  bottom: 41px;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -1424,13 +1426,15 @@
     max-width: none;
   }
 
-  .sc-visual {
-    height: 680px;
-  }
-
-  /* 피드백: 모바일에도 키 메시지를 노출한다 */
+  /* 피드백: 모바일에도 키 메시지를 노출한다.
+     시안(667:4008)은 680 높이에서 425~529 자리 → 아래에서 151px 기준으로 잡아 높이가 달라져도 유지 */
   .sc-visual .inner {
-    padding-top: 40px;
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 151px;
+    margin: 0;
+    padding-top: 0;
   }
 
   .sc-visual .tit {
@@ -1465,7 +1469,6 @@
   }
 
   .scroll-hint {
-    top: auto;
     bottom: 29px;
   }
 
