@@ -291,12 +291,17 @@
     width: 83px;
   }
 
-  /* 모바일도 PC와 같게: 최상단에서는 헤더에 있다가 스크롤하면 퀵버튼 자리로 굴러 내려간다.
-     시안(667:4332) 143×43 규격 */
+  /* 피드백: 모바일은 상단 CTA 버튼을 처음부터 없애고 우하단 퀵버튼만 항상 고정으로 쓴다 (js quickMenu) */
+  .header .btn-round {
+    display: none;
+  }
+
+  /* 헤더 버튼이 퀵버튼 자리로 굴러 내려가던 때의 규격(시안 667:4332, 143×43) — 되돌릴 경우 대비해 보류
   .header .btn-round {
     padding: 13px 15px;
     font-size: 0.875rem;
   }
+  */
 
   .quick-menu {
     right: 12px;

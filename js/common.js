@@ -159,9 +159,12 @@ function quickMenu() {
       .to(label, { autoAlpha: 1, duration: 0.25 }, 0.55);
   }
 
+  // 피드백: 모바일은 헤더 버튼이 없고 퀵버튼을 스크롤과 상관없이 항상 보여 준다
+  var mobile = window.matchMedia('(max-width: 768px)');
+
   function toggle(y) {
-    var plain = reduceMotion;
-    var show = y > window.innerHeight * 0.6;
+    var plain = reduceMotion || mobile.matches;
+    var show = mobile.matches || y > window.innerHeight * 0.6;
     if (show === state) return;
     state = show;
 
@@ -189,6 +192,11 @@ function quickMenu() {
   toggle(window.scrollY);
   lenis.on('scroll', function (e) {
     toggle(e.scroll);
+  });
+
+  // 창 크기가 모바일 기준을 넘나들면 그 폭의 방식으로 다시 맞춘다
+  mobile.addEventListener('change', function () {
+    toggle(lenis.scroll);
   });
 }
 
