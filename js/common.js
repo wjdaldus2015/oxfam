@@ -32,6 +32,8 @@ $(function () {
   rollSlide();
   goalReveal();
   crewFlow();
+  // 고정(pin) 구간이 모두 만들어진 뒤에 걸어야 아래쪽 제목의 시작 위치가 맞다
+  titleFadeUp();
 });
 
 function visualDonut() {
@@ -747,34 +749,57 @@ function rollSlide() {
   });
 }
 
-// 영문 제목 → 한글 제목 → 나머지 글, 세 덩어리로 나눠 차례로 떠오른다
+// 모든 섹션의 제목 공통: 아래에서 부드럽게 떠오른다.
+// 제목 묶음은 영문 제목 → 한글 제목 차례로, 인트로 배너 문구는 한 덩어리로
+var TITLE_STEP = 0.22;
+// 화면 아래 85%에서 시작하면 섹션이 반도 안 들어왔을 때 이미 재생돼 버린다 → 60%
+var TITLE_START = 'top 60%';
+
+function titleFadeUp() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function rise(targets, trigger) {
+    gsap.fromTo(targets, { autoAlpha: 0, y: 40 }, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1.1,
+      ease: 'power3.out',
+      stagger: TITLE_STEP,
+      clearProps: 'opacity,visibility,transform',
+      scrollTrigger: {
+        trigger: trigger,
+        start: TITLE_START,
+        once: true
+      }
+    });
+  }
+
+  gsap.utils.toArray('.main .tit-group').forEach(function (group) {
+    rise(group.children, group);
+  });
+
+  var intro = document.querySelector('.sc-intro .tit');
+  if (intro) rise(intro, intro);
+}
+
+// Donut Story는 제목 묶음(공통) 두 줄 뒤에 나머지 글이 세 번째로 이어서 떠오른다
 function storyTextUp() {
   var section = document.querySelector('.sc-story');
   if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   // 나머지 글은 여러 덩어리라도 한꺼번에 올라와야 세 등분이 된다
-  var groups = [
-    section.querySelector('.tit-group .tit-m'),
-    section.querySelector('.tit-group h2'),
-    section.querySelectorAll('.story-txt, .story-point, .story-note')
-  ];
-
-  var tl = gsap.timeline({
+  gsap.fromTo(section.querySelectorAll('.story-txt, .story-point, .story-note'), { autoAlpha: 0, y: 40 }, {
+    autoAlpha: 1,
+    y: 0,
+    duration: 1.1,
+    ease: 'power3.out',
+    delay: TITLE_STEP * 2,
+    clearProps: 'opacity,visibility,transform',
     scrollTrigger: {
-      trigger: section,
-      start: 'top 75%',
+      trigger: section.querySelector('.tit-group'),
+      start: TITLE_START,
       once: true
     }
-  });
-
-  groups.forEach(function (group, i) {
-    tl.fromTo(group, { autoAlpha: 0, y: 40 }, {
-      autoAlpha: 1,
-      y: 0,
-      duration: 1.1,
-      ease: 'power3.out',
-      clearProps: 'opacity,visibility,transform'
-    }, i * 0.22);
   });
 }
 
@@ -786,7 +811,6 @@ function goalReveal() {
 
   var bg = section.querySelector('.goal-bg');
   var photo = section.querySelector('.goal-bg .bg');
-  var edge = section.querySelector('.goal-bg .edge');
   var tit = section.querySelector('.tit');
   function build(trigger) {
     gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: trigger })
@@ -801,9 +825,8 @@ function goalReveal() {
         duration: 7
       })
       // 펼쳐질수록 사진이 어두워져 문구가 또렷해진다
-      .fromTo(photo, { opacity: 0.72 }, { opacity: 0.46, duration: 7 }, '<')
-      .fromTo(edge, { autoAlpha: 0 }, { autoAlpha: 1, duration: 2 }, '>-1.5')
-      .fromTo(tit, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 3 }, '>-1.5');
+      .fromTo(photo, { opacity: 0.72 }, { opacity: 0.4, duration: 7 }, '<')
+      .fromTo(tit, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 3 }, 6);
   }
 
   // 화면 크기와 상관없이 섹션을 고정해 두고 그 자리에서 펼친다

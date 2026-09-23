@@ -1253,23 +1253,17 @@
   transform: translate(-50%, -50%);
 }
 
-/* 피드백: 인물 얼굴이 문구에 가리지 않도록 사진을 키워 인물을 문구 위쪽으로 올린다 */
+/* 시안(667:2740): 사진을 크게 키워 인물을 가운데 두고, 아래쪽 기준으로 놓아 발까지 보인다.
+   상자 높이 154%를 아래로 20.75% 내리면 1920×920에서 시안 구도와 같고,
+   화면 높이가 달라져도 같은 비율이라 발이 잘리지 않는다. 어둡기는 시안 60% 검정 = 불투명도 0.4 */
 .goal-bg .bg {
   left: 0;
-  top: 0;
+  bottom: -20.75%;
   width: 100%;
-  height: 140%;
+  height: 153.97%;
   object-fit: cover;
-  object-position: center top;
-  opacity: 0.46;
-}
-
-.goal-bg .edge {
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 132px;
-  object-fit: cover;
+  object-position: center;
+  opacity: 0.4;
 }
 
 /* Let’s Roll the World! */
