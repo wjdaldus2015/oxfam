@@ -25,6 +25,7 @@ $(function () {
   visualDonut();
   btnBite();
   storyDonutRoll();
+  storyTextUp();
   whoIntro();
   doMobileSlide();
   doStepScroll();
@@ -678,6 +679,37 @@ function rollSlide() {
         })
         .fromTo('.sc-roll .btn-next', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, '-=0.8');
     }
+  });
+}
+
+// 영문 제목 → 한글 제목 → 나머지 글, 세 덩어리로 나눠 차례로 떠오른다
+function storyTextUp() {
+  var section = document.querySelector('.sc-story');
+  if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // 나머지 글은 여러 덩어리라도 한꺼번에 올라와야 세 등분이 된다
+  var groups = [
+    section.querySelector('.tit-group .tit-m'),
+    section.querySelector('.tit-group h2'),
+    section.querySelectorAll('.story-txt, .story-point, .story-note')
+  ];
+
+  var tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: 'top 75%',
+      once: true
+    }
+  });
+
+  groups.forEach(function (group, i) {
+    tl.fromTo(group, { autoAlpha: 0, y: 40 }, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1.1,
+      ease: 'power3.out',
+      clearProps: 'opacity,visibility,transform'
+    }, i * 0.22);
   });
 }
 
