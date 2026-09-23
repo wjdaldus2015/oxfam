@@ -42,8 +42,9 @@ function visualDonut() {
 
   var to = { autoAlpha: 1, x: 0, y: 0, duration: 1.6, ease: 'power3.out' };
 
-  gsap.fromTo(section.querySelector('.donut01'), { x: 240, y: -240, autoAlpha: 0 }, $.extend({ delay: 0.2 }, to));
-  gsap.fromTo(section.querySelector('.donut02'), { x: -240, y: 240, autoAlpha: 0 }, $.extend({ delay: 0.35 }, to));
+  // 문구(titleFadeUp, 0.2초)가 먼저 떠오르고 조금 뒤 도넛이 들어온다
+  gsap.fromTo(section.querySelector('.donut01'), { x: 240, y: -240, autoAlpha: 0 }, $.extend({ delay: 0.8 }, to));
+  gsap.fromTo(section.querySelector('.donut02'), { x: -240, y: 240, autoAlpha: 0 }, $.extend({ delay: 0.95 }, to));
 }
 
 function quickMenu() {
@@ -780,6 +781,19 @@ function titleFadeUp() {
 
   var intro = document.querySelector('.sc-intro .tit');
   if (intro) rise(intro, intro);
+
+  // 히어로 문구는 처음부터 보이는 화면이라 스크롤을 기다리지 않고 도넛과 함께 떠오른다
+  var hero = document.querySelector('.sc-visual .tit');
+  if (hero) {
+    gsap.fromTo(hero, { autoAlpha: 0, y: 40 }, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1.1,
+      delay: 0.2,
+      ease: 'power3.out',
+      clearProps: 'opacity,visibility,transform'
+    });
+  }
 }
 
 // Donut Story는 제목 묶음(공통) 두 줄 뒤에 나머지 글이 세 번째로 이어서 떠오른다
