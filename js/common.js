@@ -156,10 +156,9 @@ function quickMenu() {
       .to(label, { autoAlpha: 1, duration: 0.25 }, 0.55);
   }
 
-  // 모바일은 상단 CTA가 없어 굴러 내려올 자리가 없다. 이 버튼이 유일한 진입점이라 처음부터 띄운다
   function toggle(y) {
-    var plain = reduceMotion || window.innerWidth <= 768;
-    var show = window.innerWidth <= 768 || y > window.innerHeight * 0.6;
+    var plain = reduceMotion;
+    var show = y > window.innerHeight * 0.6;
     if (show === state) return;
     state = show;
 
@@ -738,8 +737,6 @@ function goalReveal() {
   var photo = section.querySelector('.goal-bg .bg');
   var edge = section.querySelector('.goal-bg .edge');
   var tit = section.querySelector('.tit');
-  var mm = gsap.matchMedia();
-
   function build(trigger) {
     gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: trigger })
       .fromTo(bg, {
@@ -758,28 +755,15 @@ function goalReveal() {
       .fromTo(tit, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 3 }, '>-1.5');
   }
 
-  // PC는 섹션을 화면에 고정해 두고 그 자리에서 펼친다
-  mm.add('(min-width: 769px)', function () {
-    build({
-      trigger: section,
-      start: 'top top',
-      end: '+=100%',
-      scrub: 1,
-      pin: true,
-      anticipatePin: 1,
-      invalidateOnRefresh: true
-    });
-  });
-
-  // 모바일은 화면을 붙잡지 않고 올라오는 동안 펼친다
-  mm.add('(max-width: 768px)', function () {
-    build({
-      trigger: section,
-      start: 'top bottom',
-      end: 'top top',
-      scrub: 1,
-      invalidateOnRefresh: true
-    });
+  // 화면 크기와 상관없이 섹션을 고정해 두고 그 자리에서 펼친다
+  build({
+    trigger: section,
+    start: 'top top',
+    end: '+=100%',
+    scrub: 1,
+    pin: true,
+    anticipatePin: 1,
+    invalidateOnRefresh: true
   });
 }
 
