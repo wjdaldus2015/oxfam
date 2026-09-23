@@ -446,6 +446,36 @@ function whoFilm() {
 }
 */
 
+// 슬라이드로 넘길 때는 카드가 화면 끝까지 이어져 흐르고, 여백은 처음(왼쪽)과 끝(오른쪽)에만 남긴다.
+// 컨테이너 여백이 폭마다 달라(퍼센트·max-width가 섞여 좌우도 다름) CSS 대신 실제 값을 재서 맞춘다
+function bleedSwiper(swiper, active) {
+  var el = swiper.el;
+  var inner = el.closest('.inner');
+  var section = el.closest('section');
+  if (!inner || !section) return;
+
+  function fit() {
+    if (swiper.destroyed) return;
+
+    var on = !active || active();
+    var s = section.getBoundingClientRect();
+    var i = inner.getBoundingClientRect();
+    var left = on ? Math.round(i.left - s.left) : 0;
+    var right = on ? Math.round(s.right - i.right) : 0;
+
+    if (swiper.params.slidesOffsetBefore === left && swiper.params.slidesOffsetAfter === right) return;
+
+    el.style.marginLeft = left ? -left + 'px' : '';
+    el.style.marginRight = right ? -right + 'px' : '';
+    swiper.params.slidesOffsetBefore = left;
+    swiper.params.slidesOffsetAfter = right;
+    swiper.update();
+  }
+
+  fit();
+  swiper.on('resize', fit);
+}
+
 // 피드백: 모바일에서는 네 항목을 좌우로 넘겨 보게 한다.
 // 창 크기가 경계를 넘나들 수 있으므로 스와이퍼 구조를 그때그때 씌우고 걷어낸다
 function doMobileSlide() {
@@ -484,6 +514,7 @@ function doMobileSlide() {
         }
       }
     });
+    bleedSwiper(swiper);
 
     return true;
   }
@@ -647,21 +678,23 @@ function rollSlide() {
     },
     // 좁은 화면은 손으로 밀어 보고, PC는 컨테이너를 4등분해 카드 폭을 딱 맞춘다
     breakpoints: {
-      // 간격은 CSS margin이 아니라 여기서 줘야 끝까지 넘겼을 때 마지막 카드가 잘리지 않는다.
-      // 컨테이너 오른쪽 끝에서 잘라 여백을 지키므로, 끝에서는 그림자 폭(25px)만큼 안쪽에 멈춰 그림자까지 보이게 한다
+      // 간격은 CSS margin이 아니라 여기서 줘야 끝까지 넘겼을 때 마지막 카드가 잘리지 않는다
       0: {
         slidesPerView: 'auto',
         spaceBetween: 5,
-        slidesOffsetAfter: 25,
         allowTouchMove: true
       },
       1025: {
         slidesPerView: 4,
         spaceBetween: 7,
-        slidesOffsetAfter: 0,
         allowTouchMove: false
       }
     }
+  });
+
+  // PC는 네 장이 컨테이너에 딱 맞으므로 슬라이드로 바뀌는 폭에서만 화면 끝까지 흐르게 한다
+  bleedSwiper(swiper, function () {
+    return window.innerWidth <= 1024;
   });
 
   $('.sc-roll .btn-next').on('click', function () {
