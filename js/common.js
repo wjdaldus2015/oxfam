@@ -196,11 +196,7 @@ function headerScroll() {
 
   var lastY = window.scrollY;
 
-  header.classList.toggle('is-top', lastY <= 0);
-
   function update(y) {
-    header.classList.toggle('is-top', y <= 0);
-
     var delta = y - lastY;
     if (Math.abs(delta) < 5) return;
 

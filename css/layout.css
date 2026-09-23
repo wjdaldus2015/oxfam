@@ -34,7 +34,7 @@
 }
 
 /* Header */
-/* 피드백: 흰 박스 높이를 줄인다. 콘텐츠는 그만큼 내려 사진이 가리지 않게 한다. 스크롤 최상단에서는 투명 */
+/* 피드백: 흰 박스 높이를 줄인다. 스크롤 위치·방향과 상관없이 배경은 항상 흰색 */
 .header {
   position: fixed;
   top: 0;
@@ -42,12 +42,7 @@
   right: 0;
   z-index: 100;
   background: #fff;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 0.3s ease;
-}
-
-.header.is-top {
-  background: transparent;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .header.is-hide {
