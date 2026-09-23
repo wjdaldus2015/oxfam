@@ -313,53 +313,60 @@
   transform: scaleX(-1);
 }
 
+/* 스프링클: 가로 위치·크기는 시안 1920 기준 vw로 화면 폭에 비례해 줄어든다.
+   세로는 필름(top 398, 16:9) 위쪽은 그대로, 옆·아래는 필름 높이를 따라 움직인다 */
+.who-deco {
+  --film-h: calc(min(1440px, 100vw - 80px) * 0.5625);
+}
+
 .who-deco .spr01 {
-  left: calc(50% - 229px);
+  left: calc(50% - 11.927vw);
   top: 104px;
-  width: 56px;
-  height: 65px;
+  width: 2.917vw;
+  height: 3.385vw;
 }
 
 .who-deco .spr02 {
-  left: calc(50% + 228px);
+  left: calc(50% + 11.875vw);
   top: 278px;
-  width: 38px;
-  height: 44px;
+  width: 1.979vw;
+  height: 2.292vw;
 }
 
 .who-deco .spr03 {
-  left: calc(50% - 192px);
-  top: 1264px;
-  width: 38px;
-  height: 44px;
+  left: calc(50% - 10vw);
+  top: calc(398px + var(--film-h) + 56px);
+  width: 1.979vw;
+  height: 2.292vw;
 }
 
 .who-deco .spr04 {
-  left: calc(50% + 888px);
-  top: 896px;
-  width: 32px;
-  height: 37px;
+  left: calc(50% + 46.25vw);
+  top: calc(398px + var(--film-h) * 0.6148);
+  width: 1.667vw;
+  height: 1.927vw;
 }
 
 .who-deco .spr05 {
-  left: calc(50% + 418px);
-  top: 1232px;
-  width: 56px;
-  height: 65px;
+  left: calc(50% + 21.771vw);
+  top: calc(398px + var(--film-h) + 24px);
+  width: 2.917vw;
+  height: 3.385vw;
 }
 
 .who-deco .spr06 {
-  left: calc(50% - 839px);
-  top: 532px;
-  width: 33px;
-  height: 38px;
+  left: calc(50% - 43.698vw);
+  top: calc(398px + var(--film-h) * 0.1654);
+  width: 1.719vw;
+  height: 1.979vw;
 }
 
+/* 제목 바로 왼쪽이라 제목 왼쪽 끝(여백 40px 또는 폭/2 − 720) 기준으로 둬 겹치지 않게, 좁으면 화면 끝에 반쯤 걸친다 */
 .who-deco .spr07 {
-  left: calc(50% - 855px);
+  left: max(-1vw, calc(max(40px, 50% - 720px) - 7.031vw));
   top: 253px;
-  width: 56px;
-  height: 65px;
+  width: 2.917vw;
+  height: 3.385vw;
 }
 
 .who-film {
@@ -1465,7 +1472,11 @@
    두 줄 문구(글자 크기의 7.31배 폭)가 들어가도록 줄인다 */
 @media all and (min-width: 769px) {
   .sc-visual .tit {
-    font-size: clamp(2rem, min(calc(9.85vw - 7.21dvh - 12.3px), calc(3.01vw - 7.21dvh + 91.7px)), 5rem);
+    font-size: clamp(
+      2rem,
+      min(calc(9.85vw - 7.21dvh - 12.3px), calc(3.01vw - 7.21dvh + 91.7px)),
+      5rem
+    );
   }
 }
 
@@ -1666,8 +1677,10 @@
     height: 680px;
   }
 
+  /* 시안(122:1566) 모바일 28px */
   .sc-intro .tit {
     padding: 267px 20px 0;
+    font-size: 1.75rem;
   }
 
   /* 피드백: 너무 확대돼 잘려 보이던 사진을 화면 폭에 맞춰 더 많이 보이게 한다 */
