@@ -858,7 +858,8 @@ function goalReveal() {
     end: '+=100%',
     scrub: 1,
     pin: true,
-    anticipatePin: 1,
+    // anticipatePin은 스크롤 속도로 미리 고정하는데, Lenis와 함께 빠르게 스크롤하면
+    // 고정 지점 전에 박스가 한 번에 튀어 올라 쓰지 않는다
     invalidateOnRefresh: true
   });
 }
