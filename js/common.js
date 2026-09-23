@@ -29,6 +29,7 @@ $(function () {
   doMobileSlide();
   doStepScroll();
   rollSlide();
+  goalReveal();
   crewFlow();
 });
 
@@ -677,6 +678,61 @@ function rollSlide() {
         })
         .fromTo('.sc-roll .btn-next', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, '-=0.8');
     }
+  });
+}
+
+// 사진이 둥근 카드에서 화면 가득 펼쳐지며 어두워지고, 뒤이어 문구가 떠오른다.
+// 섹션이 화면을 채울 때 딱 끝나도록 맞춰 스크롤 길이를 더 늘리지 않는다
+function goalReveal() {
+  var section = document.querySelector('.sc-goal');
+  if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var bg = section.querySelector('.goal-bg');
+  var photo = section.querySelector('.goal-bg .bg');
+  var edge = section.querySelector('.goal-bg .edge');
+  var tit = section.querySelector('.tit');
+  var mm = gsap.matchMedia();
+
+  function build(trigger) {
+    gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: trigger })
+      .fromTo(bg, {
+        width: '72%',
+        height: '45%',
+        borderRadius: 16
+      }, {
+        width: '100%',
+        height: '100%',
+        borderRadius: 0,
+        duration: 7
+      })
+      // 펼쳐질수록 사진이 어두워져 문구가 또렷해진다
+      .fromTo(photo, { opacity: 0.72 }, { opacity: 0.46, duration: 7 }, '<')
+      .fromTo(edge, { autoAlpha: 0 }, { autoAlpha: 1, duration: 2 }, '>-1.5')
+      .fromTo(tit, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 3 }, '>-1.5');
+  }
+
+  // PC는 섹션을 화면에 고정해 두고 그 자리에서 펼친다
+  mm.add('(min-width: 769px)', function () {
+    build({
+      trigger: section,
+      start: 'top top',
+      end: '+=100%',
+      scrub: 1,
+      pin: true,
+      anticipatePin: 1,
+      invalidateOnRefresh: true
+    });
+  });
+
+  // 모바일은 화면을 붙잡지 않고 올라오는 동안 펼친다
+  mm.add('(max-width: 768px)', function () {
+    build({
+      trigger: section,
+      start: 'top bottom',
+      end: 'top top',
+      scrub: 1,
+      invalidateOnRefresh: true
+    });
   });
 }
 
