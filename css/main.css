@@ -1460,13 +1460,23 @@
   }
 }
 
-/* 세로로 긴 태블릿은 사진이 크게 확대돼 가운데 문구가 얼굴을 덮는다 → 모바일처럼 아래쪽에 둔다 */
-@media all and (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+/* 문구가 얼굴에 닿지 않게: 사진은 화면 높이에 맞춰 확대되므로 얼굴 왼쪽 끝은 약 0.72×폭 − 0.527×높이.
+   거기서 문구 왼쪽 여백(40px, 1520 이상은 폭/2 − 720)과 간격 50px을 뺀 자리에
+   두 줄 문구(글자 크기의 7.31배 폭)가 들어가도록 줄인다 */
+@media all and (min-width: 769px) {
+  .sc-visual .tit {
+    font-size: clamp(2rem, min(calc(9.85vw - 7.21dvh - 12.3px), calc(3.01vw - 7.21dvh + 91.7px)), 5rem);
+  }
+}
+
+/* 정사각형에 가까운 화면(가로:세로 3:2 이하)은 그래도 자리가 모자라 모바일처럼 문구를 아래쪽에 둔다.
+   아래 도넛(화면 아래에서 17.3vw까지 올라옴) 위로 띄운다 */
+@media all and (min-width: 769px) and (max-aspect-ratio: 3/2) {
   .sc-visual .inner {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 151px;
+    bottom: max(151px, calc(17.3vw + 24px));
     padding-top: 0;
   }
 }
@@ -1617,20 +1627,26 @@
     display: none;
   }
 
-  /* 시안(122:1522) 360×680 기준 vw 환산.
-     시안은 헤더가 프레임 35~105에 걸쳐 있어 위 도넛이 헤더 아래로 52px만 보인다 → 헤더 아래 끝 기준으로 잡는다 */
+  /* 시안(122:1522) 360×680 기준. 1vw 단위로 키우되 414px 폭(1.15배)에서 멈춘다.
+     사진은 화면 높이를 따라 커지므로 폭만 따라 계속 커지면 넓은 화면에서 도넛이 얼굴을 덮는다.
+     위 도넛은 오른쪽·헤더 아래 끝, 아래 도넛은 왼쪽·아래 끝 기준이라 모서리에 걸치는 모양이 유지된다 */
+  .visual-bg {
+    --mu: min(1vw, 4.14px);
+  }
+
   .visual-bg .donut01 {
-    left: calc(50% + 10.833vw);
-    top: calc(70px + env(safe-area-inset-top, 0px) - 62.222vw);
-    width: 78.611vw;
-    height: 76.667vw;
+    left: auto;
+    right: calc(var(--mu) * -39.425);
+    top: calc(70px + env(safe-area-inset-top, 0px) - var(--mu) * 33.056);
+    width: calc(var(--mu) * 78.591);
+    height: calc(var(--mu) * 76.667);
   }
 
   .visual-bg .donut02 {
-    left: calc(50% - 96.111vw);
-    bottom: -38.611vw;
-    width: 80.556vw;
-    height: 78.611vw;
+    left: calc(var(--mu) * -46.111);
+    bottom: calc(var(--mu) * -38.611);
+    width: calc(var(--mu) * 80.584);
+    height: calc(var(--mu) * 78.611);
   }
 
   .scroll-hint {
