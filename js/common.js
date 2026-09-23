@@ -348,15 +348,62 @@ function whoIntro() {
   var section = document.querySelector('.sc-who');
   if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  gsap.timeline({
+  var deco = section.querySelector('.who-deco');
+  var sprs = deco.querySelectorAll('.spr');
+  var random = gsap.utils.random;
+
+  // 솟아오르는 동안엔 둥실 모션을 꺼 둔다(GSAP가 CSS translate·rotate를 읽어 위치가 겹친다)
+  deco.classList.add('is-burst');
+  gsap.set(sprs, { autoAlpha: 0 });
+
+  var tl = gsap.timeline({
     scrollTrigger: {
       trigger: section,
       start: 'top 70%',
       once: true
     }
   })
-    .fromTo(section.querySelector('.who-film'), { scale: 0.96, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.8, ease: 'power2.out' }, 0)
-    .fromTo(section.querySelectorAll('.who-deco .spr'), { y: -40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, ease: 'power2.out', stagger: 0.06 }, 0.3);
+    .fromTo(section.querySelector('.who-film'), { scale: 0.96, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.8, ease: 'power2.out' }, 0);
+
+  // 폭죽처럼: 한참 아래에서 빠르게 솟아 제자리보다 살짝 위까지 튀었다가 내려앉고, 그때부터 둥실 모션을 잇는다
+  sprs.forEach(function (el) {
+    var spin = random(180, 360) * (Math.random() < 0.5 ? -1 : 1);
+    // 좌우 반전(.flip) 스프링클은 가로 배율 부호를 유지해야 도중에 뒤집히지 않는다
+    var sx = el.classList.contains('flip') ? -1 : 1;
+
+    tl.add(gsap.timeline()
+      .fromTo(el, {
+        x: random(-60, 60),
+        y: function () {
+          return window.innerHeight * random(0.45, 0.7);
+        },
+        scaleX: 0.4 * sx,
+        scaleY: 0.4,
+        rotation: spin,
+        autoAlpha: 0
+      }, {
+        x: 0,
+        y: random(-70, -40),
+        scaleX: 1.15 * sx,
+        scaleY: 1.15,
+        rotation: 0,
+        autoAlpha: 1,
+        duration: 0.6,
+        ease: 'power3.out'
+      })
+      .to(el, {
+        y: 0,
+        scaleX: sx,
+        scaleY: 1,
+        duration: 0.9,
+        ease: 'sine.inOut',
+        // 인라인 transform을 지워 .flip(scaleX(-1))을 CSS로 되돌리고 둥실 모션을 0에서 시작한다
+        clearProps: 'transform,opacity,visibility',
+        onComplete: function () {
+          el.classList.add('is-float');
+        }
+      }), 0.2 + random(0, 0.35));
+  });
 }
 
 /* 브랜드필름 스토리보드(CSS/JS 애니메이션 버전) — 실제 영상으로 교체 예정이라 보류

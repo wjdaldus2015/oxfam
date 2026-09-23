@@ -425,6 +425,15 @@
   animation-name: whoFloatGreen;
 }
 
+/* 섹션 진입 시 아래에서 솟아오르는 동안엔 둥실 모션을 멈추고, 내려앉은 뒤 0에서 시작한다 (js whoIntro) */
+.who-deco.is-burst .spr:not(.is-float) {
+  animation: none;
+}
+
+.who-deco.is-burst .spr.is-float {
+  animation-delay: 0s;
+}
+
 .who-deco .spr02 {
   animation-duration: 8s;
   animation-delay: -3s;
