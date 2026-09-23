@@ -47,9 +47,9 @@
   text-align: center;
 }
 
-/* 높이가 화면에 따라 달라지므로 비율로 잡는다 (시안 920에서 387px 자리) */
+/* 높이가 화면에 따라 달라지므로 문구는 늘 가운데 둔다 (.goal-box가 가운데 정렬) */
 .sc-goal .tit {
-  padding-top: 42dvh;
+  padding-top: 0;
 }
 
 /* Visual */
@@ -709,42 +709,44 @@
   height: 631px;
 }
 
+/* 네 장을 항상 한 줄에 둔다. 1520 아래로는 줄바꿈 대신 카드와 글자가 같은 비율로 작아지고,
+   1024 아래는 더 줄이는 대신 좌우로 넘겨 보는 슬라이드로 바뀐다.
+   clamp 값은 1520에서 시안 크기, 1024에서 그 0.656배가 되도록 뽑았다 */
 .do-list {
   position: relative;
   display: flex;
   justify-content: space-between;
-  gap: 27px;
+  gap: clamp(17.7px, calc(1.872vw - 1.46px), 27px);
   margin-top: 49px;
   text-align: center;
   color: #fff;
 }
 
-/* 피드백: 항목을 흰 카드로 묶고 아이콘은 핑크, 제목은 진한 색으로.
-   시안 폭은 340이지만 좁은 화면에서는 네 장이 한 줄에 안 들어가므로 줄어들 수 있게 둔다 */
+/* 피드백: 항목을 흰 카드로 묶고 아이콘은 핑크, 제목은 진한 색으로 */
 .do-list li {
-  flex: 1 1 260px;
+  flex: 1 1 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: clamp(6.6px, calc(0.694vw - 0.54px), 10px);
   min-width: 0;
   max-width: 340px;
-  min-height: 290px;
-  padding: 14px;
-  border-radius: 20px;
+  min-height: clamp(190px, calc(20.11vw - 15.66px), 290px);
+  padding: clamp(9.2px, calc(0.971vw - 0.76px), 14px);
+  border-radius: clamp(13.1px, calc(1.387vw - 1.08px), 20px);
   background: #fff;
 }
 
 .do-list .tit {
-  font-size: 2rem;
+  font-size: clamp(21px, calc(2.219vw - 1.73px), 32px);
   line-height: 1.2;
   color: #221e1f;
 }
 
 .do-icon {
-  width: 60px;
-  height: 60px;
+  width: clamp(39.4px, calc(4.161vw - 3.24px), 60px);
+  height: clamp(39.4px, calc(4.161vw - 3.24px), 60px);
   background: #fe71ad;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
@@ -782,7 +784,7 @@
 }
 
 .do-desc {
-  font-size: 1.125rem;
+  font-size: clamp(11.8px, calc(1.248vw - 0.97px), 18px);
   font-weight: 600;
   line-height: 1.5;
   color: #fe71ad;
@@ -1014,21 +1016,33 @@
   margin-top: 64px;
 }
 
-/* 넘길 수 있다는 표시(안내 문구·스크롤바)는 모바일에서만 쓴다 */
+/* 넘길 수 있다는 표시(안내 문구·스크롤바)는 슬라이드로 바뀌는 폭에서만 쓴다 */
 .swipe-hint,
 .do-pager,
 .roll-pager {
   display: none;
 }
 
-/* 피드백: 제자리에서 내용만 바뀌던 방식 대신 목록이 좌우로 이동하는 캐러셀.
-   순환용 복제 카드가 왼쪽에 비치면 안 되므로 컨테이너를 margin으로 밀어 잘라내고,
-   padding 30px만큼은 열어 둬 첫 카드의 그림자가 살아 있게 한다 */
-/* 카드 폭은 이 컨테이너를 4등분해 정해진다. 잘라내기로 바깥 카드를 가리면 그림자까지 잘리므로
-   바깥은 열어 두고, 화면에 걸리지 않는 카드는 아래에서 투명하게 처리한다 */
+/* 스와이퍼 기본 CSS가 스크롤바를 화면에 띄우므로 흐름 안으로 되돌린다 (보이는 구간에서만 의미 있음) */
+.sc-do .do-pager.swiper-scrollbar-horizontal,
+.sc-roll .roll-pager.swiper-scrollbar-horizontal {
+  position: relative;
+  left: 0;
+  bottom: auto;
+  width: auto;
+  height: 4px;
+  border-radius: 999px;
+}
+
+.do-pager.swiper-scrollbar .swiper-scrollbar-drag,
+.roll-pager.swiper-scrollbar .swiper-scrollbar-drag {
+  border-radius: 999px;
+}
+
+/* 카드 폭은 이 컨테이너를 4등분해 정해진다(제목과 같은 .inner 안).
+   잘라내기로 바깥 카드를 가리면 그림자까지 잘리므로 바깥은 열어 두고,
+   화면에 걸리지 않는 카드는 아래에서 투명하게 처리한다 */
 .roll-slide .roll-swiper {
-  width: 1441px;
-  margin-left: calc(50% - 720px);
   overflow: visible;
 }
 
@@ -1163,9 +1177,10 @@
   text-align: center;
 }
 
+/* 시안은 컨테이너 오른쪽 끝보다 45px 밖으로 걸쳐 있다 */
 .btn-next {
   position: absolute;
-  left: calc(50% + 672px);
+  right: -45px;
   top: 165px;
   z-index: 2;
   display: flex;
@@ -1205,6 +1220,9 @@
    화면에 고정한 채로 펼치므로 항상 화면 한 칸을 채운다 */
 .goal-box {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100dvh;
   overflow: hidden;
   background: #fff;
@@ -1377,19 +1395,8 @@
     max-width: calc(100% - 80px);
   }
 
-  .do-list {
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .roll-slide .roll-swiper {
-    width: auto;
-    margin-left: 10px;
-  }
-
   .btn-next {
-    left: auto;
-    right: 40px;
+    right: -20px;
   }
 }
 
@@ -1404,24 +1411,109 @@
     display: none;
   }
 
+  /* 네 장을 더 줄이는 대신 여기부터는 좌우로 넘겨 본다 (JS가 스와이퍼 구조를 입힌다) */
   .sc-do {
     height: auto;
     padding-bottom: 80px;
   }
 
-  /* 태블릿 이하는 두 장씩 두 줄로 */
+  .swipe-hint {
+    display: block;
+    margin-top: 23px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+  }
+
+  /* 다음 카드가 여백에서 잘리지 않도록 잘라내는 범위만 화면 끝까지 넓힌다 */
+  /* 왼쪽은 컨테이너에 딱 맞추고, 다음 카드는 컨테이너 오른쪽 끝에서 잘려 여백을 남긴다 */
+  .sc-do .do-swiper {
+    margin-top: 14px;
+  }
+
   .do-list {
-    flex-wrap: wrap;
-    row-gap: 40px;
-    margin-top: 80px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0;
+    margin-top: 0;
   }
 
   .do-list li {
-    flex: 1 1 calc(50% - 10px);
+    flex: none;
+    width: 340px;
+    max-width: none;
+    min-height: 290px;
+  }
+
+  .sc-do .do-pager {
+    display: block;
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .do-pager .swiper-scrollbar-drag {
+    background: #fff;
   }
 
   .do-deco {
     margin-top: 60px;
+  }
+
+  /* Roll도 같은 지점에서 슬라이드로 바뀐다. 원이 작아져 제목이 넘치던 구간을 없앤다 */
+  .sc-roll {
+    height: auto;
+    padding: 84px 0 0px;
+  }
+
+  .sc-roll .swipe-hint {
+    margin-top: 24px;
+    color: var(--color-green);
+  }
+
+  /* 슬라이드로 바뀌면 카드가 화면 끝까지 흐르도록 컨테이너 여백을 넘어간다 */
+  /* 카드는 컨테이너 왼쪽에 딱 맞추고 오른쪽 끝에서 잘린다.
+     그림자까지 잘리지 않도록 잘라내는 상자만 왼쪽·위아래로 25px 넓혀 둔다 */
+  .roll-slide {
+    margin: 0 0 0 -25px;
+    padding: 25px 0 0px 25px;
+    overflow: hidden;
+  }
+
+  .roll-slide .roll-swiper {
+    padding: 0;
+  }
+
+  .roll-list .roll-frame {
+    width: 269px;
+  }
+
+  /* 시안: 좁은 화면은 아래쪽 그라데이션 대신 사진 전체에 딤을 깔고 제목을 가운데 둔다 */
+  .roll-card .img::after {
+    top: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .roll-card .tit {
+    top: 50%;
+    font-size: 1rem;
+    transform: translateY(-50%);
+  }
+
+  .btn-next {
+    display: none;
+  }
+
+  /* 시안: 카드 아래 20px 띄워 스크롤바 */
+  .sc-roll .roll-pager {
+    display: block;
+    margin-top: 20px;
+    background: #ededed;
+  }
+
+  .roll-pager .swiper-scrollbar-drag {
+    background: var(--color-green);
   }
 }
 
@@ -1639,15 +1731,6 @@
     padding: 94px 0 60px;
   }
 
-  .swipe-hint {
-    display: block;
-    margin-top: 23px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1;
-    color: #fff;
-  }
-
   /* 시안(667:4118)은 303×293 박스 안에서 도넛 그림만 18px 오른쪽으로 밀려 있다.
      그만큼 옮겨야 제목 오른쪽 끝과 겹치지 않는다 */
   .do-donut {
@@ -1657,68 +1740,17 @@
     height: 293px;
   }
 
-  /* 피드백: 좌우로 넘겨 보는 캐러셀 (JS가 스와이퍼 구조를 입힌다).
-     다음 카드가 여백에서 잘리지 않도록 잘라내는 범위만 화면 끝까지 넓힌다
-     (padding으로 되돌려 카드 크기·위치는 그대로) */
-  .sc-do .do-swiper {
-    margin: 14px -20px 0;
-    padding: 0 20px;
-  }
-
-  .do-list {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 0;
-    margin-top: 0;
-  }
+  /* 이 폭부터 .inner 여백이 20px 고정이라 넘겨 쓰는 값도 맞춘다 */
+  /* 화면이 좁아 카드를 시안 폭(340)으로 둘 수 없으므로 화면 폭에 맞춘다 */
 
   .do-list li {
-    flex: none;
     width: 100%;
-    max-width: none;
     min-height: 0;
     height: 242px;
   }
 
   .do-list .tit {
     font-size: 1.5rem;
-  }
-
-  /* 피드백: 불렛 대신 스크롤바. 스와이퍼 기본 CSS가 absolute·좌우 1% 여백을 주므로 흐름 안에 되돌린다 */
-  .sc-do .do-pager.swiper-scrollbar-horizontal,
-  .sc-roll .roll-pager.swiper-scrollbar-horizontal {
-    position: relative;
-    left: 0;
-    bottom: auto;
-    width: auto;
-    height: 4px;
-    border-radius: 999px;
-  }
-
-  .do-pager.swiper-scrollbar .swiper-scrollbar-drag,
-  .roll-pager.swiper-scrollbar .swiper-scrollbar-drag {
-    border-radius: 999px;
-  }
-
-  .sc-do .do-pager {
-    display: block;
-    margin-top: 30px;
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  .do-pager .swiper-scrollbar-drag {
-    background: #fff;
-  }
-
-  .sc-roll .roll-pager {
-    display: block;
-    margin: 0 20px;
-    background: #ededed;
-  }
-
-  .roll-pager .swiper-scrollbar-drag {
-    background: var(--color-green);
   }
 
   .do-sub {
@@ -1747,11 +1779,6 @@
     left: 74.1px;
     width: 146.9px;
     height: 141px;
-  }
-
-  .sc-roll {
-    height: auto;
-    padding: 84px 0 81px;
   }
 
   /* 배경 요소는 새 시안에서 빠졌다 — 되돌릴 경우 대비해 보류
@@ -1840,45 +1867,8 @@
     gap: 20px;
   }
 
-  .sc-roll .swipe-hint {
-    margin-top: 24px;
-    color: var(--color-green);
-  }
-
-  .roll-slide {
-    margin-top: 0;
-  }
-
-  .roll-slide .roll-swiper {
-    margin-left: 0;
-    padding: 20px 0 20px 20px;
-  }
-
-  .roll-list .roll-frame {
-    width: 269px;
-    margin-right: 5px;
-  }
-
-  /* 시안: 모바일은 아래쪽 그라데이션 대신 사진 전체에 딤을 깔고 제목을 가운데 둔다 */
-  .roll-card .img::after {
-    top: 0;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-  }
-
-  .roll-card .tit {
-    top: 50%;
-    font-size: 1rem;
-    transform: translateY(-50%);
-  }
-
-  .btn-next {
-    display: none;
-  }
-
-  /* 피드백: 인물 얼굴에 문구가 걸리지 않도록 위로 올린다 (시안 680에서 150px 자리) */
   .sc-goal .tit {
-    padding: 22dvh 20px 0;
+    padding: 0 20px;
   }
 
   .goal-bg .edge {

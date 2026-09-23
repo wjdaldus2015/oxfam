@@ -475,6 +475,13 @@ function doMobileSlide() {
       scrollbar: {
         el: pager,
         draggable: true
+      },
+      // 태블릿 폭에서는 카드를 시안 크기(340)로 두고 들어가는 만큼만 보여 준다
+      breakpoints: {
+        769: {
+          slidesPerView: 'auto',
+          spaceBetween: 27
+        }
       }
     });
 
@@ -499,8 +506,9 @@ function doMobileSlide() {
     return true;
   }
 
+  // 네 장이 한 줄에 들어가기 어려워지는 폭부터 슬라이드로 바꾼다 (핀 연출도 같은 기준)
   function update() {
-    var changed = window.innerWidth <= 768 ? build() : destroy();
+    var changed = window.innerWidth <= 1024 ? build() : destroy();
     if (changed && typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
   }
 
@@ -617,8 +625,8 @@ function rollSlide() {
   if (!el || typeof Swiper === 'undefined') return;
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // 모바일은 스크롤바로 위치를 보여 주므로 순환하지 않는다 (순환하면 스크롤바가 튄다)
-  var isMobile = window.innerWidth <= 768;
+  // 슬라이드로 바뀌는 폭은 스크롤바로 위치를 보여 주므로 순환하지 않는다 (순환하면 스크롤바가 튄다)
+  var isMobile = window.innerWidth <= 1024;
 
   var swiper = new Swiper(el, {
     loop: !isMobile,
@@ -637,13 +645,15 @@ function rollSlide() {
       el: '.sc-roll .roll-pager',
       draggable: true
     },
-    // 모바일은 손으로 밀어 보고, PC는 컨테이너를 4등분해 카드 폭을 딱 맞춘다
+    // 좁은 화면은 손으로 밀어 보고, PC는 컨테이너를 4등분해 카드 폭을 딱 맞춘다
     breakpoints: {
+      // 간격은 CSS margin이 아니라 여기서 줘야 끝까지 넘겼을 때 마지막 카드가 잘리지 않는다
       0: {
         slidesPerView: 'auto',
+        spaceBetween: 5,
         allowTouchMove: true
       },
-      769: {
+      1025: {
         slidesPerView: 4,
         spaceBetween: 7,
         allowTouchMove: false
