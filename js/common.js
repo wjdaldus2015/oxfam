@@ -647,15 +647,18 @@ function rollSlide() {
     },
     // 좁은 화면은 손으로 밀어 보고, PC는 컨테이너를 4등분해 카드 폭을 딱 맞춘다
     breakpoints: {
-      // 간격은 CSS margin이 아니라 여기서 줘야 끝까지 넘겼을 때 마지막 카드가 잘리지 않는다
+      // 간격은 CSS margin이 아니라 여기서 줘야 끝까지 넘겼을 때 마지막 카드가 잘리지 않는다.
+      // 컨테이너 오른쪽 끝에서 잘라 여백을 지키므로, 끝에서는 그림자 폭(25px)만큼 안쪽에 멈춰 그림자까지 보이게 한다
       0: {
         slidesPerView: 'auto',
         spaceBetween: 5,
+        slidesOffsetAfter: 25,
         allowTouchMove: true
       },
       1025: {
         slidesPerView: 4,
         spaceBetween: 7,
+        slidesOffsetAfter: 0,
         allowTouchMove: false
       }
     }
