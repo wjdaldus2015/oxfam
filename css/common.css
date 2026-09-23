@@ -280,3 +280,9 @@
     display: none !important;
   }
 }
+
+@media all and (max-width: 470px) {
+  .show-470 {
+    display: block !important;
+  }
+}
