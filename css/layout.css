@@ -157,14 +157,16 @@
 */
 
 /* Footer */
+/* 시안(667:3124): 본문과 같은 1440 폭, 위아래 40, 글자 16px 행간 1.3.
+   줄 간격은 시안 줄 위치(0·25·65·90·118·169)에 맞춘 값 */
 .footer {
-  padding: 40px 0 60px;
+  padding: 40px 0;
   border-top: 1px solid #e0e0e0;
   background: #fff;
 }
 
 .footer .inner {
-  max-width: 1222px;
+  max-width: 1440px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -174,7 +176,7 @@
 .ft-info {
   flex: 1;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.3;
   color: #424242;
 }
 
@@ -188,19 +190,26 @@
 }
 
 .ft-detail {
-  margin-top: 16px;
+  margin-top: 19px;
 }
 
 .ft-detail li + li {
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 .ft-detail .bar {
   color: #e0e0e0;
 }
 
+/* 운영시간이 "12:30-" / "13:30)"처럼 중간에서 끊기지 않게 한 덩어리로 다음 줄로 넘긴다.
+   번호(고유번호·전화·시간)는 폭이 모자라도 하이픈에서 쪼개지지 않게 한다 */
+.ft-detail .time,
+.ft-detail .num {
+  white-space: nowrap;
+}
+
 .ft-copy {
-  margin-top: 24px;
+  margin-top: 30px;
   color: #757575;
 }
 
@@ -215,6 +224,7 @@
 .ft-menu {
   display: flex;
   align-items: center;
+  padding-top: 4px;
 }
 
 .ft-menu li + li::before {
@@ -230,7 +240,7 @@
 .ft-menu a {
   font-size: 1rem;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.3;
   color: #000;
   white-space: nowrap;
 }
@@ -247,7 +257,8 @@
 }
 
 @media all and (max-width: 1520px) {
-  .header .inner {
+  .header .inner,
+  .footer .inner {
     max-width: calc(100% - 80px);
   }
 }
@@ -312,6 +323,7 @@
   }
 
   .footer .inner {
+    max-width: none;
     flex-direction: column;
     gap: 0;
   }
@@ -322,25 +334,42 @@
     display: contents;
   }
 
+  /* 시안(667:4231) 줄 위치: 이름 0·주소 35·대표자 69·문의 100·이메일 152·메뉴 200~296·SNS 364·저작권 420.
+     이메일·메뉴·저작권은 시안이 행간 1 */
   .ft-company address {
     margin-top: 14px;
   }
 
   .ft-detail {
     order: 2;
-    margin-top: 10px;
+    margin-top: 13px;
   }
 
   .ft-detail li + li {
     margin-top: 10px;
   }
 
+  .ft-detail li:last-child {
+    line-height: 1;
+  }
+
+  /* 모바일은 전화번호 뒤에서 이미 줄을 바꾸고, 아주 좁은 폰에서는 넘치지 않게 풀어 둔다 */
+  .ft-detail .time {
+    white-space: normal;
+  }
+
   .ft-menu {
     order: 3;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 16px;
     margin-top: 32px;
+    padding-top: 0;
+  }
+
+  .ft-menu a {
+    display: block;
+    line-height: 1;
   }
 
   .ft-menu li + li::before {
@@ -349,11 +378,12 @@
 
   .ft-sns {
     order: 4;
-    margin-top: 44px;
+    margin-top: 52px;
   }
 
   .ft-copy {
     order: 5;
     margin-top: 24px;
+    line-height: 1;
   }
 }
