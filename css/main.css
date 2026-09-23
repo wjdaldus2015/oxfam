@@ -76,19 +76,21 @@
   left: calc(50% - 1076px);
 }
 
+/* 시안 1920×920 기준 값을 vw로 환산해 폭에 비례. 위 도넛은 위쪽, 아래 도넛은 아래쪽 모서리 기준이라
+   화면 높이가 달라도 모서리에 걸치는 모양이 같다 */
 .visual-bg .donut01 {
-  left: calc(50% + 341.3px);
-  top: -355.65px;
-  width: 778.7px;
-  height: 759.85px;
+  left: calc(50% + 17.776vw);
+  top: -18.523vw;
+  width: 40.557vw;
+  height: 39.576vw;
 }
 
 /* 피드백: 메시지와 도넛 사이를 더 벌린다 */
 .visual-bg .donut02 {
-  left: calc(50% - 1153.8px);
-  top: 588px;
-  width: 716.58px;
-  height: 699.59px;
+  left: calc(50% - 60.094vw);
+  bottom: -19.145vw;
+  width: 37.322vw;
+  height: 36.437vw;
 }
 
 /* 시안 920 기준 303px 자리 */
@@ -1612,18 +1614,19 @@
     display: none;
   }
 
+  /* 시안 360×680 기준 vw 환산 */
   .visual-bg .donut01 {
-    left: calc(50% + 39px);
-    top: -147px;
-    width: 283px;
-    height: 276px;
+    left: calc(50% + 10.833vw);
+    top: -40.833vw;
+    width: 78.611vw;
+    height: 76.667vw;
   }
 
   .visual-bg .donut02 {
-    left: calc(50% - 346px);
-    top: 453px;
-    width: 290px;
-    height: 283px;
+    left: calc(50% - 96.111vw);
+    bottom: -15.556vw;
+    width: 80.556vw;
+    height: 78.611vw;
   }
 
   .scroll-hint {
