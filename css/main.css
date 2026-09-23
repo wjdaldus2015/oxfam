@@ -1606,10 +1606,6 @@
     padding-top: 0;
   }
 
-  .sc-visual .tit {
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
-  }
-
   /* 모바일 시안(122:1522) 사진 구도. 두 얼굴의 가운데를 기준점으로 잡아 화면 비율이 달라도 얼굴이 안 잘린다 */
   .visual-bg .bg01 {
     top: calc(70px + env(safe-area-inset-top, 0px));
@@ -1621,10 +1617,11 @@
     display: none;
   }
 
-  /* 시안(122:1522) 360×680 기준 vw 환산 */
+  /* 시안(122:1522) 360×680 기준 vw 환산.
+     시안은 헤더가 프레임 35~105에 걸쳐 있어 위 도넛이 헤더 아래로 52px만 보인다 → 헤더 아래 끝 기준으로 잡는다 */
   .visual-bg .donut01 {
     left: calc(50% + 10.833vw);
-    top: -33.056vw;
+    top: calc(70px + env(safe-area-inset-top, 0px) - 62.222vw);
     width: 78.611vw;
     height: 76.667vw;
   }
