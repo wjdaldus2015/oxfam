@@ -759,7 +759,7 @@ var TITLE_START = 'top 60%';
 function titleFadeUp() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  function rise(targets, trigger) {
+  function rise(targets, trigger, start) {
     gsap.fromTo(targets, { autoAlpha: 0, y: 40 }, {
       autoAlpha: 1,
       y: 0,
@@ -769,7 +769,7 @@ function titleFadeUp() {
       clearProps: 'opacity,visibility,transform',
       scrollTrigger: {
         trigger: trigger,
-        start: TITLE_START,
+        start: start || TITLE_START,
         once: true
       }
     });
@@ -779,8 +779,14 @@ function titleFadeUp() {
     rise(group.children, group);
   });
 
+  // 인트로 문구는 위쪽 padding(387px, 모바일 267px) 아래에 글자가 있어 박스 윗변 기준이면
+  // 글자가 화면에 들어오기 전에 재생된다 → 글자 윗변이 화면 60%에 올 때 시작
   var intro = document.querySelector('.sc-intro .tit');
-  if (intro) rise(intro, intro);
+  if (intro) {
+    rise(intro, intro, function () {
+      return 'top+=' + parseFloat(getComputedStyle(intro).paddingTop) + ' 60%';
+    });
+  }
 
   // 히어로 문구는 처음부터 보이는 화면이라 스크롤을 기다리지 않고 도넛과 함께 떠오른다
   var hero = document.querySelector('.sc-visual .tit');
