@@ -632,6 +632,10 @@ function doStepScroll() {
         onUpdate: walk
       }, 0);
 
+    // 좁은 창에서 PC 폭으로 넓히면 이 핀이 가장 나중에 만들어져, 아래 섹션들이 핀 길이를 빼고 계산돼
+    // 목표 섹션 고정이 일찍 걸려 튀었다 → 페이지 순서대로 다시 정렬해 핀 길이를 반영하게 한다
+    ScrollTrigger.sort();
+
     return function () {
       char.style.webkitMaskPosition = '';
       char.style.maskPosition = '';
