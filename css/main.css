@@ -1137,9 +1137,15 @@
 }
 
 /* 슬라이드로 넘겨 보는 폭(모바일·태블릿)은 호버 대신 현재(맨 앞) 카드의 사진이 천천히 확대된다 */
+/* 자동 넘김 간격(JS autoplay delay 5000)과 같은 5초 동안 1.2배까지 천천히 커져,
+   다음 카드로 넘어갈 즈음 확대가 끝난다 */
 @media all and (max-width: 1024px) {
+  .roll-card .img {
+    transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
   .roll-list .roll-frame.swiper-slide-active .img {
-    transform: scale(1.08);
+    transform: scale(1.2);
   }
 }
 
