@@ -346,10 +346,11 @@
     gap: calc(9 * var(--u));
   }
 
+  /* 피드백: 문구가 '옥스팜 도넛 / 함께하기'로 길어져 원 안에 들어오도록 20 → 16px */
   .quick-join {
     width: calc(96 * var(--u));
     height: calc(96 * var(--u));
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 
   .quick-top {

@@ -371,9 +371,6 @@ function whoIntro() {
   deco.classList.add('is-burst');
   gsap.set(sprs, { autoAlpha: 0 });
 
-  var film = section.querySelector('.who-film');
-  var mm = gsap.matchMedia();
-
   var tl = gsap.timeline({
     scrollTrigger: {
       trigger: section,
@@ -381,6 +378,11 @@ function whoIntro() {
       once: true
     }
   });
+
+  // 피드백: 영상 진입 모션 삭제 (PC 고정·확대, 좁은 화면 떠오르기 모두 — 되돌릴 경우 대비해 보류)
+  /*
+  var film = section.querySelector('.who-film');
+  var mm = gsap.matchMedia();
 
   // 피드백: 7섹션(목표 배너)에서 뺀 모션을 여기에 모은다. PC는 섹션 윗변을 화면 위에 고정하고,
   // 작은 카드였던 영상이 스크롤을 따라 제자리 크기로 커진다
@@ -418,6 +420,7 @@ function whoIntro() {
       }
     });
   });
+  */
 
   // 폭죽처럼: 한참 아래에서 빠르게 솟아 제자리보다 살짝 위까지 튀었다가 내려앉고, 그때부터 둥실 모션을 잇는다
   sprs.forEach(function (el) {
@@ -1020,6 +1023,8 @@ function titleFadeUp() {
   }
 
   gsap.utils.toArray('.main .tit-group').forEach(function (group) {
+    // PC Donut Story 제목은 본문과 한 줄씩 이어 뜬다 (storyTextUp)
+    if (group.closest('.sc-story') && window.innerWidth > 768) return;
     rise(group.children, group);
   });
 
@@ -1046,7 +1051,7 @@ function titleFadeUp() {
   }
 }
 
-// Donut Story 끝 지점(스크롤 위치): 마지막 글 덩어리(강조 문구)가 화면 70%에 오는 곳.
+// Donut Story 끝 지점(스크롤 위치): 모바일은 마지막 글 덩어리(강조 문구)가 화면 70%에 오는 곳(PC는 아래 참고).
 // 다만 화면이 낮으면 그때 제목(모바일은 제목 옆 지구)이 위로 잘리므로, 그 윗변이 화면 맨 위에 닿기 전으로 당긴다.
 // 지구 도넛(storyDonutRoll)은 여기서 멈추고 마지막 글(storyTextUp)은 여기서 떠올라, 한 화면에서 함께 끝난다
 function storyEndScroll() {
@@ -1057,6 +1062,13 @@ function storyEndScroll() {
   };
   var head = window.innerWidth <= 768 ? section.querySelector('.track-donut') : section.querySelector('.tit-group');
 
+  // 피드백(PC): 섹션이 화면에 다 들어오는 위치에서 추가 스크롤 없이 모두 끝나 있어야 한다 →
+  // 맨 아래 주석 글이 화면 95% 안에 들어오는 순간 끝낸다
+  if (window.innerWidth > 768) {
+    var note = section.querySelector('.story-note');
+    return Math.min(top(note) + note.offsetHeight - window.innerHeight * 0.95, top(head) - gap);
+  }
+
   return Math.min(top(section.querySelector('.story-point')) - window.innerHeight * 0.7, top(head) - gap);
 }
 
@@ -1066,6 +1078,42 @@ function storyEndScroll() {
 function storyTextUp() {
   var section = document.querySelector('.sc-story');
   if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // 피드백(PC): 제목부터 초록 강조 문구·주석까지 한 줄씩 빠르게 차례로 떠오른다.
+  // 각 줄은 화면 아래 90%에 들어올 때 뜨되, 늦어도 지구 도넛이 멈추는 지점(storyEndScroll)에서는 떠서
+  // 섹션이 다 보이는 위치에선 모두 떠 있다 (제목도 여기서 함께 다뤄 titleFadeUp에서는 뺀다)
+  if (window.innerWidth > 768) {
+    var lines = gsap.utils.toArray(section.querySelectorAll('.tit-group > *, .story-txt p, .story-point, .story-note'));
+    var lineGap = 0.12;
+    var lineNext = 0;
+
+    gsap.set(lines, { autoAlpha: 0, y: 30 });
+    lines.forEach(function (el) {
+      ScrollTrigger.create({
+        trigger: el,
+        start: function () {
+          // 멈추는 지점과 똑같으면 거기 서 있을 때 트리거가 걸리지 않아 조금 앞당긴다
+          return Math.min(el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.9, storyEndScroll() - 2);
+        },
+        once: true,
+        onEnter: function () {
+          var now = gsap.ticker.time;
+          var delay = Math.max(0, lineNext - now);
+          lineNext = now + delay + lineGap;
+
+          gsap.to(el, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.6,
+            delay: delay,
+            ease: 'power2.out',
+            clearProps: 'opacity,visibility,transform'
+          });
+        }
+      });
+    });
+    return;
+  }
 
   var p = section.querySelectorAll('.story-txt p');
   var steps = [
