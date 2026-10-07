@@ -406,6 +406,49 @@
   transition: box-shadow 0.5s ease;
 }
 
+/* 피드백: 제목과 영상이 한 화면에 들어오도록 위 여백(100)과 제목·영상 간격(40)을 화면 높이에 남는 만큼 줄인다 (각 최소 20).
+   영상 크기(16:9)는 그대로라 남는 높이가 40보다 작은 화면에선 다 들어가지 않는다 */
+@media all and (min-width: 1025px) {
+  .sc-who {
+    --who-free: calc(100dvh - calc(117 * var(--u)) - var(--film-h));
+    --who-pt: clamp(calc(20 * var(--u)), var(--who-free) / 2, calc(100 * var(--u)));
+    --who-gap: clamp(calc(20 * var(--u)), var(--who-free) / 2, calc(40 * var(--u)));
+    padding-top: var(--who-pt);
+  }
+
+  .who-film {
+    margin-top: var(--who-gap);
+  }
+
+  .who-deco .spr01 {
+    top: max(calc(-20 * var(--u)), var(--who-pt) - calc(76 * var(--u)));
+  }
+
+  .who-deco .spr02 {
+    top: max(calc(-10 * var(--u)), var(--who-pt) - calc(50 * var(--u)));
+  }
+
+  .who-deco .spr03 {
+    top: calc(var(--who-pt) + calc(117 * var(--u)) + var(--who-gap) + var(--film-h) - calc(60 * var(--u)));
+  }
+
+  .who-deco .spr04 {
+    top: calc(var(--who-pt) + calc(117 * var(--u)) + var(--who-gap) + var(--film-h) * 498 / 810);
+  }
+
+  .who-deco .spr05 {
+    top: calc(var(--who-pt) + calc(117 * var(--u)) + var(--who-gap) + var(--film-h) - calc(110 * var(--u)));
+  }
+
+  .who-deco .spr06 {
+    top: calc(var(--who-pt) + calc(117 * var(--u)) + var(--who-gap) + var(--film-h) * 134 / 810);
+  }
+
+  .who-deco .spr07 {
+    top: calc(var(--who-pt) + calc(50 * var(--u)));
+  }
+}
+
 .who-film:hover {
   box-shadow: 0 0 calc(64 * var(--u)) rgba(68, 132, 26, 0.35);
 }
