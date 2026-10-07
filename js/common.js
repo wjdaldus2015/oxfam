@@ -1069,7 +1069,12 @@ function storyEndScroll() {
     return Math.min(top(note) + note.offsetHeight - window.innerHeight * 0.95, top(head) - gap);
   }
 
-  return Math.min(top(section.querySelector('.story-point')) - window.innerHeight * 0.7, top(head) - gap);
+  // 피드백(모바일): 제목이 화면 위에서 15% 아래에 있을 때(제목·본문 세 문단이 보이는 위치) 모두 끝나 있게 한다
+  return Math.min(
+    top(section.querySelector('.story-point')) - window.innerHeight * 0.7,
+    top(head) - gap,
+    top(section.querySelector('.tit-group')) - window.innerHeight * 0.15
+  );
 }
 
 // Donut Story: 시안 메모(소개 영역 — 스크롤에 따라 텍스트를 나눠 보여 준다)대로 네 덩어리로 나눠 떠오른다.
@@ -1130,8 +1135,13 @@ function storyTextUp() {
     ScrollTrigger.create({
       trigger: items[0],
       // 첫 덩어리가 제목(화면 60%에서 시작)보다 먼저 뜨지 않도록 조금 더 올라왔을 때 시작.
-      // 마지막 덩어리는 지구 도넛이 멈추는 지점(storyEndScroll)에서 함께 떠오른다
-      start: i === steps.length - 1 ? storyEndScroll : 'top 70%',
+      // 마지막 덩어리는 지구 도넛이 멈추는 지점(storyEndScroll)에서 함께 떠오르고,
+      // 나머지도 늦어도 그 지점에서는 뜬다 (같은 지점이면 거기 서 있을 때 걸리지 않아 조금 앞당긴다)
+      start: function () {
+        var end = storyEndScroll() - 2;
+        if (i === steps.length - 1) return end;
+        return Math.min(items[0].getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.7, end);
+      },
       once: true,
       onEnter: function () {
         var now = gsap.ticker.time;
