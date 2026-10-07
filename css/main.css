@@ -87,9 +87,10 @@
 
 /* 시안 1920×920 값. 위 도넛은 위쪽, 아래 도넛은 아래쪽 모서리 기준이라
    화면 높이가 달라도 모서리에 걸치는 모양이 같다 */
+/* 피드백: 헤더 아래·화면 오른쪽 끝에 조금씩 걸쳐 잘려 보이던 스프링클 두 개가 완전히 가려지도록 오른쪽 20·위 10 옮긴다 */
 .visual-bg .donut01 {
-  left: calc(50% + 341.3 * var(--px-pc));
-  top: calc(-355.65 * var(--px-pc));
+  left: calc(50% + 361.3 * var(--px-pc));
+  top: calc(-365.65 * var(--px-pc));
   width: calc(778.7 * var(--px-pc));
   height: calc(759.85 * var(--px-pc));
 }
@@ -272,10 +273,16 @@
 }
 
 /* Who We Are */
-/* 피드백: 실제 영상 비율(16:9)에 맞춘다. 영상은 컨테이너 폭(1440, 좁으면 화면 − 80)을 채우고 높이는 폭의 9/16.
-   영상 위는 위 여백 100 + 제목 117 + 간격 40 = 257 */
+/* 피드백: 실제 영상 비율(16:9)에 맞춘다. 영상은 컨테이너 폭(1440, 좁으면 화면 − 80)까지, 높이는 폭의 9/16.
+   영상 위는 위 여백 100 + 제목 117 + 간격 40 = 257.
+   피드백: 제목과 영상이 한 화면에 들어오도록 16:9를 유지한 채 영상 폭을 화면 높이에 맞춰 줄이고(영상 아래 60), 제목 왼쪽 선에 맞춘다 */
 .sc-who {
-  --film-w: min(calc(1440 * var(--u)), 100vw - calc(80 * var(--u)));
+  --film-w: min(
+    calc(1440 * var(--u)),
+    100vw - calc(80 * var(--u)),
+    (100dvh - calc(317 * var(--u))) * 16 / 9
+  );
+  --film-l: max(calc(40 * var(--u)), 50% - calc(720 * var(--u)));
   --film-h: calc(var(--film-w) * 9 / 16);
   padding: calc(100 * var(--u)) 0;
   background: #adc958;
@@ -354,7 +361,7 @@
 
 /* 필름 아래 여백이 60뿐이라 필름 왼쪽 바깥, 아래에서 60 지점 */
 .who-deco .spr03 {
-  left: calc(50% - var(--film-w) / 2 - 80 * var(--px-pc));
+  left: calc(var(--film-l) - 80 * var(--px-pc));
   top: calc(calc(257 * var(--u)) + var(--film-h) - calc(60 * var(--u)));
   width: calc(38 * var(--px-pc));
   height: calc(44 * var(--px-pc));
@@ -370,7 +377,7 @@
 
 /* 필름 오른쪽 바깥, 아래에서 110 지점 */
 .who-deco .spr05 {
-  left: calc(50% + var(--film-w) / 2 + 40 * var(--px-pc));
+  left: calc(var(--film-l) + var(--film-w) + 40 * var(--px-pc));
   top: calc(calc(257 * var(--u)) + var(--film-h) - calc(110 * var(--u)));
   width: calc(56 * var(--px-pc));
   height: calc(65 * var(--px-pc));
@@ -398,55 +405,12 @@
   position: relative;
   width: var(--film-w);
   height: var(--film-h);
-  margin: calc(40 * var(--u)) auto 0;
+  margin-top: calc(40 * var(--u));
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #000;
   box-shadow: 0 0 0 rgba(68, 132, 26, 0);
   transition: box-shadow 0.5s ease;
-}
-
-/* 피드백: 제목과 영상이 한 화면에 들어오도록 위 여백(100)과 제목·영상 간격(40)을 화면 높이에 남는 만큼 줄인다 (각 최소 20).
-   영상 크기(16:9)는 그대로라 남는 높이가 40보다 작은 화면에선 다 들어가지 않는다 */
-@media all and (min-width: 1025px) {
-  .sc-who {
-    --who-free: calc(100dvh - calc(117 * var(--u)) - var(--film-h));
-    --who-pt: clamp(calc(20 * var(--u)), var(--who-free) / 2, calc(100 * var(--u)));
-    --who-gap: clamp(calc(20 * var(--u)), var(--who-free) / 2, calc(40 * var(--u)));
-    padding-top: var(--who-pt);
-  }
-
-  .who-film {
-    margin-top: var(--who-gap);
-  }
-
-  .who-deco .spr01 {
-    top: max(calc(-20 * var(--u)), var(--who-pt) - calc(76 * var(--u)));
-  }
-
-  .who-deco .spr02 {
-    top: max(calc(-10 * var(--u)), var(--who-pt) - calc(50 * var(--u)));
-  }
-
-  .who-deco .spr03 {
-    top: calc(var(--who-pt) + calc(117 * var(--u)) + var(--who-gap) + var(--film-h) - calc(60 * var(--u)));
-  }
-
-  .who-deco .spr04 {
-    top: calc(var(--who-pt) + calc(117 * var(--u)) + var(--who-gap) + var(--film-h) * 498 / 810);
-  }
-
-  .who-deco .spr05 {
-    top: calc(var(--who-pt) + calc(117 * var(--u)) + var(--who-gap) + var(--film-h) - calc(110 * var(--u)));
-  }
-
-  .who-deco .spr06 {
-    top: calc(var(--who-pt) + calc(117 * var(--u)) + var(--who-gap) + var(--film-h) * 134 / 810);
-  }
-
-  .who-deco .spr07 {
-    top: calc(var(--who-pt) + calc(50 * var(--u)));
-  }
 }
 
 .who-film:hover {
@@ -1530,9 +1494,15 @@
   }
 }
 
+/* 피드백: 하단 버튼을 키우고(240×57 → 약 288×70) 도넛 줄 쪽으로 조금 올린다 (125 → 90) */
 .crew-btn {
-  margin-top: calc(125 * var(--u));
+  margin-top: calc(90 * var(--u));
   text-align: center;
+}
+
+.crew-btn .btn-round {
+  padding: calc(24 * var(--u)) calc(56 * var(--u));
+  font-size: 1.375rem;
 }
 
 /* 새 시안(533:2077)은 .btn-round-m 규격(226×57)이라 별도 패딩 불필요
@@ -1797,8 +1767,9 @@
   /* 시안(122:1566) 모바일 28px */
   /* 피드백: 사진을 덜 가리도록 문구를 위쪽으로 올린다 */
   /* 피드백: 글자를 줄인다(28 → 24px). 지금 글자의 아랫변(위에서 199)은 그대로 두고 위 여백으로 맞춘다 */
+  /* 피드백: 문구를 아래로 내린다. 아래 건물 지붕(위에서 약 285)을 침범하지 않게 글자 아랫변을 약 250까지만 (105 → 160) */
   .sc-intro .tit {
-    padding: calc(105 * var(--u)) calc(20 * var(--u)) 0;
+    padding: calc(160 * var(--u)) calc(20 * var(--u)) 0;
     font-size: 1.5rem;
   }
 
