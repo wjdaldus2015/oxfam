@@ -62,7 +62,11 @@
    사진이 흐려지는 구간(152~242)과 같은 구간에서 검정으로 넘어가야 경계가 생기지 않는다 */
 .sc-visual {
   height: 100dvh;
-  background: linear-gradient(to bottom, #a3a29e calc(152 * var(--u)), #000 calc(242 * var(--u)));
+  background: linear-gradient(
+    to bottom,
+    #a3a29e calc(152 * var(--u)),
+    #000 calc(242 * var(--u))
+  );
 }
 
 /* 인물 얼굴은 어떤 화면에서도 잘리면 안 된다. 사진을 화면 폭에 채우고 기준점을 인물 쪽(가로 72%)에 둬서
@@ -81,7 +85,11 @@
 /* 띄운 여백과 이어지도록 배경 사진만 윗부분을 흐리게 풀고, 인물 누끼(.bg02)는 선명하게 둔다 */
 .visual-bg .bg01 {
   opacity: 0.85;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 calc(90 * var(--u)));
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 calc(90 * var(--u))
+  );
   mask-image: linear-gradient(to bottom, transparent, #000 calc(90 * var(--u)));
 }
 
@@ -129,7 +137,6 @@
 }
 
 @keyframes bounceHint {
-
   0%,
   100% {
     transform: translateX(-50%) translateY(0);
@@ -249,7 +256,7 @@
   color: #444;
 }
 
-.story-txt p+p {
+.story-txt p + p {
   margin-top: calc(30 * var(--u));
 }
 
@@ -332,7 +339,8 @@
 }
 
 .who-deco .spr {
-  background: url(../image/main/img-who-spr-white.svg) no-repeat center / contain;
+  background: url(../image/main/img-who-spr-white.svg) no-repeat center /
+    contain;
 }
 
 .who-deco .spr-green {
@@ -394,8 +402,12 @@
 /* 제목 바로 왼쪽이라 제목 왼쪽 끝(여백 40px 또는 폭/2 − 720)에서 시안 간격 135만큼 왼쪽에 둬 겹치지 않게,
    좁으면 화면 끝에 반쯤(-19.2) 걸친다 */
 .who-deco .spr07 {
-  left: max(-19.2 * var(--px-pc),
-      calc(max(calc(40 * var(--u)), 50% - calc(720 * var(--u))) - 135 * var(--px-pc)));
+  left: max(
+    -19.2 * var(--px-pc),
+    calc(
+      max(calc(40 * var(--u)), 50% - calc(720 * var(--u))) - 135 * var(--px-pc)
+    )
+  );
   top: calc(150 * var(--u));
   width: calc(56 * var(--px-pc));
   height: calc(65 * var(--px-pc));
@@ -526,7 +538,6 @@
 }
 
 @keyframes whoFloat {
-
   0%,
   100% {
     translate: 0 0;
@@ -540,7 +551,6 @@
 }
 
 @keyframes whoFloatGreen {
-
   0%,
   100% {
     translate: 0 0;
@@ -816,7 +826,11 @@
   position: relative;
   display: flex;
   justify-content: flex-start;
-  gap: clamp(calc(17.7 * var(--u)), calc(1.872vw - calc(1.46 * var(--u))), calc(27 * var(--u)));
+  gap: clamp(
+    calc(17.7 * var(--u)),
+    calc(1.872vw - calc(1.46 * var(--u))),
+    calc(27 * var(--u))
+  );
   margin-top: calc(49 * var(--u));
   text-align: center;
   color: #fff;
@@ -830,24 +844,52 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(calc(6.6 * var(--u)), calc(0.694vw - calc(0.54 * var(--u))), calc(8.54 * var(--u)));
+  gap: clamp(
+    calc(6.6 * var(--u)),
+    calc(0.694vw - calc(0.54 * var(--u))),
+    calc(8.54 * var(--u))
+  );
   min-width: 0;
-  min-height: clamp(calc(190 * var(--u)), calc(20.11vw - calc(15.66 * var(--u))), calc(247.8 * var(--u)));
-  padding: clamp(calc(9.2 * var(--u)), calc(0.971vw - calc(0.76 * var(--u))), calc(11.96 * var(--u)));
-  border-radius: clamp(calc(13.1 * var(--u)), calc(1.387vw - calc(1.08 * var(--u))), calc(17.09 * var(--u)));
+  min-height: clamp(
+    calc(190 * var(--u)),
+    calc(20.11vw - calc(15.66 * var(--u))),
+    calc(247.8 * var(--u))
+  );
+  padding: clamp(
+    calc(9.2 * var(--u)),
+    calc(0.971vw - calc(0.76 * var(--u))),
+    calc(11.96 * var(--u))
+  );
+  border-radius: clamp(
+    calc(13.1 * var(--u)),
+    calc(1.387vw - calc(1.08 * var(--u))),
+    calc(17.09 * var(--u))
+  );
   background: #fff;
 }
 
 .do-list .tit {
-  font-size: clamp(calc(21 * var(--u)), calc(2.219vw - calc(1.73 * var(--u))), calc(27.34 * var(--u)));
+  font-size: clamp(
+    calc(21 * var(--u)),
+    calc(2.219vw - calc(1.73 * var(--u))),
+    calc(27.34 * var(--u))
+  );
   line-height: 1.2;
   color: #221e1f;
 }
 
 /* 피드백: 박스 안 아이콘을 한 번 더 줄인다 (60 → 51.26 → 44) */
 .do-icon {
-  width: clamp(calc(39.4 * var(--u)), calc(4.161vw - calc(3.24 * var(--u))), calc(44 * var(--u)));
-  height: clamp(calc(39.4 * var(--u)), calc(4.161vw - calc(3.24 * var(--u))), calc(44 * var(--u)));
+  width: clamp(
+    calc(39.4 * var(--u)),
+    calc(4.161vw - calc(3.24 * var(--u))),
+    calc(44 * var(--u))
+  );
+  height: clamp(
+    calc(39.4 * var(--u)),
+    calc(4.161vw - calc(3.24 * var(--u))),
+    calc(44 * var(--u))
+  );
   background: #fe71ad;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
@@ -885,7 +927,11 @@
 }
 
 .do-desc {
-  font-size: clamp(calc(11.8 * var(--u)), calc(1.248vw - calc(0.97 * var(--u))), calc(15.38 * var(--u)));
+  font-size: clamp(
+    calc(11.8 * var(--u)),
+    calc(1.248vw - calc(0.97 * var(--u))),
+    calc(15.38 * var(--u))
+  );
   font-weight: 600;
   line-height: 1.5;
   color: #fe71ad;
@@ -1512,7 +1558,6 @@
 */
 
 @media (prefers-reduced-motion: reduce) {
-
   .who-deco .spr,
   .who-deco .donut01,
   .who-deco .donut02,
@@ -1545,9 +1590,14 @@
    두 줄 문구(글자 크기의 7.31배 폭)가 들어가도록 줄인다 */
 @media all and (min-width: 769px) {
   .sc-visual .tit {
-    font-size: clamp(2rem,
-        min(calc(9.85vw - 7.21dvh - calc(12.3 * var(--u))), calc(3.01vw - 7.21dvh + calc(91.7 * var(--u)))),
-        5rem);
+    font-size: clamp(
+      2rem,
+      min(
+        calc(9.85vw - 7.21dvh - calc(12.3 * var(--u))),
+        calc(3.01vw - 7.21dvh + calc(91.7 * var(--u)))
+      ),
+      5rem
+    );
   }
 }
 
@@ -1814,7 +1864,7 @@
     line-height: 1.5;
   }
 
-  .story-txt p+p {
+  .story-txt p + p {
     margin-top: calc(14 * var(--u));
   }
 
@@ -1874,14 +1924,20 @@
   /* 둥실 모션이 위로 26px까지 떠오르므로 필름 아래 30px 이상 띄운다 */
   .who-deco .spr05 {
     left: calc(50% + calc(10 * var(--u)));
-    top: calc(calc(242 * var(--u)) + (100vw - calc(40 * var(--u))) * 9 / 16 + calc(38 * var(--u)));
+    top: calc(
+      calc(242 * var(--u)) + (100vw - calc(40 * var(--u))) * 9 / 16 +
+        calc(38 * var(--u))
+    );
     width: calc(15 * var(--u));
     height: calc(13 * var(--u));
   }
 
   .who-deco .spr07 {
     left: calc(50% + calc(115 * var(--u)));
-    top: calc(calc(242 * var(--u)) + (100vw - calc(40 * var(--u))) * 9 / 16 + calc(32 * var(--u)));
+    top: calc(
+      calc(242 * var(--u)) + (100vw - calc(40 * var(--u))) * 9 / 16 +
+        calc(32 * var(--u))
+    );
     width: calc(13 * var(--u));
     height: calc(11 * var(--u));
   }
