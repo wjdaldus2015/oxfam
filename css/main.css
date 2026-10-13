@@ -95,20 +95,20 @@
 
 /* 시안 1920×920 값. 위 도넛은 위쪽, 아래 도넛은 아래쪽 모서리 기준이라
    화면 높이가 달라도 모서리에 걸치는 모양이 같다 */
-/* 피드백: 헤더 아래·화면 오른쪽 끝에 조금씩 걸쳐 잘려 보이던 스프링클 두 개가 완전히 가려지도록 오른쪽 20·위 10 옮긴다 */
+/* 피드백: 참고 이미지(185:4476)처럼 도넛을 키워 모서리 밖으로 더 내보낸다. 가장자리만 걸치고 가운데 구멍은 보이지 않는다
+   (이전 값: 위 도넛 361.3 / -365.65 / 778.7 / 759.85, 아래 도넛 -1153.8 / -367.59 / 716.58 / 699.59) */
 .visual-bg .donut01 {
-  left: calc(50% + 361.3 * var(--px-pc));
-  top: calc(-365.65 * var(--px-pc));
-  width: calc(778.7 * var(--px-pc));
-  height: calc(759.85 * var(--px-pc));
+  left: calc(50% + 612.6 * var(--px-pc));
+  top: calc(-511.4 * var(--px-pc));
+  width: calc(1022.6 * var(--px-pc));
+  height: calc(998 * var(--px-pc));
 }
 
-/* 피드백: 메시지와 도넛 사이를 더 벌린다. 시안 top 588 → 아래로 367.59 넘침 */
 .visual-bg .donut02 {
-  left: calc(50% - 1153.8 * var(--px-pc));
-  bottom: calc(-367.59 * var(--px-pc));
-  width: calc(716.58 * var(--px-pc));
-  height: calc(699.59 * var(--px-pc));
+  left: calc(50% - 1343.7 * var(--px-pc));
+  bottom: calc(-580.6 * var(--px-pc));
+  width: calc(855.3 * var(--px-pc));
+  height: calc(835 * var(--px-pc));
 }
 
 /* 시안 920 기준 303px 자리 */
