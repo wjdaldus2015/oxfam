@@ -69,15 +69,25 @@
   );
 }
 
-/* 인물 얼굴은 어떤 화면에서도 잘리면 안 된다. 사진을 화면 폭에 채우고 기준점을 인물 쪽(가로 72%)에 둬서
-   화면이 좁아지면 왼쪽 배경부터 잘려 나가게 한다. 두 장(배경·인물 누끼)은 같은 기준으로 겹친다.
-   피드백: 원본 사진은 머리가 사진 맨 위에 닿아 있어, 헤더 아래 56px를 띄우고 그만큼 사진을 줄인다 */
+/* 인물 얼굴은 어떤 화면에서도 잘리면 안 된다. 두 장(배경·인물 누끼)은 같은 기준으로 겹친다.
+   피드백: 원본 사진은 머리가 사진 맨 위에 닿아 있어, 헤더 아래 56px를 띄운다 */
+/* 피드백: 참고 이미지(185:4476) 구도. 사진을 화면 높이에 맞춰 키워(사진 높이의 77.5%가 보이고 아래로 아이 손이 조금 걸친다)
+   아이 머리 오른쪽 끝(사진 가로 80.2%)을 화면 폭 95.82% 자리에 둔다. 2.3005는 사진 가로세로 비.
+   세로로 긴 화면은 폭의 1.9배까지만 키우고, 가로로 긴 화면은 왼쪽 끝을 화면에 붙여 빈 곳이 없게 한다
+   (이전 값: left 0 / width 100% / height calc(100% - 152) / object-position 72% top) */
 .visual-bg .bg01,
 .visual-bg .bg02 {
+  --photo-h: calc(100dvh - calc(152 * var(--u)));
+  --photo-w: max(
+    calc(var(--photo-h) * 2.3005),
+    min(calc(var(--photo-h) * 2.967), 190vw),
+    100vw
+  );
   top: calc(calc(96 * var(--u)) + calc(56 * var(--u)));
-  left: 0;
-  width: 100%;
-  height: calc(100% - calc(152 * var(--u)));
+  left: min(0px, calc(95.82vw - var(--photo-w) * 0.802));
+  width: var(--photo-w);
+  max-width: none;
+  height: calc(var(--photo-w) / 2.3005);
   object-fit: cover;
   object-position: 72% top;
 }
@@ -1764,6 +1774,8 @@
 
   .visual-bg .bg01 {
     top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
     -webkit-mask-image: none;
     mask-image: none;
