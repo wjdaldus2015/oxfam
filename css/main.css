@@ -1886,7 +1886,9 @@
 
   .story-note {
     margin-top: calc(12 * var(--u));
-    font-size: 0.875rem;
+    /* 피드백: 400px보다 좁은 화면은 한 줄(18.2em)이 오른쪽 아래 퀵버튼(96 + 오른쪽 13)에 닿지 않을 만큼만 글자를 줄인다 */
+    font-size: min(0.875rem, calc((100vw - calc(137 * var(--u))) / 18.2));
+    white-space: nowrap;
   }
 
   .story-point p {
