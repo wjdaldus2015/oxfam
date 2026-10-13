@@ -1874,6 +1874,7 @@
 
   .story-note {
     margin-top: calc(12 * var(--u));
+    font-size: 0.875rem;
   }
 
   .story-point p {

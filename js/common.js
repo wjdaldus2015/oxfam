@@ -20,6 +20,7 @@ AOS.init({
 });
 
 $(function () {
+  utmRelay();
   headerScroll();
   quickMenu();
   visualDonut();
@@ -37,6 +38,39 @@ $(function () {
   // 고정(pin) 구간이 모두 만들어진 뒤에 걸어야 아래쪽 제목의 시작 위치가 맞다
   titleFadeUp();
 });
+
+// 들어올 때의 UTM 파라미터를 보관했다가 도너스 결제 링크에 붙여 넘긴다
+function utmRelay() {
+  var KEY = 'oxfamDonutUtm';
+  var utm = {};
+  var found = false;
+
+  new URLSearchParams(window.location.search).forEach(function (value, key) {
+    if (key.toLowerCase().indexOf('utm_') !== 0 || value === '') return;
+    utm[key] = value;
+    found = true;
+  });
+
+  try {
+    if (found) {
+      sessionStorage.setItem(KEY, JSON.stringify(utm));
+    } else {
+      utm = JSON.parse(sessionStorage.getItem(KEY)) || {};
+    }
+  } catch (e) { }
+
+  var keys = Object.keys(utm);
+  if (!keys.length) return;
+
+  document.querySelectorAll('a[href*="with.oxfam.or.kr"]').forEach(function (link) {
+    var url = new URL(link.href);
+
+    keys.forEach(function (key) {
+      url.searchParams.set(key, utm[key]);
+    });
+    link.href = url.href;
+  });
+}
 
 function visualDonut() {
   var section = document.querySelector('.sc-visual');
