@@ -814,9 +814,9 @@
 */
 
 /* How We Act */
-/* 시안(185:4605) 1920×980: 왼쪽 글 465, 오른쪽 사진·카드 822 */
+/* 시안(185:4605) 1920×980: 왼쪽 글 465, 오른쪽 사진·설명 영역 925×746 (x 755, y 132) */
 .sc-act {
-  padding: calc(135 * var(--u)) 0 calc(159 * var(--u));
+  padding: calc(132 * var(--u)) 0 calc(102 * var(--u));
   background: #f7f7eb;
 }
 
@@ -824,22 +824,28 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: calc(40 * var(--u));
+  gap: calc(50 * var(--u));
 }
 
 /* 제목은 실제 서체(둥켈 산스)가 시안 서체보다 넓어 465 안에서 세 줄이 된다 → 줄바꿈 없이 두 줄 유지 */
 .act-info {
   flex: none;
   width: calc(465 * var(--u));
+  margin-top: calc(3 * var(--u));
 }
 
 .act-info .tit-group {
   white-space: nowrap;
 }
 
+/* 오른쪽 영역은 폭이 줄면 시안 비율 그대로 작아진다. 안쪽 값은 시안 px × --a */
 .act-side {
-  flex: 0 1 calc(822 * var(--u));
+  --a: calc(100cqw / 925);
+  flex: 0 1 calc(925 * var(--u));
   min-width: 0;
+  position: relative;
+  aspect-ratio: 925 / 746;
+  container-type: inline-size;
 }
 
 .act-txt {
@@ -864,104 +870,83 @@
   margin-top: calc(40 * var(--u));
 }
 
-/* 사진 두 장(키링 위에 패키지)을 시안 상자 822×474 기준 비율로 겹친다 */
+/* 키링 위에 패키지를 겹친다. 시안 상자 크기대로 잘라 보인다(object-fit: cover) */
 .act-visual {
-  position: relative;
-  aspect-ratio: 822 / 474;
-  border-radius: calc(20 * var(--u));
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
 }
 
 .act-visual img {
   position: absolute;
   max-width: none;
-  height: auto;
+  object-fit: cover;
 }
 
 .act-visual .keyring {
-  left: 12.9%;
-  top: 4.64%;
-  width: 81.63%;
+  left: calc(42.54 * var(--a));
+  top: calc(58.07 * var(--a));
+  width: calc(839.46 * var(--a));
+  height: calc(600.74 * var(--a));
   filter: drop-shadow(calc(10 * var(--u)) calc(4 * var(--u)) calc(14 * var(--u)) rgba(0, 0, 0, 0.2));
 }
 
 .act-visual .package {
-  left: 8.76%;
-  top: 2.74%;
-  width: 56.57%;
+  left: 0;
+  top: 0;
+  width: calc(581.75 * var(--a));
+  height: calc(623.53 * var(--a));
   filter: drop-shadow(calc(8 * var(--u)) calc(3 * var(--u)) calc(14 * var(--u)) rgba(0, 0, 0, 0.2));
 }
 
-.act-items {
-  display: flex;
-  gap: calc(34 * var(--u));
-  margin-top: calc(34 * var(--u));
-}
-
 .act-items li {
-  flex: 1 1 0;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: calc(20 * var(--u));
-  padding: calc(20 * var(--u));
-  border-radius: calc(16 * var(--u));
-  background: #fff;
-}
-
-.act-items .thumb {
-  flex: none;
-  position: relative;
-  width: calc(138 * var(--u));
-  height: calc(138 * var(--u));
-  border-radius: 50%;
-}
-
-.act-items .thumb.keyring {
-  background: #fff1f7;
-}
-
-.act-items .thumb.keyring img {
   position: absolute;
-  left: 11.59%;
-  top: 2.9%;
-  width: 76.09%;
+  white-space: nowrap;
 }
 
-.act-items .thumb.sticker img {
-  width: 100%;
-  height: 100%;
+.act-items li.keyring {
+  left: calc(740 * var(--a));
+  top: calc(71 * var(--a));
 }
 
-.act-items .txt {
-  min-width: 0;
+.act-items li.sticker {
+  left: calc(307 * var(--a));
+  top: calc(656 * var(--a));
+}
+
+.act-items .arrow {
+  position: absolute;
+  max-width: none;
+}
+
+.act-items .keyring .arrow {
+  left: calc(-74.63 * var(--a));
+  top: calc(16.3 * var(--a));
+  width: calc(65 * var(--a));
+  height: calc(64 * var(--a));
+  transform: rotate(2.42deg);
+}
+
+.act-items .sticker .arrow {
+  left: calc(56.88 * var(--a));
+  top: calc(-64.85 * var(--a));
+  width: calc(29 * var(--a));
+  height: calc(66 * var(--a));
+  transform: rotate(36.6deg) scaleX(-1);
 }
 
 .act-items .name {
-  font-size: 1.375rem;
+  font-size: calc(24 * var(--a));
   font-weight: 700;
-  line-height: 1.2;
-  color: #fe71ad;
-}
-
-.act-items .thumb.sticker + .txt .name {
+  line-height: 1;
   color: var(--color-green);
 }
 
 .act-items .txt p {
-  margin-top: calc(16 * var(--u));
-  font-size: 1rem;
+  margin-top: calc(16 * var(--a));
+  font-size: calc(18 * var(--a));
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.4;
   color: #444;
-}
-
-/* 오른쪽 칸이 좁아지면 카드 두 장을 위아래로 둔다 */
-@media all and (min-width: 1025px) and (max-width: 1200px) {
-  .act-items {
-    flex-direction: column;
-    gap: calc(20 * var(--u));
-  }
 }
 
 /* What We Do */
@@ -2031,7 +2016,7 @@
     background: var(--color-green);
   }
 
-  /* 한 줄로 쌓는다. 시안(186:4876) 순서: 제목 → 사진 → 버튼 → 글 → 카드 */
+  /* 한 줄로 쌓는다. 시안(186:4876) 순서: 제목 → 사진 → 글 (버튼·설명 없음) */
   .sc-act {
     padding: calc(80 * var(--u)) 0;
   }
@@ -2052,23 +2037,35 @@
     white-space: normal;
   }
 
+  /* 시안 사진 묶음 320×234 기준 비율 */
   .act-visual {
     order: 2;
+    position: relative;
+    inset: auto;
     max-width: calc(822 * var(--u));
+    aspect-ratio: 320 / 234;
     margin-top: calc(40 * var(--u));
   }
 
-  .act-btn {
-    order: 3;
+  .act-visual .keyring {
+    left: 4.82%;
+    top: 1.94%;
+    width: 95.18%;
+    height: 96.34%;
+  }
+
+  .act-visual .package {
+    width: 65.96%;
+    height: 100%;
   }
 
   .act-txt {
-    order: 4;
+    order: 3;
   }
 
+  .act-btn,
   .act-items {
-    order: 5;
-    margin-top: calc(42 * var(--u));
+    display: none;
   }
 
   .sc-faq {
@@ -2577,81 +2574,23 @@
     display: block;
   }
 
-  /* How We Act: 시안(186:4871) 360×1044 */
+  /* How We Act: 시안(186:4876) 320 폭, 제목·사진·글 사이 20 */
   .sc-act {
     padding: calc(83 * var(--u)) 0 calc(60 * var(--u));
   }
 
   .act-visual {
-    aspect-ratio: 320 / 234;
-    border-radius: 0;
-    overflow: visible;
-  }
-
-  .act-visual .keyring {
-    left: 4.82%;
-    top: 1.94%;
-    width: 95.18%;
-  }
-
-  .act-visual .package {
-    left: 0;
-    top: 0;
-    width: 65.96%;
+    max-width: none;
+    margin-top: calc(20 * var(--u));
   }
 
   .act-txt {
+    margin-top: calc(20 * var(--u));
     font-size: 1rem;
   }
 
   .act-txt .point {
     font-size: 1.125rem;
-  }
-
-  /* 카드 두 장은 화면 밖으로 이어져 옆으로 밀어 본다 */
-  .act-items {
-    gap: calc(10 * var(--u));
-    margin: calc(42 * var(--u)) calc(-20 * var(--u)) 0;
-    padding: 0 calc(20 * var(--u));
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .act-items::-webkit-scrollbar {
-    display: none;
-  }
-
-  .act-items li {
-    flex: none;
-    width: calc(286 * var(--u));
-  }
-
-  .act-items li + li {
-    width: auto;
-  }
-
-  .act-items li + li .txt p {
-    white-space: nowrap;
-  }
-
-  .act-items .thumb {
-    width: calc(80 * var(--u));
-    height: calc(80 * var(--u));
-  }
-
-  .act-items .thumb.keyring img {
-    left: 12.01%;
-    top: 6.7%;
-    width: 69.92%;
-  }
-
-  .act-items .name {
-    font-size: 1.125rem;
-  }
-
-  .act-items .txt p {
-    margin-top: calc(8 * var(--u));
-    font-size: 0.875rem;
   }
 
   /* FAQ: 시안(186:5147) 360×1210 */
