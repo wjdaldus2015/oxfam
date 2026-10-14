@@ -35,6 +35,7 @@ $(function () {
   // 피드백: 목표 배너 섹션 모션 전체 삭제 (PC·모바일, 되돌릴 경우 대비해 보류)
   // goalReveal();
   crewFlow();
+  faq();
   // 고정(pin) 구간이 모두 만들어진 뒤에 걸어야 아래쪽 제목의 시작 위치가 맞다
   titleFadeUp();
 });
@@ -1033,6 +1034,71 @@ function rollSlide() {
 
 // 모든 섹션의 제목 공통: 아래에서 부드럽게 떠오른다.
 // 제목 묶음은 영문 제목 → 한글 제목 차례로, 인트로 배너 문구는 한 덩어리로
+// FAQ: 분류 탭 전환 + 질문을 누르면 답이 펼쳐진다 (한 분류 안에서는 하나만 열림)
+function faq() {
+  var $section = $('.sc-faq');
+  if (!$section.length) return;
+
+  var $tabs = $section.find('.faq-tab [role="tab"]');
+
+  // 열린 답의 max-height를 내용 높이에 맞춘다 (처음, 분류를 바꿀 때, 창 크기가 바뀔 때)
+  function fit() {
+    $section.find('.faq-item.is-open .faq-a').each(function () {
+      this.style.maxHeight = this.scrollHeight + 'px';
+    });
+  }
+
+  function setOpen($item, open) {
+    var a = $item.find('.faq-a')[0];
+
+    $item.toggleClass('is-open', open);
+    $item.find('.faq-q').attr('aria-expanded', open);
+    a.style.maxHeight = a.scrollHeight + 'px';
+    if (!open) {
+      requestAnimationFrame(function () {
+        a.style.maxHeight = '0';
+      });
+    }
+  }
+
+  fit();
+  $(window).on('resize', fit);
+  // 웹폰트가 늦게 들어오면 줄 수가 달라져 높이가 바뀐다
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+
+  $section.on('click', '.faq-q', function () {
+    var $item = $(this).closest('.faq-item');
+    var open = !$item.hasClass('is-open');
+
+    $item.siblings('.is-open').each(function () {
+      setOpen($(this), false);
+    });
+    setOpen($item, open);
+  });
+
+  function select($tab) {
+    $tabs.each(function () {
+      var on = this === $tab[0];
+      $(this).toggleClass('is-active', on).attr({ 'aria-selected': on, tabindex: on ? 0 : -1 });
+      $('#' + $(this).attr('aria-controls')).prop('hidden', !on);
+    });
+    fit();
+  }
+
+  $tabs.on('click', function () {
+    select($(this));
+  });
+
+  $tabs.on('keydown', function (e) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    var i = $tabs.index(this) + (e.key === 'ArrowRight' ? 1 : -1);
+    var $next = $tabs.eq((i + $tabs.length) % $tabs.length);
+    e.preventDefault();
+    select($next);
+    $next.trigger('focus');
+  });
+}
+
 var TITLE_STEP = 0.22;
 // 화면 아래 85%에서 시작하면 섹션이 반도 안 들어왔을 때 이미 재생돼 버린다 → 60%
 var TITLE_START = 'top 60%';
