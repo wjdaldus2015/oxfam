@@ -29,6 +29,7 @@ $(function () {
   storyDonutRoll();
   storyTextUp();
   whoIntro();
+  filmCaptionOff();
   doMobileSlide();
   doStepScroll();
   rollSlide();
@@ -495,6 +496,34 @@ function whoIntro() {
           el.classList.add('is-float');
         }
       }), 0.2 + random(0, 0.35));
+  });
+}
+
+// 영상에 기본 자막이 지정돼 있어 cc_load_policy=0만으로는 자막이 켜진다 → 재생이 시작될 때마다 자막 모듈을 내린다
+function filmCaptionOff() {
+  var frame = document.querySelector('.sc-who iframe.film-video');
+  if (!frame) return;
+
+  var ORIGIN = 'https://www.youtube.com';
+
+  function send(data) {
+    frame.contentWindow.postMessage(JSON.stringify(data), ORIGIN);
+  }
+
+  frame.addEventListener('load', function () {
+    send({ event: 'listening', id: 'whoFilm' });
+  });
+
+  window.addEventListener('message', function (e) {
+    if (e.origin !== ORIGIN || e.source !== frame.contentWindow) return;
+    var data;
+    try {
+      data = JSON.parse(e.data);
+    } catch (err) {
+      return;
+    }
+    var state = data.event === 'onStateChange' ? data.info : data.info && data.info.playerState;
+    if (state === 1) send({ event: 'command', func: 'unloadModule', args: ['captions'] });
   });
 }
 
